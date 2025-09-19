@@ -25,11 +25,11 @@ II. PREPARE YOUR PAPER BEFORE STYLING
     -Don’t use the {eqnarray}
     -Use {align} or {IEEEeqnarray}.
     -{subequations} environment in LATEX also increment the main equation counter.
-    - If you assign the same label to a subsubsection and a table, you might find that Table I   has been cross referenced as Table IV-B3.
-    - Do not use \nonumber inside the {array} environment. It might stop a wanted equation number in the surrounding equation.
+    -If you assign the same label to a subsubsection and a table, you might find that Table I   has been cross referenced as Table IV-B3.
+    -Do not use \nonumber inside the {array} environment. It might stop a wanted equation number in the surrounding equation.
   E.Some Common Mistakes
     -The word “data” is plural, not singular.
-    - µ0, and other common scientific constants, is zero with subscript formatting, not a lowercase letter “o”.
+    -µ0, and other common scientific constants, is zero with subscript formatting, not a lowercase letter “o”.
     -When quotation marks are used, instead of a bold or italic typeface.
     -To highlight a word or phrase, punctuation should appear outside of the quotation marks.
     -A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis.    
