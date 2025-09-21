@@ -220,3 +220,209 @@ We propose ...
 \subsubsection -> use Arabic numerals.
 
 \paragraph     -> use lower case letters.
+
+## A. Initial Drop Cap Letter
+- The first letter of a journal paper. oversized letter is called “drop cap”.
+- Can be accurately produced using the IEEEtran command:
+
+\IEEEPARstart{}{}
+- The first argument is the first letter of the first word.
+- The second argument is the remaining letters of the first word.
+
+#  VII. CITATIONS
+- Are made with the \cite command as usual.
+- IEEEtran will produce citation numbers that are individually bracketed in IEEE style.
+- If the \cite with note has more than one reference, the note will be applied to the last of the listed references.
+
+# VIII. EQUATIONS
+- Equations are created using the traditional equation environment:
+
+ \begin{equation}
+
+ \label{eqn_example}
+ 
+ x = \sum\limits_{i=0}^{z} 2^{i}Q
+ 
+ \end{equation}
+
+
+- which yields <img width="127" height="72" alt="image" src="https://github.com/user-attachments/assets/e675545b-4241-473c-bffb-9233497fe9e3" />
+
+#  IX. MULTI-LINE EQUATIONS
+- The most convenient and popular way to produce multiline equations is LATEX2 ’s eqnarray environment.
+- eqnarray has several serious shortcomings:
+  
+Use 2 \arraycolsep for a column separation space does not provide natural math spacing in the default configuration.
+
+Column definitions cannot be altered.
+
+It is limited to three alignment columns.
+
+Column alignment cannot be overridden within individual cells.
+
+## Amsmath
+- Contains many helpful tools.
+- upon loading, amsmath will configure LATEX to disallow page breaks within multiline equations.
+- To restore IEEEtran’s ability to automatically break within multiline equations, load amsmath like:
+
+ \usepackage{amsmath}
+ 
+ \interdisplaylinepenalty=2500
+
+ # X. FLOATING STRUCTURES
+ - Most IEEE journals strongly favor the positioning of floats to the top of the page.
+ - IEEE journals never place floats in the first column of the first page.
+
+## A. Figures
+- Handled in the standard LATEX manner. For example:
+
+ \begin{figure}[!t]
+ 
+ \centering
+
+ \includegraphics[width=2.5in]{myfigure}
+ 
+ \caption{Simulation results for the network.}
+ 
+ - The IEEE normally wants all of the lines left aligned.
+
+\label{fig_sim}
+
+\end{figure}
+
+- Figures should be centered via the LATEX command:
+
+\centering
+
+- The caption follows the graphic.
+- Any labels must be declared after (or within) the caption command.
+
+### #Subfigures
+- Can be obtain via the use of subfig packages.
+- Subfig.sty package options are usually required to obtain IEEE compliant subfigure captions.
+- This package depends on caption.sty. To prevent this, be sure to invoke subfig.sty’s option:
+
+caption=false
+
+- The recommended way to load subfig.sty is:
+
+\ifCLASSOPTIONcompsoc
+ 
+\usepackage[caption=false,font=normalsize,labelfon
+t=sf,textfont=sf]{subfig}
+ 
+\else
+ 
+\usepackage[caption=false,font=footnotesize]{subfi
+g}
+ 
+\fi
+
+## B. Algorithms
+- The only floating structures IEEE uses are figures and tables.
+- Do not use the floating algorithm environment of algorithm.sty or algorithm2e.sty.
+- IEEEtran will not be in control of the (non-IEEE) caption style by the algorithm.sty or algorithm2e.sty float environments.
+
+##  C. Tables
+- IEEE places table captions before the tables.
+- Table captions much like titles.
+- Table captions usually use capitalized except for " a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to and up "
+- IEEE generally uses the standard text font, not the small caps font.
+
+## D. Double Column Floats
+- LATEX’s figure* and table* environments produce figures and tables that span both columns.
+- Double column floats cannot be placed at the bottom of pages.
+- That means “\begin{figure*}[!b]” will not normally work as intended.
+- IEEE authors are warned not to use packages that allow material to be placed across the middle of the two text columns.
+
+#  XI. LISTS
+- IEEEtran provides enhanced IED list environments that make it much easier to produce IEEE style lists.
+- The underlying \list remains the same as in traditional LATEX so as not to break code that depends upon it.
+- IEEEtran uses a new length variable:
+
+\IEEElabelindent
+- So users can specify IED list structures directly in IEEE fashion.
+- IED lists are controlled exclusively via two interfaces:
+
+#### “global” control via the command:
+
+\IEEEiedlistdecl 
+
+#### “local” control via an optional argument that can be provided to \itemize, \enumerate, and \description.
+
+## A. Itemize(列舉)
+- Normally automatically calculate the width of whatever symbol the current list level is using, so we can call
+
+\begin{itemize}...\end{itemize}
+
+## B. Enumerate(枚舉)
+- The \labelwidth will default to the length of "9" in the normal size and style.
+- The width of the longest label will have to be manually specified if any of the following conditions are true:
+
+A top level list has more than 9 items.
+A relevant \labelenumX or \theenumX has been redefined.
+\item[X] has been used to manually specify labels. 
+The labels are using a font that is not the normal size and style.
+The enumerated list is nested (i.e., not at the top level) and is therefore not using Arabic digits as labels.
+
+## C. Description(描述)
+- The longest label width will always have to be specified for description lists.
+
+#  XII. THEOREMS AND PROOFS
+- Axioms, corollaries and lemmas, are handled in the traditional LATEX fashion.
+- Need to declare the structure name via the
+
+\newtheorem{struct_type}{struct_title}[in_counter]
+
+- struct_type is the user chosen identifier for the structure.
+- struct_title is the heading that is used for the structure.
+- in_counter is an optional name of a counter, the number will be displayed with the structure number, and whose update will reset the structure counter.
+
+## A. Proofs
+- Easily handled by the predefined IEEEproof environment:
+
+\begin{IEEEproof}
+
+.
+ 
+.
+ 
+\end{IEEEproof}
+
+#  XIII. END SECTIONS
+## A. Appendices
+- The \appendix command is used to start a single appendix.
+- After issuing \appendix, the \section command will be disabled and any attempt to use \section.
+- The section counter is fixed at zero
+- \appendices is used when there is more than one appendix section.
+- Then use \section to declare each appendix:
+
+ \section{Proof of the First Zonklar Equation}
+
+## B. Acknowledgments(致謝)
+- Acknowledgments and other unnumbered sections are created using the \section* command:
+
+\section*{Acknowledgment}
+ 
+\addcontentsline{toc}{section}{Acknowledgment}
+
+## C. Bibliographies(參考書目)
+- Using the IEEEtran BIBTEX package which is easily invoked via:
+
+\bibliographystyle{IEEEtran}
+ 
+\bibliography{IEEEabrv,mybibfile}
+
+- When submitting the document source (.tex) file, strongly recommended that the BIBTEX .bbl file be manually copied into the document to prevent the possibility of changes occurring therein.
+
+##  D. Biographies(簡歷)
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{./shell}}]{MichaelShell}.. \end{IEEEbiography}
+
+- The photo area is 1in wide and 1.25in long.
+- Images should be of 220dpi (dots per inch) resolution and in gray scale with 8 bits/sample.
+
+#  XIV. LAST PAGE COLUMN EQUALIZATION
+- Balancing the last two columns is especially important for camera ready work.
+- Use the manual approach by putting in \newpage at the appropriate point or \enlargethispage{-X.Yin} somewhere at the top of the first column of the last page.
+- Where “X.Yin” is the amount to effectively shorten the text height of the given page. 
