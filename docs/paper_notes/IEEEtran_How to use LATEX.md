@@ -25,13 +25,15 @@
 ##  B. draft, draftcls, draftclsnofoot, final
 - IEEEtran provides for three draft modes as well as the normal final mode.
 
-### The draft modes
+### #The draft modes
 - provide a larger (double) line spacing to allow for editing comments as well as one inch margins on all four sides of the paper.
 - it will puts every package used in the document into draft mode.
 - this has the effect of disabling the rendering of figures.
 
-### draftcls option 
+### #draftcls option 
 - It will be confined within the IEEEtran class so that figures will be included as normal.
+
+### #draftclsnofoot
 - Like draftcls
 - Not display the word “DRAFT” along with the date at the foot of each page.
 
