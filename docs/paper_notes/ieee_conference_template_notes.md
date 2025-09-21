@@ -1,81 +1,43 @@
-# IEEE 會議論文模板重點整理
+## Key Points
 
-這是一個針對 *ASP-DAC2026 IEEE Conference Template* 的重點整理，幫助撰寫論文時符合格式要求。
-
----
-
-## 文件來源
-
-- 名稱：IEEE Conference Template for ASP-DAC2026  
-- 連結：[下載 PDF](https://www.aspdac.com/aspdac2026/author/files/IEEE-conference-template-062824.pdf)  
-- 用途：APA-DAC 論文投稿格式規範
+### I. Introduction
+- **Maintaining the Integrity of the Specifications**  
+  Authors must ensure their papers comply with IEEE formatting standards and do not modify the integrity of the specifications.
 
 ---
 
-## 重點條列
+### II. Prepare Your Paper Before Styling
+- Write and save your paper content as a plain text file before formatting.  
+- Complete all content and organizational editing before applying the template.  
+- **Do not manually number section headings** — LATEX will do that automatically.  
 
-1. **論文標題**  
-   - 不可含特殊符號／數學／footnotes/enumerations  
+#### A. Abbreviations and Acronyms
+- Do not use abbreviations in the title or headings unless absolutely unavoidable.  
 
-2. **作者與機構**  
-   - 每位作者姓名與所屬機構的標示方式  
-   - 不分欄、不重複部門  
+#### B. Units
+- Use either **SI (MKS)** or **CGS** as the primary system of units.  
+- Exception: English units may be used as identifiers in trade, e.g., *“3.5-inch disk drive”*.  
+- Avoid mixing SI and CGS units.  
+- If mixed units are required, clearly state the unit for each quantity in equations.  
+- Do not write *“webers/m2”*; use **Wb/m²** or *“webers per square meter”*.  
+- Spell out units when they appear in the text: *“a few henries”* not *“a few H”*.  
+- Always use a leading zero before decimal points: **0.25**, not **.25**.  
 
-3. **摘要 & 關鍵詞**  
-   - 摘要中格式限制  
-   - Index Terms 的使用  
+#### C. Equations
+- Use a long dash (–) for minus signs, not a hyphen.  
+- Punctuate equations with commas or periods if they are part of a sentence.  
+- Number equations as **(1)**, not *“Eq. (1)”*.  
 
-4. **縮寫與單位**  
-   - 第一次使用縮寫要定義  
-   - 優先 SI 單位  
+#### D. LATEX
+- Use *soft cross-references* such as `\eqref{Eq}` instead of hard references like *(1)*.  
+- Do not use `{eqnarray}`; use **{align}** or **{IEEEeqnarray}** instead.  
+- The `{subequations}` environment increments the main equation counter.  
+- Do not assign the same label to both a subsection and a table — this may cause incorrect cross-references.  
+- Avoid using `\nonumber` inside the `{array}` environment as it may suppress required equation numbers.  
 
-5. **數學公式排版**  
-   - 變數與符號格式  
-   - 編號與引用方式  
-
-6. **LaTeX 注意事項**  
-   - 使用環境（比如 align）  
-   - label／caption 的位置  
-   - 引用方式  
-
-7. **圖表規範**  
-   - 放置位置與標題位置  
-   - label 與單位格式  
-
-8. **致謝**  
-   - 放置位置  
-   - 拼寫建議  
-
-9. **引用文獻**  
-   - format 要求  
-   - “in press” / “unpublished”等標示  
-
----
-
-## 建議做法與提醒
-
-- 寫完內容後再做格式排版（先定內容後排版）  
-- 校對拼寫、標點、縮寫一致性  
-- 確認所有圖表被正文引用  
-- 刪除模板中所有指引文字（template instruction / sample text）避免被當正式內容刊登  
-
----
-
-## 範例段落 / 範例公式
-
-> 這裡可以放一小段範例：  
->  
-> Equation (1) shows the relationship between ...  
-> $$
-> x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-> $$(1)  
->  
-> 在圖標題中這樣寫：  
-> *Fig. 1. Sample system architecture.*  
-
----
-
-## 權責聲明
-
-以上整理依據 ASP-DAC2026 IEEE template “IEEE-conference-template-062824.pdf”。參考使用者需確認最新官方版本以防規範更動。
-
+#### E. Some Common Mistakes
+- The word *“data”* is plural, not singular.  
+- Constants such as **µ₀** use zero as a subscript, not the lowercase letter “o”.  
+- Use quotation marks properly, instead of bold or italic, for emphasis.  
+- When highlighting with quotation marks, punctuation should appear **outside** the quotes.  
+- Parenthetical remarks at the end of a sentence should be punctuated **outside** the closing parenthesis.  
