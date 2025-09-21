@@ -53,16 +53,18 @@
  - If there are not at least two sub-topics, then no subheads should be introduced.
 
 ### H. Figures and Tables
-Positioning Figures and Tables
+#### Positioning Figures and Tables
 - Place figures and tables at the top and bottom of columns.
 - Avoid placing them in the middle of columns.
 - Large figures and tables may span across both columns.
 - Use the abbreviation “Fig. 1”, even at the beginning of a sentence.
-#### *  Figure captions should be below the figures. *
-#### * table heads should appear above the tables. *
+
+#### ** Figure captions should be below the figures. **
+
+#### ** table heads should appear above the tables. **
 
   
-Figure Labels
+#### Figure Labels
 - Use 8 point Times New Roman for Figure labels.
 - Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader.
 #### Notice : Do not label axes only with units.
