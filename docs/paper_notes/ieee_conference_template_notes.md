@@ -69,3 +69,14 @@ Figure Labels
 - write “Magnetization (A/m)” or “Magnetization {A[m(1)]}”, not just “A/m” 
 #### Notice : Do not label axes with a ratio of quantities and units.
 - write “Temperature (K)”, not “Temperature/K”.
+____
+
+##  REFERENCES
+#### Please number citations consecutively within brackets [1].
+- as in [3]—do not use “Ref. [3]” or “reference [3]”
+- Except “Reference [3] was the first ...”
+- Unless there are six authors or more give all authors’ names.
+- do not use “et al.”. Papers that have not been published.
+- if they have been submitted for publication, should be cited as “unpublished”.
+- Papers that have been accepted for publication should be cited as “in press”.
+- Capitalize only the first word in a paper title, except for proper nouns and element symbols.
