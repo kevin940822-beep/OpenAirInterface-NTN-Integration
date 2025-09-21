@@ -58,8 +58,8 @@ Positioning Figures and Tables
 - Avoid placing them in the middle of columns.
 - Large figures and tables may span across both columns.
 - Use the abbreviation “Fig. 1”, even at the beginning of a sentence.
-#### ** Figure captions should be below the figures. **
-#### ** table heads should appear above the tables. **
+#### *  Figure captions should be below the figures. *
+#### * table heads should appear above the tables. *
 
   
 Figure Labels
