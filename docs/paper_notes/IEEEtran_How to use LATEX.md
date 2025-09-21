@@ -53,7 +53,7 @@
  (in addition to and after the traditional {\maketitle}) 
 - to be executed at the place the cover page is to end—usually just after the abstract.
 
-## Conference Mode Details
+## #Conference Mode Details
 ### Page layout and margins
 - The text height is reduced to about 9.25 inches.
 - the top and bottom margins are asymmetrical.
