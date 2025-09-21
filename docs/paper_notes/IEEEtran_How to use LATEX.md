@@ -42,11 +42,11 @@
 #### correspondence (brief/technote) 
 #### peer review papers
 
-### Journal and technote modes
+### #Journal and technote modes
 - produce papers very similar to those that appear in many IEEE TRANSACTIONS journals.
 - When using technote, most users should also select the 9pt option.
 
-### The peerreview mode
+### #The peerreview mode
 - Produces a single-column cover page (with the title, author names and abstract) to facilitate anonymous peerreview.
 - Papers using the peerreview options require an {\IEEEpeerreviewmaketitle} command
 
@@ -64,7 +64,7 @@ the bottom margin is larger (IEEE requires additional space at the bottom).
 - Horizontal margins are symmetrical, and headers and footers do not display titles or page numbers.
 - The difference between the one and two sided options will not be a noticeable.
 
-### The \author text
+### #The \author text
 - Is placed within a tabular environment to allow for multicolumn formatting of author names and affiliations.
 - The spacing after the authors’ names is reduced. So is the spacing around the section names.
 - The special paper notice (if used) will appear between the author names and the title (not after as with journals).
@@ -76,7 +76,7 @@ the bottom margin is larger (IEEE requires additional space at the bottom).
 - Various reminder (related to camera ready work) and warning notices are enabled.
 
 ## D. comsoc, compsoc, transmag
-### Comsoc Mode
+### #Comsoc Mode
 - only affects the math font so that it will more closely match the Times Roman main text.
 - The recommended loading procedure and order for newtx math is:
 
@@ -85,12 +85,12 @@ the bottom margin is larger (IEEE requires additional space at the bottom).
 #### \usepackage[cmintegrals]{newtxmath}
 #### \usepackage{bm} % optional
 
-### Compsoc Mode
+### #Compsoc Mode
 - The default text font is changed from Times Roman to Palatino/Palladio.
 - Arabic section numbering.
 - Enabling of the \IEEEtitleabstractindextext command to provide for single column abstract and index terms.
 
-### Transmag Mode
+### #Transmag Mode
 - The text within \author should be entered as the long form under conference mode.
 - Enabling of the \IEEEtitleabstractindextext command -> provide for single column abstract and index terms.
 - \IEEEauthorrefmark will produce arabic author affiliation symbols.
