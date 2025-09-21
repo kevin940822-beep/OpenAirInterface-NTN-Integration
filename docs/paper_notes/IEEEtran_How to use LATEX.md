@@ -120,3 +120,103 @@ the bottom margin is larger (IEEE requires additional space at the bottom).
 -  The nofonttune option will disable the adjustment of these font parameters.
 
 # III. THE CLASSINPUT, CLASSOPTION AND CLASSINFO CONTROLS
+##  A. CLASSINPUTs
+- Are inputs that provide a way to customize the operation of IEEEtran by overriding some of the default settings.
+### Can be set via the traditional LATEX interface
+- \CLASSINPUTbaselinestretch -> sets the line spacing of the document.
+- \CLASSINPUTinnersidemargin -> sets the margin at the inner (binding) edge.
+- \CLASSINPUTinnersidemargin -> sets the margin at the inner (binding) edge.
+- \CLASSINPUTtoptextmargin   -> sets the top margin.
+- \CLASSINPUTbottomtextmargin -> sets the bottom margin.
+
+## B. CLASSOPTIONs
+- Are primarily TEX \if conditionals that are automatically set based on which IEEEtran options are being used. \ifCLASSOPTIONconference
+ \typeout{in conference mode}
+
+ \else
+ 
+ \typeout{not in conference mode}
+ 
+ \fi
+- Can be used to provide for conditional code execution.
+- Treat the CLASSOPTIONs as being “read-only”.
+- Changing these flags will likely result in improper formatting.
+
+## C. CLASSINFOs
+- Provide document information (line spacing, whether it is PDF, paper size, etc.).
+- \CLASSINFOnormalsizebaselineskip       ->  \baselineskip of the normalsize font.
+-  \CLASSINFOnormalsizeunitybaselineskip -> \baselineskip  of the normalsize font under unity \baselinestetch.
+-  \CLASSINFOpaperwidth and \CLASSINFOpaperheight  -> The paper dimensions in their native specifications including units (e.g., 8.5in, 22mm, etc.).
+
+# IV. THE TITLE PAGE
+- The parts of the document unique to the title area are created using the standard LATEX command.
+
+## A. Paper Title
+- Is declared like: \title{A Heuristic Coconut-based Algorithm} in the standard LATEX manner.
+- Titles are generally capitalized.
+- Line breaks (\\) may be used to equalize the length of the title lines.
+
+##  B. Author Names
+- The name and associated information is declared with the \author command.
+  
+#### have to use a separate \thanks for each paragraph
+- two % → Prevent the code line break on lines ending in a } from becoming an unwanted space.
+
+##  C. Running Headings
+- Declared with the \markboth{}{} command.
+- The first argument contains the journal name information.
+- The second contains the author name and paper title.
+
+#### eg. \markboth{Journal of Quantum Telecommunications,˜Vol.˜1, No.˜1,˜January˜2025}{Shell \MakeLowercase{\text it{et al.}}: A Novel Tin Can Link}
+
+- The \MakeLowercase{} command must be used to obtain lower case text. Because the text in the running headings is automatically capitalized.
+- Page heading only for the odd number pages after the title page for two sided (duplex) journal papers.
+
+## D. Publication ID Marks
+- Can be placed on the title page of journal and technote papers via the \IEEEpubid{} command:
+
+ #### \IEEEpubid{0000--0000/00\$00.00˜\copyright˜2015 IEEE}
+ 
+- Because LATEX resets the text height at the beginning of each column. 
+- so \IEEEpubidadjcol must be issued somewhere in the second column of the title page to prevent it from running into the publication ID.
+
+## E. Special Paper Notices
+- Can declare with:
+####  \IEEEspecialpapernotice{(Invited Paper)}
+- Sometimes we need to gain access to the space across both columns just above the main text. IEEEtran provides the command:
+
+#### \IEEEaftertitletext{}
+
+- Which can be used to insert text or to alter the spacing between the title area and the main text.
+
+# V. ABSTRACT AND INDEX TERMS
+- The first part of a paper after \maketitle.
+- Placed within the abstract environment:
+
+\begin{abstract}
+
+We propose ...
+
+\end{abstract}
+-  Math, special symbols and/or citations should generally not be used in abstracts.
+-  Journal and technote papers also have a list of key words (index terms) which can be declared with:
+
+ \begin{IEEEkeywords}
+ 
+ Broad band networks, quality of service, WDM.
+ 
+ \end{IEEEkeywords}
+
+- Here is a list of valid keywords from the IEEE.
+#### http://www.computer.org/mc/keywords/keywords.htm.
+
+#  VI. SECTIONS
+- Declared in the usual LATEX fashion via
+
+\section       -> use upper case Roman numerals.
+
+\subsection    -> use upper case letters.
+
+\subsubsection -> use Arabic numerals.
+
+\paragraph     -> use lower case letters.
