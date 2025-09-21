@@ -1,4 +1,4 @@
-## Key Points
+# Key Points
 
 ### I. Introduction
 - **Maintaining the Integrity of the Specifications**  
@@ -40,4 +40,13 @@
 - Constants such as **µ₀** use zero as a subscript, not the lowercase letter “o”.  
 - Use quotation marks properly, instead of bold or italic, for emphasis.  
 - When highlighting with quotation marks, punctuation should appear **outside** the quotes.  
-- Parenthetical remarks at the end of a sentence should be punctuated **outside** the closing parenthesis.  
+- Parenthetical remarks at the end of a sentence should be punctuated **outside** the closing parenthesis.
+- The prefix “non” is not a word; it should be joined to the word it modifies, usually without a hyphen.
+- The abbreviation “i.e.” means “that is”, and the abbreviation “e.g.” means “for example”.
+
+####  F. Authors and Affiliations
+- Author names should be listed starting from left.
+- Names should not be listed in columns nor group by affiliation.
+
+ ####  G. Identify the Headings
+ - 
