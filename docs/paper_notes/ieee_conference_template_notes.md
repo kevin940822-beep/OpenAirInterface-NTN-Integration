@@ -1,36 +1,81 @@
-I. INTRODUCTION
-  A.Maintaining the Integrity of the Specifications
+# IEEE 會議論文模板重點整理
 
-II. PREPARE YOUR PAPER BEFORE STYLING
-  -Before you begin to format your paper, first write and save the content as a separate text file.
-  -Complete all content and organizational editing before formatting.
-  -Do not number text heads---LATEX will do that for you.
-  
-  A.Abbreviations and Acronyms
-    -Do not use abbreviations in the title or heads unless they are unavoidable.
-  B.Units
-    -Use either SI (MKS) or CGS as primary units.
-    -An exception for English units as identifiers in trade. Such as “3.5-inch disk drive”.
-    -Avoid combining SI and CGS units.
-    -If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-    -do not use “webers/m2” instead of “Wb/m2” or “webers per square meter”.
-    -Spell out units when they appear in text: “. . . a few henries”, not “. . . a few H”.
-    -Use a zero before decimal points: “0.25”, not “.25”.
-  C.Equations
-    -Use a long dash rather than a hyphen for a minus sign.
-    -Punctuate equations with commas or periods when they are part of a sentence.
-    -The equation number use "(1)", not "Eq. (1)".
-  D.LATEX
-    -Use “soft” (e.g., \eqref{Eq}) cross references instead of “hard” references (e.g., (1)).
-    -Don’t use the {eqnarray}
-    -Use {align} or {IEEEeqnarray}.
-    -{subequations} environment in LATEX also increment the main equation counter.
-    -If you assign the same label to a subsubsection and a table, you might find that Table I   has been cross referenced as Table IV-B3.
-    -Do not use \nonumber inside the {array} environment. It might stop a wanted equation number in the surrounding equation.
-  E.Some Common Mistakes
-    -The word “data” is plural, not singular.
-    -µ0, and other common scientific constants, is zero with subscript formatting, not a lowercase letter “o”.
-    -When quotation marks are used, instead of a bold or italic typeface.
-    -To highlight a word or phrase, punctuation should appear outside of the quotation marks.
-    -A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis.    
-    
+這是一個針對 *ASP-DAC2026 IEEE Conference Template* 的重點整理，幫助撰寫論文時符合格式要求。
+
+---
+
+## 文件來源
+
+- 名稱：IEEE Conference Template for ASP-DAC2026  
+- 連結：[下載 PDF](https://www.aspdac.com/aspdac2026/author/files/IEEE-conference-template-062824.pdf)  
+- 用途：APA-DAC 論文投稿格式規範
+
+---
+
+## 重點條列
+
+1. **論文標題**  
+   - 不可含特殊符號／數學／footnotes/enumerations  
+
+2. **作者與機構**  
+   - 每位作者姓名與所屬機構的標示方式  
+   - 不分欄、不重複部門  
+
+3. **摘要 & 關鍵詞**  
+   - 摘要中格式限制  
+   - Index Terms 的使用  
+
+4. **縮寫與單位**  
+   - 第一次使用縮寫要定義  
+   - 優先 SI 單位  
+
+5. **數學公式排版**  
+   - 變數與符號格式  
+   - 編號與引用方式  
+
+6. **LaTeX 注意事項**  
+   - 使用環境（比如 align）  
+   - label／caption 的位置  
+   - 引用方式  
+
+7. **圖表規範**  
+   - 放置位置與標題位置  
+   - label 與單位格式  
+
+8. **致謝**  
+   - 放置位置  
+   - 拼寫建議  
+
+9. **引用文獻**  
+   - format 要求  
+   - “in press” / “unpublished”等標示  
+
+---
+
+## 建議做法與提醒
+
+- 寫完內容後再做格式排版（先定內容後排版）  
+- 校對拼寫、標點、縮寫一致性  
+- 確認所有圖表被正文引用  
+- 刪除模板中所有指引文字（template instruction / sample text）避免被當正式內容刊登  
+
+---
+
+## 範例段落 / 範例公式
+
+> 這裡可以放一小段範例：  
+>  
+> Equation (1) shows the relationship between ...  
+> $$
+> x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+> $$(1)  
+>  
+> 在圖標題中這樣寫：  
+> *Fig. 1. Sample system architecture.*  
+
+---
+
+## 權責聲明
+
+以上整理依據 ASP-DAC2026 IEEE template “IEEE-conference-template-062824.pdf”。參考使用者需確認最新官方版本以防規範更動。
+
