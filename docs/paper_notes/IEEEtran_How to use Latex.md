@@ -1,3 +1,0 @@
-# Key Point
-
-## I. INTRODUCTION
