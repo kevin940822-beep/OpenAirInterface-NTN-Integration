@@ -66,7 +66,7 @@ the bottom margin is larger (IEEE requires additional space at the bottom).
 - Horizontal margins are symmetrical, and headers and footers do not display titles or page numbers.
 - The difference between the one and two sided options will not be a noticeable.
 
-### #The \author text
+### The \author text
 - Is placed within a tabular environment to allow for multicolumn formatting of author names and affiliations.
 - The spacing after the authors’ names is reduced. So is the spacing around the section names.
 - The special paper notice (if used) will appear between the author names and the title (not after as with journals).
