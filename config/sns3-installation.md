@@ -126,14 +126,16 @@ cd ~/workspace/bake/source/ns-3.43
 ./ns3 configure --build-profile=optimized --enable-examples --enable-tests
 ./ns3 build
 ```
-** Output :**
+
+**Output :**
+
 ```
 Finished executing the following commands:
 /usr/bin/cmake --build /home/kevin/workspace/bake/source/ns-3.43/cmake-cache -j 7
 ```
 ### Post-Compilation
 Once you compiled SNS-3 successfully, you will need an extra step before being able to run any simulation: download the data defining the reference scenario of the simulation.
-These data are available as a separate repository and bundled as a submodule in SNS-3. You can download them afterwards in the `satellite` repository using: (It will cost a little time)
+These data are available as a separate repository and bundled as a submodule in SNS-3. You can download them afterwards in the `satellite` repository using:
 ```
 cd contrib/satellite
 git submodule update --init --recursive
