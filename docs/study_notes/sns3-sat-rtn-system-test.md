@@ -50,6 +50,8 @@ log.txt
 10. CBR vs OnOff
 11. 程式結果檔
 12. architecture diagram(架構圖)
+13. flowchart (流程圖)
+14. MSC (Message Sequence Chart)訊息序列圖
 
 ---
 ## 1.UT/SAT/GW
@@ -182,9 +184,10 @@ RTN 模擬的最終目的是觀察：
 ## 12.architecture diagram(架構圖)
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/4fd8fe41-7a33-4aee-9d91-566dcfab7894" />
 
+## 13.flowchart(流程圖)
 
-
-
+## 14.MSC (Message Sequence Chart)(訊息序列圖)
+<img width="1099" height="519" alt="image" src="https://github.com/user-attachments/assets/7c1e5cab-2cf8-42d8-a7ec-10f8d271ab68" />
 
 
 
