@@ -15,6 +15,8 @@
 6. 時槽與超幀結構
 7. 網路層與應用層的回傳效能
 8. 在 SNS3 模擬中的應用
+9. ACM 影響
+10. 程式結果檔
 
 ---
 ## 1.UT/SAT/GW
@@ -104,6 +106,22 @@ RTN 模擬的最終目的是觀察：
 - 排程策略
 
 來觀察 RTN 效能變化
+
+## 9.ACM 影響
+
+（`--"ns3::SatWaveformConf::AcmEnabled=true" `等）：
+通道好時用高階調變（每符號更多 bit），`Per-beam Throughput` 上升；通道差時退階以保 BER，延遲可能增加。
+
+
+## 10.程式結果檔
+
+以下為幾個較為重要的程式結果
+- `Per-beam RTN App Throughput`（每波束的應用層上行吞吐）：有散點圖與純量檔，拿來比不同 beam 的負載/效率。
+- `Feeder Dev/MAC/PHY Throughput`（回傳饋線段在不同層的吞吐）：看瓶頸在哪一層（裝置、MAC、PHY）。
+- `Average UT User RTN App Throughput` / `Delay`（CDF）：看「每個使用者平均」的上行吞吐與延遲分佈（服務公平性、尾端延遲）。
+- `Per-beam RTN App Delay`（CDF）：比較不同 beam 的延遲差異。
+- `Per-beam Frame Symbol Load` / `Waveform Usage`：看每個超影格的符號負載與波形使用率（資源是否滿載、用到哪些 MODCOD/波形）。
+- `Per-beam Feeder DA Packet Error`：資料承載服務的封包錯誤統計（看錯誤率是否升高）。
 
 
 
