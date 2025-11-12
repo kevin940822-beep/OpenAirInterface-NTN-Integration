@@ -1,4 +1,4 @@
-# SNS3 sat-rtn-system-test-example.cc
+# SNS3 RTN
 >### Refrence 
 >https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/examples/sat-rtn-system-test-example.cc
 >
@@ -17,6 +17,7 @@
 
 5.物理層（PHY）建模
 
+6. 時槽與超幀結構
 
 ---
 ## 1.UT/SAT/GW
@@ -63,12 +64,18 @@ RTN 中最重要的部分之一是 MAC（Medium Access Control）機制。
 
 此類行為，通常由`SatPhy`模組以及通道模型`SatChannel`實現
 
+## 6. 時槽與超幀結構
+
+RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
+- Random Access (RA) slots：用於初始接入或需求封包
+- Assigned Slots：給已分配成功的終端
+- Control Burst：控制與同步訊號
+
+這樣的設計能確保多個終端公平使用上行頻寬。
+在 SNS3 的設定檔中，會看到 `.conf` 或 `.xml` 檔描述這個結構。
 
 
 
-
-
----
 
  
 
