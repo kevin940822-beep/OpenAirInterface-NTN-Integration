@@ -22,6 +22,19 @@
 
 這是 `sat-rtn-system-test-example.cc` 的主要功能之一。
 
+執行結束後，可以輸入此指令查看輸出檔（CSV / JSON）。
+
+```
+ls contrib/satellite/data/sims/sat-rtn-system-test-example/
+```
+會跑出
+```
+results.csv
+trace.json
+log.txt
+```
+這些就是模擬結果
+
 
 
 # Table of Contents
