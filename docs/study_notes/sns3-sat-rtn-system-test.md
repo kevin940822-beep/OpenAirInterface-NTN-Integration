@@ -5,6 +5,24 @@
 ### Result :
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/c60f707a-41df-4b89-bdd8-7bb5311ae607" />
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/bbdf4036-20f3-46c3-a961-63946d666987" />
+
+```
+115 Bytes allocated within TBTP
+130 Bytes allocated within TBTP
+144 Bytes allocated within TBTP
+```
+### 左圖為第一次執行時編譯器的輸出結果，右圖為執行結果
+- 右圖為 RTN（Return Link）排程器在分配回傳時槽（TBTP）時的輸出訊息。
+- 每一行的數字（115、130、144 Bytes）代表在該傳輸時槽中分配出去的 payload 大小。
+- 這些訊息持續出現，表示排程器正在運作、衛星網路模擬正在「傳送回傳資料流」。
+
+換句話說：
+模擬器正在模擬多個終端的回傳封包，TBTP 正在持續被配置。
+
+這是 `sat-rtn-system-test-example.cc` 的主要功能之一。
+
+
 
 # Table of Contents
 1. UT/SAT/GW
