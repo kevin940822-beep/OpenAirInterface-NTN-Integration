@@ -101,20 +101,32 @@ git clone https://github.com/sns3/stats.git magister-stats
 ```
 
 Note :
-> When retrieving the satellite, traffic and magister-stats modules, you should put them under the ns-3.43/contrib/ folder.
+> When retrieving the satellite, traffic and magister-stats modules, you should put them under the `ns-3.43/contrib/`  folder.
 > You can do so by cloning them directly in this folder, extracting them here, copying the files afterwards or using symbolic links.
 > Make sure all the repositories are using compatible versions. The best way to ensure that is to use the same tag on all repositories. For the latest release:
 
-### On NS-3 repository :
+### Go back to `ns-3.43` :
 ```
-cd ns-3.43
-git checkout ns-3.43
-```
-
-### On `satellite`, `traffic` and `magister-stats` repositories :
+cd ~/workspace/bake/source/ns-3.43
 
 ```
-cd ns-3.43/contrib/[satellite|traffic|magister-stats]
+
+### Go into the `satellite` and switch to 3.43 :
+```
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite
+git checkout 3.43
+```
+
+### Go back to contrib and enter the `traffic` :
+
+```
+cd ../traffic
+git checkout 3.43
+```
+
+### Go back to contrib again and enter the `magister-stats` :
+```
+cd ../magister-stats
 git checkout 3.43
 ```
 ---
