@@ -55,7 +55,7 @@ log.txt
 
 - SAT(Satellite Network) : 衛星
 
-- GW(Gateway) : 網關，外部核心網或伺服器
+- GW(Gateway) : 地面端，外部核心網或伺服器
 
 
 ## 2.RTN(Return Link Network)
