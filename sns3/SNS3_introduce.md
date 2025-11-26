@@ -9,6 +9,6 @@
 
 - reference satellite system have 72 spot-beams with an  European coverage
 
-- 5 gateways(GW) and Ka-band frequencies
+- 5 gateways(GW) and Ka-band frequencies as feeder/user link
 
 - implements the DVB-RCS2(RTN) - DVB-S2(FW) standards.
