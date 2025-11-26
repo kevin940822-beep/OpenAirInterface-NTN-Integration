@@ -3,8 +3,6 @@
 
 >https://www.aspdac.com/aspdac2026/author/files/IEEE-conference-template-062824.pdf
 
-# Key Points
-
 # I. Introduction
 - **Maintaining the Integrity of the Specifications**  
   Authors must ensure their papers comply with IEEE formatting standards and do not modify the integrity of the specifications.
