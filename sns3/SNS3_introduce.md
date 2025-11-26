@@ -1,5 +1,5 @@
 # Refrence
->https://www.sns3.org/
+> https://github.com/sns3/sns3-satellite/blob/master/doc/satellite-design.rst
 
 ## SNS3 Introduce
 
@@ -9,9 +9,11 @@
 
 - reference satellite system have 72 spot-beams with an  European coverage.
 
-- 5 gateways (GW) and Ka-band frequencies as feeder/user link.
+- serverd by 5 gateways (GWs) and using Ka-band frequencies on the feeder/user link.
 
-- implements the DVB-RCS2 (RTN) - DVB-S2 (FW) standards.
+- implements the DVB-RCS2/S2 standards.
+  - DVB-RCS2 (return link) : Digital Video Broadcast - Return Channel via Satellite - 2nd generation
+  - DVB-S2 (forword link) : Digital Video Broadcasting - Satellite - 2nd generation
 
 ## Frame configuration (時間與頻寬怎麼切格子)
 ### Return Link (DVB-RCS2)
