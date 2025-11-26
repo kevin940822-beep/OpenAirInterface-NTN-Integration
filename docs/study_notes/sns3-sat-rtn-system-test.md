@@ -25,7 +25,9 @@
 執行結束後，可以輸入此指令查看輸出檔（CSV / JSON）。
 
 ```
-ls contrib/satellite/data/sims/sat-rtn-system-test-example/
+cd ~/workspace/bake/source/ns-3.43
+ls contrib/satellite/data/sims
+ls contrib/satellite/data/sims/example-rtn-system-test
 ```
 會跑出
 ```
