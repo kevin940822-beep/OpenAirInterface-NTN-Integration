@@ -46,7 +46,7 @@
   
 ## Architecture (整體架構)
 <img width="1300" height="537" alt="image" src="https://github.com/user-attachments/assets/5949f5b4-03a9-46ba-9677-3c0bd824779f" />
-
+> Refrence : https://www.sns3.org/doc/_images/satellite-general-architecture.png
 
 
 - All satellite nodes require a new implementation of a ```SatNetDevice```
