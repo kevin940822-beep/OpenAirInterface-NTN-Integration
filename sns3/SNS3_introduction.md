@@ -21,11 +21,15 @@
 ### Return Link (DVB-RCS2)
 - Use **Multi-Frequency Time Division Multiple Access (MF-TDMA)**.
 - Composed of:
-  1. Superframe sequences
-  2. Superframes
-  3. Frames
-  4. Time slots
-  5. Bandwidth Time Units (BTUs)
+  1. **Superframe sequences**
+  2. **Superframes**
+  3. **Frames**
+  4. **Time slots**
+  5. **Bandwidth Time Units (BTUs)**
+
+- **Superframe sequence (SFS)** : An ordered time sequence of superframes on a given set of carriers, identifying one **MF-TDMA** resource block.  *(在一組特定頻寬上的連續 superframe 時間序列，代表一整塊 MF-TDMA 資源)*
+<img width="600" height="537" alt="image" src="https://github.com/user-attachments/assets/ccd39297-2004-4637-9320-de07b7d87531" />
+
    
 - The used frame structures are dynamically configured by the **Network Control Center (NCC)**.
   - **Superframe Composition Table (SCT)**
@@ -41,8 +45,8 @@
  - Using **DVB-S2 Time Division Multiplexing (TDM)**.
  - feeder link 2 GHz bandwidth is:
    - Divided into **16 carriers**, each **125 MHz**. 
-   - Each carrier is statically mapped to a user link frequency color.  ##每個 carrier 固定對應到某一個 user-beam 的 125 MHz 顏色
-   - Only one carrier per beam is supported.    ##每個 beam 只支援 一個 carrier
+   - Each carrier is statically mapped to a user link frequency color.  *(每個 carrier 固定對應到某一個 user-beam 的 125 MHz 顏色)*
+   - Only one carrier per beam is supported.    *(每個 beam 只支援 一個 carrier)*
   
 ## Architecture (整體架構)
 <img width="1300" height="537" alt="image" src="https://github.com/user-attachments/assets/5949f5b4-03a9-46ba-9677-3c0bd824779f" />
@@ -60,7 +64,7 @@
 - Satellite module implements both spherical and geodetic coordinate systems (**WGS80** and **GRS84**). 
   - In addition to labeling latitude, longitude, altitude of UT, GEO satellite and GW.
 
-##支援球面/大地座標（WGS80、GRS84），方便標示 UT / SAT / GW 的經緯度與高度
+*(支援球面/大地座標（WGS80、GRS84），方便標示 UT / SAT / GW 的經緯度與高度)*
 ### 1 Left side End user（地面使用者）
 - Connection:
   - Use **CSMA channel** connect to User Terminal(UT).
