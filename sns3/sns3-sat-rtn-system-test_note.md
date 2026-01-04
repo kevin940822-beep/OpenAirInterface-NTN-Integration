@@ -1,7 +1,7 @@
 # SNS3 sat-rtn-system-test-example.cc
 >### Refrence 
 >https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/examples/sat-rtn-system-test-example.cc
-
+## sns3 set up
 ## Step
 ### 檢視可修改的參數
 ```
@@ -12,13 +12,13 @@
 <img width="737" height="498" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
 
 | 參數 | 說明 | 預設值 | 修改範例 |
-|----|---|---|---|
+|---|---|---|---|
 | `--testCase` | 選擇要跑哪一個內建測試案例（通常不改） | `--testCase=0` | `--testCase=0` |
 | `--frameConf` | 指定 Superframe / Frame 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
 | `--trafficModel` | 決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff) | `0` | `--trafficModel=1` |
 | `--simLength` | 模擬時間（秒） | `30` | `--simLength=120` |
 | `--beamId` | 指定使用的衛星 Beam（波束） | `26` | `--beamId=10` |
-| `--utAppStartTime` | UT（User Terminal）Application 什麼時候開始傳資料 | `+100ms` | `--utAppStartTime=+1s` |
+| `--utAppStartTime`   | UT（User Terminal）Application 什麼時候開始傳資料 | `+100ms` | `--utAppStartTime=+1s` |
 | `--OutputPath` | 指定輸出統計檔案的資料夾 | （未指定） | `mkdir -p results/rtn-exp1`<br>`./ns3 run sat-rtn-system-test-example -- \`<br>`--OutputPath=results/rtn-exp1` |
 | `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
 
@@ -31,8 +31,21 @@ mkdir -p results/rtn-test1
 
 修改參數
 ```
-./ns3 run sat-rtn-system-test-example -- --simLength=120 --trafficModel=1 --frameConf=Configuration_1 --beamId=10 --utAppStartTime=+1s --OutputPath=results/rtn-test1
+./ns3 run sat-rtn-system-test-example -- \
+--simLength=120 \
+--trafficModel=1 \
+--frameConf=Configuration_1 \
+--beamId=10 \
+--utAppStartTime=+1s \
+--OutputPath=results/rtn-test1
 ```
+前往資料夾位置
+```
+cd /home/kevin/workspace/bake/source/ns-3.43/results/rtn-test1
+ls -la
+```
+output
+<img width="736" height="608" alt="image" src="https://github.com/user-attachments/assets/9c39e4ca-4f40-44a4-b851-5002ca77654d" />
 
 ### Result :
 
