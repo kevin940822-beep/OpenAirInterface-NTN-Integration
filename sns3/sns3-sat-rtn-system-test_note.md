@@ -101,7 +101,7 @@ ls -la
 
 這是 `sat-rtn-system-test-example.cc` 的主要功能之一。
 
-執行結束後，可以輸入此指令查看輸出檔（CSV / JSON）。
+執行結束後，可以輸入此指令查看輸出檔。
 
 ```
 cd ~/workspace/bake/source/ns-3.43
@@ -109,12 +109,20 @@ ls contrib/satellite/data/sims
 ls contrib/satellite/data/sims/example-rtn-system-test
 ```
 會跑出
-```
-results.csv
-trace.json
-log.txt
-```
+
+<img width="1116" height="795" alt="image" src="https://github.com/user-attachments/assets/d78ac5e4-4573-4fcb-bbe0-9f18b6163bc3" />
+
 這些就是模擬結果
+
+對應結果
+| 檔名關鍵字             | 意義      | 結果檔數量            |
+| ----------------- | ------- | ------------------ |
+| `stat-global-*`   | 全系統統計   | 全部加總 → 只有 1 個      |
+| `stat-per-ut-*`   | 每個 UT   | UT 有 N 個 → 檔案有 N 個 |
+| `stat-per-beam-*` | 每個 Beam | Beam 數量決定          |
+| `scatter-*`       | 時間序列    | 每個實體 × 時間          |
+
+所以才會有10個UT結果檔，因為前面手動將UT設定為10個
 
 ---
 
@@ -135,11 +143,22 @@ log.txt
 
 ---
 ## 1.UT/SAT/GW
-- UT(User Terminal) : 使用者終端
+- **UT(User Terminal)** : 使用者終端
+  - 產生應用資料（RTN 上行）
+  - 依照 TBTP 指定的 time slot 傳送資料
+    
+- **SAT(Satellite Network)** : 衛星
+  - 接收 UT 的 RTN 資料
+  - 轉發至 GW
+  - 將 GW 的 FWD 控制訊息轉送給 UT
+  - **不做排程決策**
+  - **只負責轉送（bent-pipe）**
 
-- SAT(Satellite Network) : 衛星
+- **GW(Gateway)** : 地面端，外部核心網或伺服器
+  - 產生 **TBTP（Terminal Burst Time Plan）**
+  - 決定：哪個 UT、什麼時間、用多少 RTN 資源
 
-- GW(Gateway) : 地面端，外部核心網或伺服器
+<img width="971" height="453" alt="image" src="https://github.com/user-attachments/assets/304a110f-b3b9-47ff-a7e8-74ce8228e07b" />
 
 
 ## 2.RTN(Return Link Network)
