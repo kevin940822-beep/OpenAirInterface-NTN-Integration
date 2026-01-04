@@ -212,7 +212,7 @@ RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 | **(1) Superframe / MF-TDMA 資源結構層**<br>（決定可用的 time slot / frequency 資源格子） | **GW（主要決策者）** | - 定義／選擇 superframe configuration（如 `Configuration_0 / Configuration_1`）<br>- 依系統設計決定 RTN 資源格子大小（時間 × 頻率）<br>- 限制後續 MAC 排程可用的資源範圍 |
 | | **UT（遵循者）** | - 接收 GW 下發的 frame / superframe 結構資訊<br>- 依此得知可使用的時間與頻率資源 |
 | | **SAT（透明轉發）** | - 透明轉發模式下不建立、不調整 superframe，只負責轉送 |
-| **(2) 需求回報 + 動態分配層**<br>（DA / Dynamic Assignment）<br>（解決誰需要多少資源、誰先拿到） | **UT（提出需求）** | - 有資料要傳時產生容量需求（capacity request）(Random Access) <br>- 透過 RTN 控制訊息回報上行資源需求給 GW |
+| **(2) 需求回報 + 動態分配層**<br>（DA / Dynamic Assignment）<br>（解決誰需要多少資源、誰先拿到） | **UT（提出需求）** | - 有資料要傳時產生容量需求（capacity request）[(Random Access)](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#5-%E6%99%82%E6%A7%BD%E8%88%87%E8%B6%85%E5%B9%80%E7%B5%90%E6%A7%8Bsuperframe) <br>- 透過 RTN 控制訊息回報上行資源需求給 GW |
 | | **GW（分配與排程）** | - 收集各 UT 的需求資訊<br>- 依負載、QoS、延遲需求等進行 Dynamic Assignment<br>- 形成類 TBTP 的資源分配結果 |
 | | **SAT（透明轉發）** | - 不進行排程決策<br>- 僅轉送需求與控制訊息 |
 | **(3) MAC 傳輸執行層**<br>（依排程真正送資料） | **UT（執行上行傳輸）** | - 依 GW 下發的排程規則（TBTP ）<br>- 在指定 time slot / burst 中進行 RTN 上行傳輸（MF-TDMA）<br>- 管理本地 MAC queue / dequeue |
@@ -265,6 +265,15 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
   - 初始接入（initial access）
 - Assigned Slots：給已分配成功的終端
 - Control Burst：控制與同步訊號
+
+## Superframe 內各組成與其在 RTN 流程中的角色
+
+| Superframe 組成 | 主要用途 | 存取方式 | 與 DA / TBTP 的關係 | 與 MF-TDMA 的關係 |
+|---|---|---|---|---|
+| **Random Access (RA) slots** | 初始接入、容量需求回報（Capacity Request） | 競爭式（可能碰撞） | - UT 透過 RA slots 回報 DA <br>- 作為 GW 排程的輸入資訊 | - RA slots 通常佔用固定的時間 × 頻率資源<br>- 不屬於正式排程的 MF-TDMA 資料傳輸 |
+| **Assigned Slots** | 給 **已成功排程的** UT 進行資料傳輸 | 排程式（無碰撞） | - GW 根據 DA 與 Dynamic Assignment 產生 TBTP<br>- TBTP 指定 UT 使用哪些 Assigned slots | - Assigned slots 即為 MF-TDMA 的實際使用資源<br>- 不同 UT 於不同時間 × 頻率同時傳輸 | 
+| **Control Burst** | 控制與同步資訊傳遞 | 排程式 | - 承載與排程相關的控制資訊（如同步、配置）<br>- 輔助 TBTP 與系統運作 | - 不承載使用者資料<br>- 主要用於維持 MF-TDMA 上行的時間與頻率同步 |
+
 
 這樣的設計能確保多個終端公平使用上行頻寬。
 在 SNS3 的設定檔中，會看到 `.conf` 或 `.xml` 檔描述這個結構。
