@@ -276,7 +276,14 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 
 
 這樣的設計能確保多個終端公平使用上行頻寬。
-在 SNS3 的設定檔中，會看到 `.conf` 或 `.xml` 檔描述這個結構。
+
+### 對應程式碼
+|**Superframe 組成** |**對應程式碼分布位置**|
+|---|---|
+|**Superframe結構**|`satellite-orbiter-net-device.cc`<br>`satellite-*-net-device.cc`|
+| **Random Access (RA) slots**|`satellite-llc.cc`|
+|**Assigned Slots**|`satellite-ut-mac.cc` （實際上行傳輸）|
+|**Control Burst**|`satellite-mac.cc` <br>`satellite-*-net-device.cc`|
 
 ## 6. 網路層與應用層的回傳效能
 
