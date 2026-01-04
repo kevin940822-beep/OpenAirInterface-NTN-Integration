@@ -1,7 +1,10 @@
 # SNS3 sat-rtn-system-test-example.cc
 >### Refrence 
 >https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/examples/sat-rtn-system-test-example.cc
-## sns3 set up
+
+### sns3 set up
+>https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/SNS3_installation.md#sns3-installation
+
 ## Step
 ### 檢視可修改的參數
 ```
@@ -24,12 +27,12 @@
 
 
 
-創建新資料夾給測試(方便之後修改使用)
+### 創建新資料夾給測試結果(方便之後修改使用)
 ```
 mkdir -p results/rtn-test1
 ```
 
-修改參數
+### 修改參數
 ```
 ./ns3 run sat-rtn-system-test-example -- \
 --simLength=120 \
@@ -39,14 +42,28 @@ mkdir -p results/rtn-test1
 --utAppStartTime=+1s \
 --OutputPath=results/rtn-test1
 ```
-前往資料夾位置
+### 前往資料夾位置
 ```
 cd /home/kevin/workspace/bake/source/ns-3.43/results/rtn-test1
 ls -la
 ```
-output
+### output
+
 <img width="736" height="608" alt="image" src="https://github.com/user-attachments/assets/9c39e4ca-4f40-44a4-b851-5002ca77654d" />
 
+### 重要檔案
+
+| 類別 | 指標名稱 | 說明 | 對應輸出檔案 |
+|---|---|---|---|
+| **App Throughput** | Global App Throughput (Scalar) | 整體 RTN 應用層吞吐量的單一平均數值，用來比較不同參數設定下的整體效能 | `stat-global-rtn-app-throughput-scalar.txt` |
+| **App Throughput** | App Throughput (Scatter) | RTN 應用層吞吐量隨時間變化的數據，常用來畫 Throughput vs. Time 圖，觀察流量穩定度與突波 | `stat-global-rtn-app-throughput-scatter-0.txt` |
+| **App Throughput** | Average UT User App Throughput (CDF) | 各使用者平均 RTN 應用層吞吐量的 CDF，用於分析使用者間的公平性（fairness） | `stat-average-ut-user-rtn-app-throughput-cdf.txt` |
+| **Delay** | Average UT User App Delay (CDF) | RTN 應用層延遲的 CDF，用於評估 RTN 時延表現與整體效能分析 | `stat-average-ut-user-rtn-app-delay-cdf-ATTN.txt` |
+| **MAC Throughput** | RTN User MAC Throughput (Scalar) | RTN 使用者端 MAC layer 的吞吐量，反映無線資源在使用者端的實際利用情況 | `stat-global-rtn-user-mac-throughput-scalar.txt` |
+| **MAC Throughput** | RTN Feeder MAC Throughput (Scalar) | RTN feeder link MAC layer 的吞吐量，用來分析核心鏈路的負載與瓶頸 | `stat-global-rtn-feeder-mac-throughput-scalar.txt` |
+| **Beam / Frame 使用率** | Frame Symbol Load per Beam | 各個衛星 beam 的 frame symbol 使用率，反映 RTN 資源分配與 beam 負載狀況 | `stat-per-beam-frame-symbol-load-scalar.txt` |
+
+### 檢視檔案內容
 ### Result :
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/c60f707a-41df-4b89-bdd8-7bb5311ae607" />
