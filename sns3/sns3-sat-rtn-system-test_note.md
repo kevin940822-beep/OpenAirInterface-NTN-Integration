@@ -12,7 +12,7 @@
 <img width="737" height="498" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
 
 | 參數 | 說明 | 預設值 | 修改範例 |
-|---|---|---|---|
+|----|---|---|---|
 | `--testCase` | 選擇要跑哪一個內建測試案例（通常不改） | `--testCase=0` | `--testCase=0` |
 | `--frameConf` | 指定 Superframe / Frame 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
 | `--trafficModel` | 決定 RTN 回傳資料的流量型態。0 = CBR (Constant Bit Rate)，1 = OnOff | `0` | `--trafficModel=1` |
