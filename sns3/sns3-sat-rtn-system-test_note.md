@@ -118,10 +118,9 @@ log.txt
 8. 在 SNS3 模擬中的應用
 9. ACM 影響
 10. CBR vs OnOff
-11. 程式結果檔
-12. architecture diagram(架構圖)
-13. flowchart (流程圖)
-14. MSC (Message Sequence Chart)訊息序列圖
+11. architecture diagram(架構圖)
+12. flowchart (流程圖)
+13. MSC (Message Sequence Chart)訊息序列圖
 
 ---
 ## 1.UT/SAT/GW
@@ -240,23 +239,12 @@ RTN 模擬的最終目的是觀察：
 | `OffTime`    | 無                       | 傳輸暫停的時間，可為常數或隨機分布       |
 
 
-  
-## 11.程式結果檔
-
-以下為幾個較為重要的程式結果
-- `Per-beam RTN App Throughput`（每波束的應用層上行吞吐）：有散點圖與純量檔，拿來比不同 beam 的負載/效率。
-- `Feeder Dev/MAC/PHY Throughput`（回傳饋線段在不同層的吞吐）：看瓶頸在哪一層（裝置、MAC、PHY）。
-- `Average UT User RTN App Throughput` / `Delay`（CDF）：看「每個使用者平均」的上行吞吐與延遲分佈（服務公平性、尾端延遲）。
-- `Per-beam RTN App Delay`（CDF）：比較不同 beam 的延遲差異。
-- `Per-beam Frame Symbol Load` / `Waveform Usage`：看每個超影格的符號負載與波形使用率（資源是否滿載、用到哪些 MODCOD/波形）。
-- `Per-beam Feeder DA Packet Error`：資料承載服務的封包錯誤統計（看錯誤率是否升高）。
-
-## 12.architecture diagram(架構圖)
+## 11.architecture diagram(架構圖)
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/4fd8fe41-7a33-4aee-9d91-566dcfab7894" />
 
-## 13.flowchart(流程圖)
+## 12.flowchart(流程圖)
 
-## 14.MSC (Message Sequence Chart)(訊息序列圖)
+## 13.MSC (Message Sequence Chart)(訊息序列圖)
 <img width="1099" height="519" alt="image" src="https://github.com/user-attachments/assets/7c1e5cab-2cf8-42d8-a7ec-10f8d271ab68" />
 
 
