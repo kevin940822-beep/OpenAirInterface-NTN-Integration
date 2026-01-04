@@ -11,16 +11,17 @@
 
 <img width="737" height="498" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
 
-- ```--testCase```：選擇要跑哪一個內建測試案例(通常不改)。預設為```--testCase=0```
-- ```--frameConf```：指定 Superframe / Frame 結構配置(RTN slot 數量、頻寬配置、資源分配方式)。修改範例：```--frameConf=Configuration_1```
-- ```--trafficModel```：決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff)。修改範例：```--trafficModel=1```
-- ```--simLength```：模擬時間（秒）。修改範例：```--simLength=120```
-- ```--beamId```：指定使用的 衛星 Beam（波束）。修改範例：```--beamId=10```
-- ```--utAppStartTime```：UT（User Terminal）Application 什麼時候開始傳資料。修改範例：```--utAppStartTime=+1s```
-- ```--OutputPath```：指定 輸出統計檔案的資料夾。修改範例：```mkdir -p results/rtn-exp1
-./ns3 run sat-rtn-system-test-example -- \
---OutputPath=results/rtn-exp1```
-- ```--InputXml```：指定 XML 設定檔(節點數、Frame 結構、FWD / RTN 參數)。修改範例：```--InputXml=contrib/satellite/examples/sys-rtn-test.xml```
+| 參數 | 說明 | 預設值 | 修改範例 |
+|---|---|---|---|
+| `--testCase` | 選擇要跑哪一個內建測試案例（通常不改） | `--testCase=0` | `--testCase=0` |
+| `--frameConf` | 指定 Superframe / Frame 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
+| `--trafficModel` | 決定 RTN 回傳資料的流量型態。0 = CBR (Constant Bit Rate)，1 = OnOff | `0` | `--trafficModel=1` |
+| `--simLength` | 模擬時間（秒） | `30` | `--simLength=120` |
+| `--beamId` | 指定使用的衛星 Beam（波束） | `26` | `--beamId=10` |
+| `--utAppStartTime` | UT（User Terminal）Application 什麼時候開始傳資料 | `+100ms` | `--utAppStartTime=+1s` |
+| `--OutputPath` | 指定輸出統計檔案的資料夾 | （未指定） | `mkdir -p results/rtn-exp1`<br>`./ns3 run sat-rtn-system-test-example -- \`<br>`--OutputPath=results/rtn-exp1` |
+| `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
+
 
 
 創建新資料夾給測試(方便之後修改使用)
