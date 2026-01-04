@@ -81,9 +81,20 @@ ls -la
 144 Bytes allocated within TBTP
 ```
 ### 左圖為第一次執行時編譯器的輸出結果，右圖為執行結果
-- 右圖為 RTN（Return Link）排程器在分配回傳時槽（TBTP）時的輸出訊息。
+- 右圖為 RTN（Return Link）排程器在分配回傳時槽 **TBTP(Terminal Burst Time Plan)** 時的輸出訊息。
+  - **TBTP(Terminal Burst Time Plan)** ：是由 Hub 所產生的一份 回傳鏈路（Return Link, RTN）排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
+  - 內容包含：
+    - 哪一個 UT（User Terminal）
+    - 在哪一個 superframe / frame
+    - 被分配到哪一個 time slot
+    - 可以使用多少 symbols / bursts 進行傳輸
+  - 實際運作方式：
+    - FWD（Forward Link）：由 Hub 將 TBTP 傳送給各個 UT，作為回傳鏈路的傳輸規則說明。
+    - Return Link（RTN）：各 UT 依照 TBTP 所指定的時間與資源配置，在對應的 time slot 中回傳資料。
 - 每一行的數字（115、130、144 Bytes）代表在該傳輸時槽中分配出去的 payload 大小。
 - 這些訊息持續出現，表示排程器正在運作、衛星網路模擬正在「傳送回傳資料流」。
+
+
 
 換句話說：
 模擬器正在模擬多個終端的回傳封包，TBTP 正在持續被配置。
