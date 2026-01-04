@@ -13,7 +13,7 @@
 
 - ```--testCase```：選擇要跑哪一個內建測試案例(通常不改)。預設為```--testCase=0```
 - ```--frameConf```：指定 Superframe / Frame 結構配置(RTN slot 數量\頻寬配置\資源分配方式)。```--frameConf=Configuration_1```
-- ```--trafficModel```：決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/edit/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff)。p
+- ```--trafficModel```：決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff)
 
 
 創建新資料夾給測試(方便之後修改使用)
