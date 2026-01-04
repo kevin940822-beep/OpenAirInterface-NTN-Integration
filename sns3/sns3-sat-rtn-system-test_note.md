@@ -12,7 +12,7 @@
 ```
 
 
-<img width="737" height="498" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
+<img width="350" height="350" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
 
 | 參數 | 說明 | 預設值 | 修改範例 |
 |---|---|---|---|
@@ -129,13 +129,12 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 # Table of Contents
 1. UT/SAT/GW
 2. RTN 上行/回傳鏈路
-3. Regenerator/RTN System
-4. MAC 層排程與接入控制
-5. 物理層（PHY）建模
-6. 時槽與超幀結構
-7. 網路層與應用層的回傳效能
-8. 在 SNS3 模擬中的應用
-9. ACM 影響
+3. MAC 層排程與接入控制
+4. 物理層（PHY）建模
+5. 時槽與超幀結構
+6. 網路層與應用層的回傳效能
+7. 在 SNS3 模擬中的應用
+8. ACM 影響
 10. CBR vs OnOff
 11. architecture diagram(架構圖)
 12. flowchart (流程圖)
@@ -162,32 +161,42 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 
 
 ## 2.RTN(Return Link Network)
-使用者 → 衛星 → 地面站 的上行路徑
+**主要傳輸資料(App Data)**
 
-(  UT → SAT  →  GW  )
+路徑：
 
-此結構主要依賴 TDMA（時分多工） 或 MF-TDMA（多頻多時分多工） 機制，來在上行鏈路中有效分配時間與頻率資源。
+使用者 → 衛星 → 地面站
+
+(  UT →  SAT  →  GW  )
+
+此結構主要依賴 **TDMA（Time Division Multiple Access）時分多工** 或 **MF-TDMA（Multi-Frequency Time Division Multiple Access）多頻多時分多工** 機制，來在上行鏈路中有效分配時間與頻率資源。
+| 項目     | TDMA | MF-TDMA |
+| ------ | ---- | ------- |
+| 切分方式   | 只有時間 | 時間 + 頻率 |
+| 同時傳輸   | ❌    | ✅       |
+| 頻寬利用率  | 較低   | 較高      |
+| 衛星 RTN | 少用   | **主流**  |
+|圖片比較|<img width="640" height="178" alt="image" src="https://github.com/user-attachments/assets/d233a5c8-dded-4339-93ad-2eeebaaad95a" />|<img width="458" height="264" alt="image" src="https://github.com/user-attachments/assets/1ac51ea1-7af9-4bff-ad27-b6f46efce6a1" />|
 
 
-## 3.Regenerator/RTN System
 
-模擬上行鏈路的排程、資源分配、干擾與BER
+## 3.MAC 層排程與接入控制
 
-## 4.MAC 層排程與接入控制
+RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 
-RTN 中最重要的部分之一是 MAC（Medium Access Control）機制。
+應付多個終端共用同一顆衛星的頻寬，因此系統必須解決「誰在什麼時候可以傳」的問題。
 
-為了應付多個終端共用同一顆衛星的頻寬，因此系統必須解決「誰在什麼時候可以傳」的問題。
+所以**MAC**為**排程與資源分配的核心**。
 
-- Demand Assignment (DA) : 終端先發送一個「資源需求」給網關，再由網關分配上行時槽。
+- **Demand Assignment (DA)** : **需求式配置**。UT先發送一個「資源需求」給GW，再由GW分配RTN slot。
 
-- Dynamic Assignment：依據負載、QoS、延遲需求動態調整。
+- **Dynamic Assignment**：**動態配置**。GW依據負載、QoS、延遲需求動態調整分配結果。
 
-- Contention Resolution：若多個終端同時搶同一時槽，需偵測碰撞並重新傳送。
+- **Contention Resolution**：**競爭式存取**。若多個終端同時搶同一時槽，需偵測碰撞並重新傳送。
 
 上述行為通常由 `SatRtnScheduler`/`SatRtnMac`/`SatSuperframeConf` 等類別控制
 
-## 5.物理層（PHY）建模
+## 4.物理層（PHY）建模
 
 上行鏈路(RTN)相較於下行鏈路(FL)，功率通常較弱、天線增益較低，因此 RTN 的 PHY 層特性更具挑戰性：
 - 使用 上行頻段（如 Ka-band 29.5–30GHz）
@@ -200,7 +209,7 @@ RTN 中最重要的部分之一是 MAC（Medium Access Control）機制。
 
 此類行為，通常由`SatPhy`模組以及通道模型`SatChannel`實現
 
-## 6. 時槽與超幀結構
+## 5. 時槽與超幀結構
 
 RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 - Random Access (RA) slots：用於初始接入或需求封包
@@ -210,7 +219,7 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 這樣的設計能確保多個終端公平使用上行頻寬。
 在 SNS3 的設定檔中，會看到 `.conf` 或 `.xml` 檔描述這個結構。
 
-## 7. 網路層與應用層的回傳效能
+## 6. 網路層與應用層的回傳效能
 
 RTN 模擬的最終目的是觀察：
 - 封包延遲（Round Trip Delay）
@@ -223,7 +232,7 @@ RTN 模擬的最終目的是觀察：
 - 系統需分配 RTN 時槽給每個終端
 - 分析在不同負載下系統的穩定性與效率
 
-## 8.在 SNS3 模擬中的應用
+## 7.在 SNS3 模擬中的應用
 
 當執行`./ns3 run sat-rtn-system-test-example`，
 系統會模擬：
@@ -241,12 +250,12 @@ RTN 模擬的最終目的是觀察：
 
 來觀察 RTN 效能變化
 
-## 9.ACM 影響
+## 8.ACM 影響
 
 （`--"ns3::SatWaveformConf::AcmEnabled=true" `等）：
 通道好時用高階調變（每符號更多 bit），`Per-beam Throughput` 上升；通道差時退階以保 BER，延遲可能增加。
 
-## 10.CBR vs OnOff
+## 9.CBR vs OnOff
 
 | 項目         | **CBR (Constant Bit Rate)** | **OnOff (On–Off Model)**  |
 | :--------- | :-------------------------- | :------------------------ |
@@ -269,12 +278,12 @@ RTN 模擬的最終目的是觀察：
 | `OffTime`    | 無                       | 傳輸暫停的時間，可為常數或隨機分布       |
 
 
-## 11.architecture diagram(架構圖)
+## 10.architecture diagram(架構圖)
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/4fd8fe41-7a33-4aee-9d91-566dcfab7894" />
 
-## 12.flowchart(流程圖)
+## 11.flowchart(流程圖)
 
-## 13.MSC (Message Sequence Chart)(訊息序列圖)
+## 12.MSC (Message Sequence Chart)(訊息序列圖)
 <img width="1099" height="519" alt="image" src="https://github.com/user-attachments/assets/7c1e5cab-2cf8-42d8-a7ec-10f8d271ab68" />
 
 
