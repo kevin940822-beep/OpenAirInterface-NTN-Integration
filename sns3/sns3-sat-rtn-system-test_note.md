@@ -15,7 +15,7 @@
 |----|---|---|---|
 | `--testCase` | 選擇要跑哪一個內建測試案例（通常不改） | `--testCase=0` | `--testCase=0` |
 | `--frameConf` | 指定 Superframe / Frame 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
-| `--trafficModel` | 決定 RTN 回傳資料的流量型態。0 = CBR (Constant Bit Rate)，1 = OnOff | `0` | `--trafficModel=1` |
+| `--trafficModel` | 決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff) | `0` | `--trafficModel=1` |
 | `--simLength` | 模擬時間（秒） | `30` | `--simLength=120` |
 | `--beamId` | 指定使用的衛星 Beam（波束） | `26` | `--beamId=10` |
 | `--utAppStartTime` | UT（User Terminal）Application 什麼時候開始傳資料 | `+100ms` | `--utAppStartTime=+1s` |
