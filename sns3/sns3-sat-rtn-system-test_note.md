@@ -1,7 +1,31 @@
 # SNS3 sat-rtn-system-test-example.cc
 >### Refrence 
 >https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/examples/sat-rtn-system-test-example.cc
->
+
+## Step
+### 檢視可修改的參數
+```
+./ns3 run sat-rtn-system-test-example -- --PrintHelp
+```
+
+
+<img width="737" height="498" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
+
+- ```--testCase```：選擇要跑哪一個內建測試案例(通常不改)。預設為```--testCase=0```
+- ```--frameConf```：指定 Superframe / Frame 結構配置(RTN slot 數量\頻寬配置\資源分配方式)。```--frameConf=Configuration_1```
+- ```--trafficModel```：決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/edit/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff)。p
+
+
+創建新資料夾給測試(方便之後修改使用)
+```
+mkdir -p results/rtn-test1
+```
+
+修改參數
+```
+./ns3 run sat-rtn-system-test-example -- --simLength=120 --trafficModel=1 --frameConf=Configuration_1 --beamId=10 --utAppStartTime=+1s --OutputPath=results/rtn-test1
+```
+
 ### Result :
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/c60f707a-41df-4b89-bdd8-7bb5311ae607" />
