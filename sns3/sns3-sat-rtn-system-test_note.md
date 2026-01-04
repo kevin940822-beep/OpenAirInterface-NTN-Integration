@@ -64,6 +64,12 @@ ls -la
 | **Beam / Frame 使用率** | Frame Symbol Load per Beam | 各個衛星 beam 的 frame symbol 使用率，反映 RTN 資源分配與 beam 負載狀況 | `stat-per-beam-frame-symbol-load-scalar.txt` |
 
 ### 檢視檔案內容
+| 檢視方式 | 指令格式 | 說明 | 使用範例 |
+|---|---|---|---|
+| 直接顯示內容 | `cat 檔名` | 一次顯示整個檔案內容，適合內容較少或只需要快速查看 | `cat stat-global-rtn-app-throughput-scalar.txt` |
+| 分頁檢視 | `less 檔名` | 以分頁方式檢視檔案內容，適合內容較多的檔案 | `less stat-global-rtn-app-throughput-scatter-0.txt` |
+| 檢視前/後幾行 | `head 檔名` / `tail 檔名` | 只顯示檔案的前幾行或後幾行，適合快速確認檔案格式或最新資料 | `head stat-average-ut-user-rtn-app-throughput-cdf.txt` |
+
 ### Result :
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/c60f707a-41df-4b89-bdd8-7bb5311ae607" />
