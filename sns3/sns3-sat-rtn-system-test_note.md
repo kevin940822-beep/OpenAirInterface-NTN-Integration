@@ -135,7 +135,7 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 ---
 
 # Table of Contents
-1. [UT/SAT/GW](#ut/sat/gw)
+1. [UT/SAT/GW](#ut-sat-gw)
 2. RTN 上行/回傳鏈路
 3. MAC 層排程與接入控制
 4. 物理層（PHY）建模
