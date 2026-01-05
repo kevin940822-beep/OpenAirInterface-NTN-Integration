@@ -11,8 +11,8 @@
 ./ns3 run sat-rtn-system-test-example -- --PrintHelp
 ```
 
+<img width="737" height="498" alt="image" src="https://github.com/user-attachments/assets/4d67df40-7011-4de1-9865-5a70521658ce" />
 
-<img width="350" height="350" alt="image" src="https://github.com/user-attachments/assets/fb96d95c-03d9-434d-a415-6dc8961e3ae9" />
 
 | 參數 | 說明 | 預設值 | 修改範例 |
 |---|---|---|---|
@@ -24,6 +24,21 @@
 | `--utAppStartTime`   | UT（User Terminal）Application 什麼時候開始傳資料 | `+100ms` | `--utAppStartTime=+1s` |
 | `--OutputPath` | 指定輸出統計檔案的資料夾 | （未指定） | `mkdir -p results/rtn-exp1`<br>`./ns3 run sat-rtn-system-test-example -- \`<br>`--OutputPath=results/rtn-exp1` |
 | `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
+
+### testCase
+程式碼位置：
+```
+grep -n "case 4:" sat-rtn-system-test-example.cc
+```
+
+| testCase | 測試主題 | 主要重點 | 說明 |
+|---|---|---|---|
+| **0** | Scheduler + CRA | 固定分配（CRA）+ 排程 | 使用 Constant Rate Assignment（CRA），是否啟用 ACM 由指令參數決定，用來觀察基本排程與固定資源配置行為 |
+| **1** | Scheduler + FCA（CRA + VBDC） | 混合分配 | 啟用 FCA（結合 CRA 與 VBDC），測試較彈性的動態資源分配機制，ACM 仍由指令參數控制 |
+| **2** | ACM 測試 | 通道自適應 | 單一 UT / 單一使用者，啟用 ACM，搭配 Markov fading 與 external fading，用來觀察調變編碼自適應效果 |
+| **3** | RM（Resource Management）+ CRA | RM + 固定配置 | 單一 UT / 單一使用者，只使用 CRA，測試 RM 架構下的固定資源管理行為 |
+| **4** | RM + RBDC | RM + 需求式分配 | 單一 UT / 單一使用者，只使用 RBDC（Rate-Based Dynamic Capacity），觀察需求導向的資源分配效果 |
+
 
 
 
@@ -77,7 +92,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 
 <img width="386" height="784" alt="image" src="https://github.com/user-attachments/assets/f0c034da-e30d-43f6-85fa-ea5e6d8fa9b5" />
 
-
+---
 ### Result :
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/c60f707a-41df-4b89-bdd8-7bb5311ae607" />
@@ -135,7 +150,7 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 ---
 
 # Table of Contents
-1. [UT/SAT/GW](#ut-sat-gw)
+1. UT/SAT/GW
 2. RTN 上行/回傳鏈路
 3. MAC 層排程與接入控制
 4. 物理層（PHY）建模
@@ -240,7 +255,7 @@ RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 ```
 
-上行鏈路(RTN)相較於下行鏈路(FL)，功率通常較弱、天線增益較低，因此 RTN 的 PHY 層特性更具挑戰性：
+上行鏈路(RTN)相較於下行鏈路(FWD)，功率通常較弱、天線增益較低，因此 RTN 的 PHY 層特性更具挑戰性：
 - 使用 上行頻段（如 Ka-band 29.5–30GHz）
 - 調變與編碼方式（ModCod）：QPSK、8PSK、16QAM + LDPC
 - 功率控制（Uplink Power Control）
@@ -264,13 +279,6 @@ Superframe 的主要目的在於：
 - 作為 MAC 排程（TBTP / DA / Dynamic Assignment） 的基礎
   
 RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
-- Random Access (RA) slots：
-  - 容量需求回報（capacity request）
-  - 初始接入（initial access）
-- Assigned Slots：給已分配成功的終端
-- Control Burst：控制與同步訊號
-
-## Superframe 內各組成與其在 RTN 流程中的角色
 
 | Superframe 組成 | 主要用途 | 存取方式 | 與 DA / TBTP 的關係 | 與 MF-TDMA 的關係 |
 |---|---|---|---|---|
@@ -324,18 +332,16 @@ RTN 模擬的最終目的是觀察：
 ### 程式位置
 
 ```
-cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model/
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 ```
 
-`satellite-waveform-conf.cc`
-
-`satellite-waveform-conf.h`
+`satellite-wave-form-conf.cc`
 
 ACM 的實作主要位於 SNS-3 的 waveform 與 PHY 模組
 
 `satellite-phy-rx-*.cc`
 
-`satellite-waveform-conf.cc`
+`satellite-wave-form-conf.cc`
 
 
 可透過設定
@@ -380,12 +386,17 @@ cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 
 
 ## 10.architecture diagram(架構圖)
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/4fd8fe41-7a33-4aee-9d91-566dcfab7894" />
+<img width="926" height="521" alt="image" src="https://github.com/user-attachments/assets/2f5e36fb-260e-4da3-8660-86a6c3936f20" />
+
 
 ## 11.flowchart(流程圖)
 
+### 單次傳輸
+<img width="317" height="635" alt="image" src="https://github.com/user-attachments/assets/96eff2fa-8fb9-4faf-9ef6-7fbee3417c24" />
+
 ## 12.MSC (Message Sequence Chart)(訊息序列圖)
-<img width="1099" height="519" alt="image" src="https://github.com/user-attachments/assets/7c1e5cab-2cf8-42d8-a7ec-10f8d271ab68" />
+<img width="976" height="612" alt="image" src="https://github.com/user-attachments/assets/e76a4d16-22a6-4699-8da3-f84103497599" />
+
 
 
 
