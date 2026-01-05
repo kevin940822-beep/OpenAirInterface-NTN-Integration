@@ -17,7 +17,7 @@
 | 參數 | 說明 | 預設值 | 修改範例 |
 |---|---|---|---|
 | `--testCase` | 選擇要跑哪一個內建測試案例（通常不改） | `--testCase=0` | `--testCase=0` |
-| `--frameConf` | 指定 Superframe / Frame 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
+| `--frameConf` | 指定 [Superframe / Frame](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#5-%E6%99%82%E6%A7%BD%E8%88%87%E8%B6%85%E5%B9%80%E7%B5%90%E6%A7%8Bsuperframe) 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
 | `--trafficModel` | 決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff) | `0` | `--trafficModel=1` |
 | `--simLength` | 模擬時間（秒） | `30` | `--simLength=120` |
 | `--beamId` | 指定使用的衛星 Beam（波束） | `26` | `--beamId=10` |
