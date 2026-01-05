@@ -135,7 +135,7 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 ---
 
 # Table of Contents
-1. UT/SAT/GW
+1. [UT/SAT/GW](#ut/sat/gw)
 2. RTN 上行/回傳鏈路
 3. MAC 層排程與接入控制
 4. 物理層（PHY）建模
@@ -350,7 +350,7 @@ ACM 由 PHY 層根據即時通道品質（如 C/N₀）自動選擇適當的調�
 
 <img width="224" height="626" alt="image" src="https://github.com/user-attachments/assets/472f2539-4f56-460e-8723-1650f4b68a99" />
 
-## 9.CBR vs OnOff
+## 9.CBR(Constant Bit Rate) vs OnOff
 
 ### 程式碼位置
 ```
