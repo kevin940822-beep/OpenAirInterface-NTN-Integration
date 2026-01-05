@@ -8,6 +8,7 @@
 ## Step
 ### 檢視可修改的參數
 ```
+cd ~/workspace/bake/source/ns-3.43
 ./ns3 run sat-rtn-system-test-example -- --PrintHelp
 ```
 
