@@ -193,7 +193,9 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 
 ### 程式碼位置
 
-`cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model`
+```
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
+```
 
 RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 
@@ -234,7 +236,9 @@ RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 
 ### 程式碼位置
 
-`cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model`
+```
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
+```
 
 上行鏈路(RTN)相較於下行鏈路(FL)，功率通常較弱、天線增益較低，因此 RTN 的 PHY 層特性更具挑戰性：
 - 使用 上行頻段（如 Ka-band 29.5–30GHz）
@@ -278,7 +282,7 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 這樣的設計能確保多個終端公平使用上行頻寬。
 
 ### 對應程式碼
-|**Superframe 組成** |**對應程式碼分布位置**|
+|**Superframe 組成** |**對應程式碼分布**|
 |---|---|
 |**Superframe結構**|`satellite-orbiter-net-device.cc`<br>`satellite-*-net-device.cc`|
 | **Random Access (RA) slots**|`satellite-llc.cc`|
@@ -319,11 +323,14 @@ RTN 模擬的最終目的是觀察：
 ## 8.ACM 影響
 ### 程式位置
 
-`cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model/`
 ```
-satellite-waveform-conf.cc
-satellite-waveform-conf.h
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model/
 ```
+
+`satellite-waveform-conf.cc`
+
+`satellite-waveform-conf.h`
+
 ACM 的實作主要位於 SNS-3 的 waveform 與 PHY 模組
 
 `satellite-phy-rx-*.cc`
@@ -344,6 +351,12 @@ ACM 由 PHY 層根據即時通道品質（如 C/N₀）自動選擇適當的調�
 <img width="224" height="626" alt="image" src="https://github.com/user-attachments/assets/472f2539-4f56-460e-8723-1650f4b68a99" />
 
 ## 9.CBR vs OnOff
+
+### 程式碼位置
+```
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
+```
+`satellite-on-off-application.cc`
 
 | 項目         | **CBR (Constant Bit Rate)** | **OnOff (On–Off Model)**  |
 | :--------- | :-------------------------- | :------------------------ |
