@@ -58,7 +58,7 @@ ls
 | `stat-global-fwd-user-mac-throughput-scalar.txt`      | Global | MAC Throughput | User link MAC 層平均吞吐量                       |
 | `stat-global-fwd-user-mac-throughput-scatter-0.txt`   | Global | MAC Throughput | User link MAC 隨時間變化的吞吐量                       |
 
-### Feeder link v.s. User link
+## Feeder link v.s. User link
 
 | 項目              | Feeder link MAC                | User link MAC             |
 | --------------- | ------------------------------ | ------------------------- |
@@ -98,7 +98,7 @@ less stat-global-fwd-user-mac-throughput-scalar.txt
 - SINR
 等數據。
 
-### SINR（Signal to Interference plus Noise Ratio）
+## SINR（Signal to Interference plus Noise Ratio）
 **接收到的有用訊號功率，相對於干擾＋雜訊的比例**
 
 <img width="301" height="74" alt="image" src="https://github.com/user-attachments/assets/a76f3120-13fe-42ce-b240-8f427f9d09fe" />
@@ -127,14 +127,26 @@ stat-global-fwd-composite-sinr-cdf-0-ATTN.txt
 ```
 ### Output
 <img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/d36b2eb2-797d-403f-add4-d5f50750a2a4" />
-`OUTPUT_TYPE_CUMULATIVE`：表示為**CDF（累積分佈）**
+
+| 欄位 | 意義 |
+| ---| ---|
+| `OUTPUT_TYPE_CUMULATIVE` | 這是 **CDF（累積分佈）**|
+| `mean`     | 平均 SINR ≈ **9.65 dB** |
+| `stddev`   | 標準差 ≈ 1.44 dB         |
+| `variance` | 變異數                   |
+| `% percentile_5`  | 最差 5% 的 SINR ≈ **8.28 dB**  |
+| `% percentile_50%` | 中位數 ≈ **9.87 dB**           |
+| `% percentile_95%` | 最好 5% 的 SINR ≈ **11.13 dB** |
 
 
 
 
 
 
-### What is Beam Hopping?
+
+
+
+## What is Beam Hopping?
 
 | 項目        | Static Beam | Beam Hopping |
 | --------- | ----------- | ------------ |
