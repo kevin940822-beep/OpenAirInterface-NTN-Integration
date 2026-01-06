@@ -298,22 +298,17 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 ### 對應程式碼
 |**Superframe 組成** |**對應程式碼分布**|
 |---|---|
-|**Superframe結構**|`satellite-superframe-allocator.cc`<br>`model/satellite-superframe-sequence.cc`|
-| **Random Access (RA) slots**|`satellite-llc.cc`|
+|**Superframe結構**|`satellite-superframe-allocator.cc`<br>`satellite-superframe-sequence.cc`<Br>`satellite-frame-conf.cc`|
+| **Random Access (RA) slots**|`satellite-ut-mac.cc`（UT 端觸發/排程 RA）<br>`satellite-random-access-container.cc`（RA 演算法)<br>`satellite-random-access-container-conf.cc`（RA 參數與 allocation channel 設定）|
 |**Assigned Slots**|`satellite-ut-mac.cc` （實際上行傳輸）|
-|**Control Burst**|`satellite-mac.cc` <br>`satellite-*-net-device.cc`|
+|**Control Burst**|`satellite-rtn-scheduler`|
 
 For `--frameConf=Configuration_1`
 
-- Superframe
-  - FrameCount = 10
-  - ConfigType = 1
- 
   <img width="929" height="319" alt="image" src="https://github.com/user-attachments/assets/c7f3951b-0f0d-440f-827c-85e68c4e7991" />
 
 |項目|Frame 1|Frame0,2~9|
 |---|---|---|
-|**用途**|RA frame|Data/Assigned frames|
 |**大小**| AllocBW = 1.25 MHz <br>CarrierBW = 1.25 MHz<br>CarrierCount = 1|AllocBW = 12.5 MHz <br>CarrierBW = 1.25 MHz<br>CarrierCount = 10|
 |**圖表**|<img width="581" height="219" alt="image" src="https://github.com/user-attachments/assets/3791ceb6-31fb-4f46-bf6d-cea20c93798d" />|<img width="603" height="432" alt="image" src="https://github.com/user-attachments/assets/3b60632c-f328-415e-9dae-3d0025f34662" />|
 
