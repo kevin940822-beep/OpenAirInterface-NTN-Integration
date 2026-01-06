@@ -130,20 +130,82 @@ stat-global-fwd-composite-sinr-cdf-0-ATTN.txt
 
 | 欄位 | 意義 |
 | ---| ---|
-| `OUTPUT_TYPE_CUMULATIVE` | 這是 **CDF（累積分佈）**|
 | `mean`     | 平均 SINR ≈ **9.65 dB** |
 | `stddev`   | 標準差 ≈ 1.44 dB         |
-| `variance` | 變異數                   |
+| `variance` | 方差(代表 SINR 集中但有一定波動)                 |
 | `% percentile_5`  | 最差 5% 的 SINR ≈ **8.28 dB**  |
 | `% percentile_50%` | 中位數 ≈ **9.87 dB**           |
 | `% percentile_95%` | 最好 5% 的 SINR ≈ **11.13 dB** |
+| `sinr_db` | SINR（dB）                     |
+| `freq`    | **CDF 值**（P[SINR ≤ sinr_db]） |
+
+---
+### （B）Per-beam（每個 Beam 一筆，Beam hopping 核心）
+| 檔案名稱 | 層級 | 指標 | 實際作用 |
+| --- | --- | --- | --- |
+| `stat-per-beam-beam-service-time-scalar.txt`  | Per-beam | Service Time   | **每個 beam 被點亮 / 服務的時間比例（beam hopping 證據）** |
+| `stat-per-beam-fwd-app-throughput-scalar.txt` | Per-beam | App Throughput | **每個 beam 的 Forward Link 吞吐量**             |
 
 
+|檔名|輸出|說明|
+|---|---|---|
+|`stat-per-beam-beam-service-time-scalar.txt`|<img width="390" height="390" alt="image" src="https://github.com/user-attachments/assets/bda536c8-c569-44ec-977b-5022131d37dd" />|`beam_id` :	衛星上的 spot beam 編號<br><br>`service_time` : 該 beam 在整個模擬期間中，被「點亮／服務」的相對時間份額|
+|`stat-per-beam-fwd-app-throughput-scalar.txt`|<img width="390" height="390" alt="image" src="https://github.com/user-attachments/assets/153fe96d-ae7f-4f1f-a925-2059ff74162c" />|`1-41` : GW 1 → Beam 41 <br> <br>`throughput_kbps` : 該 beam 底下所有 UT 的 Forward Link Application Throughput（kbps）|
 
+官方 scenario 定義好的 beam ID (在程式裡): 
+```
+simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
+```
 
+依照此輸出可得知`service_time` 多 → `throughput` 通常高
+| Beam | service_time | throughput   |
+| ---- | ------------ | ------------ |
+| 12   | 1.715        | 119,993 kbps |
+| 28   | 1.287        | 120,714 kbps |
+| 27   | 0.428        | 63,881 kbps  |
+| 25   | 0.429        | 34,217 kbps  |
 
+---
 
+### （C）Per-GW（每個 Gateway）
+| 檔案名稱                                                  | 層級     | 指標             | 實際作用                          |
+| ----------------------------------------------------- | ------ | -------------- | ----------------------------- |
+| `stat-per-gw-fwd-app-throughput-scalar.txt`           | Per-GW | App Throughput | 每個 Gateway 的 Forward Link 吞吐量 |
+| `stat-per-gw-fwd-app-throughput-scatter-1.txt`        | Per-GW | App Throughput | Gateway 吞吐量               |
+| `stat-per-gw-fwd-feeder-mac-throughput-scalar.txt`    | Per-GW | MAC Throughput | 每個 GW 在 feeder link 的 MAC 吞吐量 |
+| `stat-per-gw-fwd-feeder-mac-throughput-scatter-1.txt` | Per-GW | MAC Throughput | 隨時間變化的GW feeder MAC 吞吐量      |
+| `stat-per-gw-fwd-user-mac-throughput-scalar.txt`      | Per-GW | MAC Throughput | GW user link MAC 吞吐量          |
+| `stat-per-gw-fwd-user-mac-throughput-scatter-1.txt`   | Per-GW | MAC Throughput | 隨時間變化的GW user MAC 吞吐量           |
 
+因為此系統只有一個GW，所以數值可以對應到global
+
+---
+
+### （D）Per-UT (一個UT生成一個輸出檔)
+
+進階分析才需要看到**per-UT**
+
+| 檔案名稱                                                     | 層級     | 指標             | 實際作用                         |
+| -------------------------------------------------------- | ------ | -------------- | ---------------------------- |
+| `stat-per-ut-fwd-app-throughput-scalar.txt`              | Per-UT | App Throughput | **所有 UT 的平均 throughput 彙整**  |
+| `stat-per-ut-fwd-app-throughput-scatter-0.txt ~ 252.txt` | Per-UT | App Throughput | **每一個 UT 的 throughput 時間序列** |
+| `stat-per-ut-fwd-feeder-mac-throughput-scalar.txt`          | Per-UT | MAC Throughput | UT 在 feeder link MAC 的平均 throughput |
+| `stat-per-ut-fwd-feeder-mac-throughput-scatter-0 ~ 232.txt` | Per-UT | MAC Throughput | 每一個 UT 在 feeder MAC 的 throughput    |
+| `stat-per-ut-fwd-user-mac-throughput-scatter-0 ~ 228.txt`   | Per-UT | MAC Throughput | 每一個 UT 在 user MAC 的 throughput      |
+### Output
+<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/cb884be7-15a0-4854-b957-c7e7625f61ff" />
+
+| 欄位                | 意義                                 |
+| ----------------- | ---------------------------------- |
+| `OUTPUT_TYPE_SUM` | 每個時間點是 **該秒 throughput 的加總**       |
+| `count`           | **此 UT 被統計到的時間點數**（不是模擬秒數）         |
+| `sum`             | 所有時間點 throughput 的 **總和（kbps 累加）** |
+
+|檔名|輸出|說明|
+|---|---|---|
+|`stat-per-ut-fwd-app-throughput-scatter-78.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/6ba12ce8-928b-4527-9810-99e5f2e7ee9b" />||
+|`stat-per-ut-fwd-app-throughput-scatter-141.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/2f2d1107-5fd2-4198-8e03-e071e44706cc" />||
+|`stat-per-ut-fwd-app-throughput-scatter-2.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/95ea0a96-04b9-40a3-b5f2-6d6468683cae" />||
 
 
 ## What is Beam Hopping?
