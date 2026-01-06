@@ -292,6 +292,7 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 | **Control slots** | 控制與同步資訊傳遞 | 排程式 | - 承載與排程相關的控制資訊（如同步、配置）<br>- 輔助 TBTP 與系統運作 | - 不承載使用者資料<br>- 主要用於維持 MF-TDMA 上行的時間與頻率同步 |
 
 
+
 這樣的設計能確保多個終端公平使用上行頻寬。
 
 ### 對應程式碼
@@ -302,19 +303,21 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 |**Assigned Slots**|`satellite-ut-mac.cc` （實際上行傳輸）|
 |**Control Burst**|`satellite-mac.cc` <br>`satellite-*-net-device.cc`|
 
-`--frameConf=Configuration_1`
+For `--frameConf=Configuration_1`
+
 - Superframe
   - FrameCount = 10
   - ConfigType = 1
-- Frame 1 = RA frame
-  - AllocBW = 1.25 MHz
-  - CarrierBW = 1.25 MHz
-- Frame 0,2~9 = Data/Assigned frames
-  - AllocBW = 12.5 MHz
-  - CarrierBW = 1.25 MHz
+ 
+  <img width="929" height="319" alt="image" src="https://github.com/user-attachments/assets/c7f3951b-0f0d-440f-827c-85e68c4e7991" />
 
-CarrierCount = 10
-CarrierCount = 1
+|項目|Frame 1|Frame0,2~9|
+|---|---|---|
+|**用途**|RA frame|Data/Assigned frames|
+|**大小**| AllocBW = 1.25 MHz <br>CarrierBW = 1.25 MHz<br>CarrierCount = 1|AllocBW = 12.5 MHz <br>CarrierBW = 1.25 MHz<br>CarrierCount = 10|
+|**圖表**|<img width="581" height="219" alt="image" src="https://github.com/user-attachments/assets/3791ceb6-31fb-4f46-bf6d-cea20c93798d" />|<img width="603" height="432" alt="image" src="https://github.com/user-attachments/assets/3b60632c-f328-415e-9dae-3d0025f34662" />|
+
+
 ## 6. 網路層與應用層的回傳效能
 
 RTN 模擬的最終目的是觀察：
