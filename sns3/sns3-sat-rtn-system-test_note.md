@@ -275,7 +275,11 @@ cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
   
 ## 5. 時槽與超幀結構（Superframe）
 
-Superframe 的主要目的在於：
+### 程式碼位置
+```
+cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
+```
+### Superframe 的主要目的在於：
 - 將 RTN 的上行頻寬切分為結構化的時間與資源單位
 - 作為 MAC 排程（TBTP / DA / Dynamic Assignment） 的基礎
   
@@ -285,7 +289,7 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 |---|---|---|---|---|
 | **Random Access (RA) slots** | 初始接入、容量需求回報（Capacity Request） | 競爭式（可能碰撞） | - UT 透過 RA slots 回報 DA <br>- 作為 GW 排程的輸入資訊 | - RA slots 通常佔用固定的時間 × 頻率資源<br>- 不屬於正式排程的 MF-TDMA 資料傳輸 |
 | **Assigned Slots** | 給 **已成功排程的** UT 進行資料傳輸 | 排程式（無碰撞） | - GW 根據 DA 與 Dynamic Assignment 產生 TBTP<br>- TBTP 指定 UT 使用哪些 Assigned slots | - Assigned slots 即為 MF-TDMA 的實際使用資源<br>- 不同 UT 於不同時間 × 頻率同時傳輸 | 
-| **Control Burst** | 控制與同步資訊傳遞 | 排程式 | - 承載與排程相關的控制資訊（如同步、配置）<br>- 輔助 TBTP 與系統運作 | - 不承載使用者資料<br>- 主要用於維持 MF-TDMA 上行的時間與頻率同步 |
+| **Control slots** | 控制與同步資訊傳遞 | 排程式 | - 承載與排程相關的控制資訊（如同步、配置）<br>- 輔助 TBTP 與系統運作 | - 不承載使用者資料<br>- 主要用於維持 MF-TDMA 上行的時間與頻率同步 |
 
 
 這樣的設計能確保多個終端公平使用上行頻寬。
@@ -293,11 +297,24 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 ### 對應程式碼
 |**Superframe 組成** |**對應程式碼分布**|
 |---|---|
-|**Superframe結構**|`satellite-orbiter-net-device.cc`<br>`satellite-*-net-device.cc`|
+|**Superframe結構**|`satellite-superframe-allocator.cc`<br>`model/satellite-superframe-sequence.cc`|
 | **Random Access (RA) slots**|`satellite-llc.cc`|
 |**Assigned Slots**|`satellite-ut-mac.cc` （實際上行傳輸）|
 |**Control Burst**|`satellite-mac.cc` <br>`satellite-*-net-device.cc`|
 
+`--frameConf=Configuration_1`
+- Superframe
+  - FrameCount = 10
+  - ConfigType = 1
+- Frame 1 = RA frame
+  - AllocBW = 1.25 MHz
+  - CarrierBW = 1.25 MHz
+- Frame 0,2~9 = Data/Assigned frames
+  - AllocBW = 12.5 MHz
+  - CarrierBW = 1.25 MHz
+
+CarrierCount = 10
+CarrierCount = 1
 ## 6. 網路層與應用層的回傳效能
 
 RTN 模擬的最終目的是觀察：
