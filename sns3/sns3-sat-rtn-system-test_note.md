@@ -21,7 +21,7 @@ cd ~/workspace/bake/source/ns-3.43
 | `--frameConf` | 指定 [Superframe / Frame](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#5-%E6%99%82%E6%A7%BD%E8%88%87%E8%B6%85%E5%B9%80%E7%B5%90%E6%A7%8Bsuperframe) 結構配置（RTN slot 數量、頻寬配置、資源分配方式） | `Configuration_0` | `--frameConf=Configuration_1` |
 | `--trafficModel` | 決定 RTN 回傳資料的流量型態。[0 = CBR (Constant Bit Rate)，1 = OnOff](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/sns3-sat-rtn-system-test_note.md#10cbr-vs-onoff) | `0` | `--trafficModel=1` |
 | `--simLength` | 模擬時間（秒） | `30` | `--simLength=120` |
-| `--beamId` | 指定使用的衛星 Beam（波束） | `26` | `--beamId=10` |
+| `--beamId` | 指定使用的 Beam（波束）數量 | `26` | `--beamId=10` |
 | `--utAppStartTime`   | UT（User Terminal）Application 什麼時候開始傳資料 | `+100ms` | `--utAppStartTime=+1s` |
 | `--OutputPath` | 指定輸出統計檔案的資料夾 | （未指定） | `mkdir -p results/rtn-exp1`<br>`./ns3 run sat-rtn-system-test-example -- \`<br>`--OutputPath=results/rtn-exp1` |
 | `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
@@ -40,8 +40,16 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 | **3** | RM（Resource Management）+ CRA | RM + 固定配置 | 單一 UT / 單一使用者，只使用 CRA，測試 RM 架構下的固定資源管理行為 |
 | **4** | RM + RBDC | RM + 需求式分配 | 單一 UT / 單一使用者，只使用 RBDC（Rate-Based Dynamic Capacity），觀察需求導向的資源分配效果 |
 
-
-
+### configuration 0/1
+```
+satellite-frame-conf.cc
+```
+| 項目 |Configuration_0 |Configuration_1 | 程式碼位置 |
+| --- | ---| ---| --- |
+| `FrameCount`（superframe 內 frame 數） |10 |10 |Conf0【L1314-L1316】、Conf1【L1415-L1417】 |
+| `FrameConfigType`（超級關鍵）|`CONFIG_TYPE_0` |`CONFIG_TYPE_1` | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
+| `MaxCarrierSubdivision`（最大細分) |5 | 0 | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
+| **ACM 條件（真正會影響行為）** | **要求 ACM 應該關掉**（若開會警告） | **要求 ACM 必須開**（沒開直接 Fatal error） 判斷【L910-L919】|
 
 ### 創建新資料夾給測試結果(方便之後修改使用)
 ```
