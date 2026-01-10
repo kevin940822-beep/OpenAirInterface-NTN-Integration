@@ -36,6 +36,15 @@ mkdir -p results/bh-test1
 
 <img width="173" height="363" alt="image" src="https://github.com/user-attachments/assets/da14ab8f-f044-43a5-be4d-0741bf1080a1" />
 
+### 輸出結果解釋 : 
+`0.2` 代表 目前模擬時間已跑到 0.2 秒，`/3` 代表總模擬時間是 3 秒
+
+而0.2印一次是因為 progress log 的印出間隔是 0.2 秒（這是 progress log 的回報頻率）
+在此程式碼
+
+`simulationHelper->EnableProgressLogs();`
+
+---
 ### 檢視結果檔
 ```
 cd ~/workspace/bake/source/ns-3.43/results/bh-test1
@@ -152,7 +161,7 @@ stat-global-fwd-composite-sinr-cdf-0-ATTN.txt
 |`stat-per-beam-beam-service-time-scalar.txt`|<img width="390" height="390" alt="image" src="https://github.com/user-attachments/assets/bda536c8-c569-44ec-977b-5022131d37dd" />|`beam_id` :	衛星上的 spot beam 編號<br><br>`service_time` : 該 beam 在整個模擬期間中，被「點亮／服務」的相對時間份額|
 |`stat-per-beam-fwd-app-throughput-scalar.txt`|<img width="390" height="390" alt="image" src="https://github.com/user-attachments/assets/153fe96d-ae7f-4f1f-a925-2059ff74162c" />|`1-41` : GW 1 → Beam 41 <br> <br>`throughput_kbps` : 該 beam 底下所有 UT 的 Forward Link Application Throughput（kbps）|
 
-官方 scenario 定義好的 beam ID (在程式裡): 
+example 預設的 beam ID (在程式裡): 
 ```
 simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
 ```
@@ -198,15 +207,24 @@ simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
 | 欄位                | 意義                                 |
 | ----------------- | ---------------------------------- |
 | `OUTPUT_TYPE_SUM` | 每個時間點是 **該秒 throughput 的加總**       |
-| `count`           | **此 UT 被統計到的時間點數**（不是模擬秒數）         |
+| `count`           | 在 beam 照到時，且**實際有 Application 資料被成功送出的時間點數**         |
 | `sum`             | 所有時間點 throughput 的 **總和（kbps 累加）** |
 
-|檔名|輸出|說明|
-|---|---|---|
-|`stat-per-ut-fwd-app-throughput-scatter-78.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/6ba12ce8-928b-4527-9810-99e5f2e7ee9b" />||
-|`stat-per-ut-fwd-app-throughput-scatter-141.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/2f2d1107-5fd2-4198-8e03-e071e44706cc" />||
-|`stat-per-ut-fwd-app-throughput-scatter-2.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/95ea0a96-04b9-40a3-b5f2-6d6468683cae" />||
+|檔名|輸出|
+|---|---|
+|`stat-per-ut-fwd-app-throughput-scatter-78.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/6ba12ce8-928b-4527-9810-99e5f2e7ee9b" />|
+|`stat-per-ut-fwd-app-throughput-scatter-141.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/2f2d1107-5fd2-4198-8e03-e071e44706cc" />|
+|`stat-per-ut-fwd-app-throughput-scatter-2.txt`|<img width="462" height="252" alt="image" src="https://github.com/user-attachments/assets/95ea0a96-04b9-40a3-b5f2-6d6468683cae" />|
 
+`% time_sec` : 時間（秒）<BR>`throughput_kbps` : 該秒 UT 的 Forward App Throughput
+
+`count` 越多，通常代表該 UT 被服務的次數越多，因此 `throughput`（sum）通常也會越大
+但`count` 多不等於 `throughput`（sum） 一定大，可能會受
+ - 同一 beam 下 UT 很多
+ - 當次 SINR 較差
+
+ 影響
+---
 
 ## What is Beam Hopping?
 
@@ -218,3 +236,28 @@ simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
 | 系統彈性      | 低           | 高            |
 | 控制複雜度     | 低           | 高            |
 | 模擬時間      | 快           | 較慢           |
+
+---
+
+## 一個beam 的 UT數量
+```
+std::map<uint32_t, uint32_t> utsInBeam = {{1, 30},
+                                              {2, 9},
+                                              {3, 15},
+                                              {4, 30},
+                                              {11, 15},
+                                              {12, 30},
+                                              {13, 9},
+                                              {14, 18},
+                                              {25, 9},
+                                              {26, 15},
+                                              {27, 18},
+                                              {28, 30},
+                                              {40, 9},
+                                              {41, 15}};
+
+```
+在此程式碼裡設定好
+`std::map<uint32_t, uint32_t> utsInBeam = {{beam ID, UT}`
+### 目的
+製造**不均勻流量需求**  
