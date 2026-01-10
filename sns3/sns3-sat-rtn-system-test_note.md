@@ -67,12 +67,11 @@ mkdir -p results/rtn-test1
 --utAppStartTime=+1s \
 --OutputPath=results/rtn-test1
 ```
-### 前往資料夾位置
+### 檢視結果檔
 
 ```
-cd ~/workspace/bake/source/ns-3.43
-ls contrib/satellite/data/sims
-ls contrib/satellite/data/sims/example-rtn-system-test
+cd ~/workspace/bake/source/ns-3.43/results/rtn-test2
+ls
 ```
 會跑出以下模擬結果
 
