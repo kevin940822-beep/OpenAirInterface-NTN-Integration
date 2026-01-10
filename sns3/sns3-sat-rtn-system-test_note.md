@@ -44,10 +44,11 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 ```
 satellite-frame-conf.cc
 ```
+[satellite-frame-conf.cc](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-frame-conf.cc)
 | 項目 |Configuration_0 |Configuration_1 | 程式碼位置 |
 | --- | ---| ---| --- |
 | `FrameCount`（superframe 內 frame 數） |10 |10 |Conf0【L1314-L1316】、Conf1【L1415-L1417】 |
-| `FrameConfigType`（超級關鍵）|`CONFIG_TYPE_0` |`CONFIG_TYPE_1` | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
+| `FrameConfigType`|`CONFIG_TYPE_0` |`CONFIG_TYPE_1` | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
 | `MaxCarrierSubdivision`（最大細分) |5 | 0 | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
 | **ACM 條件（真正會影響行為）** | **要求 ACM 應該關掉**（若開會警告） | **要求 ACM 必須開**（沒開直接 Fatal error）| 【L910-L919】|
 
@@ -67,13 +68,16 @@ mkdir -p results/rtn-test1
 --OutputPath=results/rtn-test1
 ```
 ### 前往資料夾位置
-```
-cd /home/kevin/workspace/bake/source/ns-3.43/results/rtn-test1
-ls -la
-```
-### output
 
-<img width="736" height="608" alt="image" src="https://github.com/user-attachments/assets/9c39e4ca-4f40-44a4-b851-5002ca77654d" />
+```
+cd ~/workspace/bake/source/ns-3.43
+ls contrib/satellite/data/sims
+ls contrib/satellite/data/sims/example-rtn-system-test
+```
+會跑出以下模擬結果
+
+<img width="1116" height="795" alt="image" src="https://github.com/user-attachments/assets/d78ac5e4-4573-4fcb-bbe0-9f18b6163bc3" />
+
 
 ### 重要檔案
 
@@ -101,50 +105,6 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 
 <img width="386" height="784" alt="image" src="https://github.com/user-attachments/assets/f0c034da-e30d-43f6-85fa-ea5e6d8fa9b5" />
 
----
-### Result :
-
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/c60f707a-41df-4b89-bdd8-7bb5311ae607" />
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/bbdf4036-20f3-46c3-a961-63946d666987" />
-
-```
-115 Bytes allocated within TBTP
-130 Bytes allocated within TBTP
-144 Bytes allocated within TBTP
-```
-### 左圖為第一次執行時編譯器的輸出結果，右圖為執行結果
-- 右圖為 RTN（Return Link）排程器在分配回傳時槽 **TBTP(Terminal Burst Time Plan)** 時的輸出訊息。
-  - **TBTP(Terminal Burst Time Plan)** ：是由 Hub 所產生的一份 回傳鏈路（Return Link, RTN）排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
-  - 內容包含：
-    - 哪一個 UT（User Terminal）
-    - 在哪一個 superframe / frame
-    - 被分配到哪一個 time slot
-    - 可以使用多少 symbols / bursts 進行傳輸
-  - 實際運作方式：
-    - FWD（Forward Link）：由 Hub 將 TBTP 傳送給各個 UT，作為回傳鏈路的傳輸規則說明。
-    - Return Link（RTN）：各 UT 依照 TBTP 所指定的時間與資源配置，在對應的 time slot 中回傳資料。
-- 每一行的數字（115、130、144 Bytes）代表在該傳輸時槽中分配出去的 payload 大小。
-- 這些訊息持續出現，表示排程器正在運作、衛星網路模擬正在「傳送回傳資料流」。
-
-
-
-換句話說：
-模擬器正在模擬多個終端的回傳封包，TBTP 正在持續被配置。
-
-這是 `sat-rtn-system-test-example.cc` 的主要功能之一。
-
-執行結束後，可以輸入此指令查看輸出檔。
-
-```
-cd ~/workspace/bake/source/ns-3.43
-ls contrib/satellite/data/sims
-ls contrib/satellite/data/sims/example-rtn-system-test
-```
-會跑出以下模擬結果
-
-<img width="1116" height="795" alt="image" src="https://github.com/user-attachments/assets/d78ac5e4-4573-4fcb-bbe0-9f18b6163bc3" />
-
-
 
 對應結果
 | 檔名關鍵字             | 意義      | 結果檔數量            |
@@ -155,6 +115,23 @@ ls contrib/satellite/data/sims/example-rtn-system-test
 | `scatter-*`       | 時間序列    | 每個實體 × 時間          |
 
 所以才會有10個UT結果檔，因為前面手動將UT設定為10個
+
+---
+## TBTP
+  - **TBTP(Terminal Burst Time Plan)** ：是由 Hub 所產生的一份 回傳鏈路（Return Link, RTN）排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
+  - 內容包含：
+    - 哪一個 UT（User Terminal）
+    - 在哪一個 superframe / frame
+    - 被分配到哪一個 time slot
+    - 可以使用多少 symbols / bursts 進行傳輸
+  - 實際運作方式：
+    - FWD（Forward Link）：由 Hub 將 TBTP 傳送給各個 UT，作為回傳鏈路的傳輸規則說明。
+    - Return Link（RTN）：各 UT 依照 TBTP 所指定的時間與資源配置，在對應的 time slot 中回傳資料。
+
+而模擬器正在模擬多個終端的回傳封包，TBTP 正在持續被配置。
+
+這是 `sat-rtn-system-test-example.cc` 的主要功能之一。
+
 
 ---
 
@@ -249,10 +226,10 @@ RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 
 | 功能                                | SNS-3 對應程式                                      |
 | -------------------------------------- | ------------------------------------------------- |
-| RTN MAC                                | `satellite-ut-mac.cc`                             |
-| Demand Assignment / Dynamic Assignment | `satellite-llc.cc`                                |
-| TBTP（排程結果）                             | `satellite-llc.cc` + `satellite-mac.cc`           |
-| Superframe / MF-TDMA                   | `satellite-enums.h` + `satellite-*-net-device.cc` |
+| RTN MAC                                | [`satellite-ut-mac.cc` ](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-ut-mac.cc)                            |
+| Demand Assignment / Dynamic Assignment | [`satellite-llc.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-llc.cc)                                |
+| TBTP（排程結果）                             | `satellite-llc.cc` + [`satellite-mac.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-mac.cc)           |
+| Superframe / MF-TDMA                   | [`satellite-enums.h`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-enums.h) + `satellite-*-net-device.cc` |
 
 
 
@@ -273,12 +250,12 @@ cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
   
 這些都會影響 EIRP、C/N0、BER、PER、Throughput 等效能指標。
 
-此類行為主要由 **衛星 PHY 層模組**`satellite-phy-*`與 **通道與傳播模型**`satellite-channel`/ `propagation loss models` 所實現。
+此類行為主要由 **衛星 PHY 層模組**`satellite-phy-*`與 **通道與傳播模型**`satellite-channel`/ `propagation delay models` 所實現。
 
 | 模組 | 主要負責內容 | 相關程式 |
 |---|---|---|
-| **PHY（Physical Layer）** | 調變編碼、功率處理<br>接收品質評估、封包成功判斷 |`satellite-phy-tx.cc`<br>`satellite-phy-rx.cc`<br>`satellite-phy-rx-carrier-uplink.cc`<br>`satellite-phy-rx-carrier-downlink.cc`  |
-| **Channel（通道模型）** | 路徑損耗、雨衰<br>雜訊、干擾、訊號疊加 | `satellite-channel.cc`<br>`satellite-propagation-loss-model.cc` |
+| **PHY（Physical Layer）** | 調變編碼、功率處理<br>接收品質評估、封包成功判斷 |[`satellite-phy-tx.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-phy-tx.cc)<br>[`satellite-phy-rx.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-phy-rx.cc)<br>[`satellite-phy-rx-carrier-uplink.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-phy-rx-carrier-uplink.cc)  |
+| **Channel（通道模型）** | 路徑損耗、雨衰<br>雜訊、干擾、訊號疊加 | [`satellite-channel.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-channel.cc)<br>[`satellite-propagation-delay-model.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-propagation-delay-model.h) |
 
   
 ## 5. 時槽與超幀結構（Superframe）
@@ -306,9 +283,9 @@ RTN 的傳輸資源通常被組織成 超幀（Superframe），裡面包含：
 ### 對應程式碼
 |**Superframe 組成** |**對應程式碼分布**|
 |---|---|
-|**Superframe結構**|`satellite-superframe-allocator.cc`<br>`satellite-superframe-sequence.cc`<Br>`satellite-frame-conf.cc`|
-| **Random Access (RA) slots**|`satellite-ut-mac.cc`（UT 端觸發/排程 RA）<br>`satellite-random-access-container.cc`（RA 演算法)<br>`satellite-random-access-container-conf.cc`（RA 參數與 allocation channel 設定）|
-|**Assigned Slots**|`satellite-ut-mac.cc` （實際上行傳輸）|
+|**Superframe結構**|[`satellite-superframe-allocator.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-superframe-allocator.cc)<br>[`satellite-superframe-sequence.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-superframe-sequence.cc)<Br>[`satellite-frame-conf.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-frame-conf.cc)|
+| **Random Access (RA) slots**|[`satellite-ut-mac.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-ut-mac.cc)（UT 端觸發/排程 RA）<br>[`satellite-random-access-container.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-random-access-container.cc)（RA 演算法)<br>[`satellite-random-access-container-conf.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-random-access-container-conf.cc)（RA 參數與 allocation channel 設定）|
+|**Assigned Slots**|[`satellite-ut-mac.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-ut-mac.cc) （實際上行傳輸）|
 |**Control Burst**|`satellite-rtn-scheduler`|
 
 For `--frameConf=Configuration_1`
@@ -359,13 +336,13 @@ RTN 模擬的最終目的是觀察：
 cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 ```
 
-`satellite-wave-form-conf.cc`
+[`satellite-wave-form-conf.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-wave-form-conf.cc)
 
 ACM 的實作主要位於 SNS-3 的 waveform 與 PHY 模組
 
 `satellite-phy-rx-*.cc`
 
-`satellite-wave-form-conf.cc`
+[`satellite-wave-form-conf.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-wave-form-conf.cc)
 
 
 可透過設定
@@ -386,7 +363,7 @@ ACM 由 PHY 層根據即時通道品質（如 C/N₀）自動選擇適當的調�
 ```
 cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 ```
-`satellite-on-off-application.cc`
+[`satellite-on-off-application.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-on-off-application.cc)
 
 | 項目         | **CBR (Constant Bit Rate)** | **OnOff (On–Off Model)**  |
 | :--------- | :-------------------------- | :------------------------ |
