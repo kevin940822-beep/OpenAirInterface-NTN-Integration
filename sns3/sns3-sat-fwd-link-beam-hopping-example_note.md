@@ -2,6 +2,11 @@
 > Refrence
 > https://github.com/sns3/sns3-satellite/blob/master/examples/sat-fwd-link-beam-hopping-example.cc
 
+## 預設參數
+- UT : 252
+- beam : 14
+- duration time :
+- 
 ## Step  
 ```
 cd ~/workspace/bake/source/ns-3.43
@@ -238,6 +243,7 @@ simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
 | 系統彈性      | 低           | 高            |
 | 控制複雜度     | 低           | 高            |
 | 模擬時間      | 快           | 較慢           |
+|示意圖        ||<img width="945" height="528" alt="image" src="https://github.com/user-attachments/assets/f5ecd453-f319-4863-9583-0d0ea6989edc" /><br>refrence https://dvb.org/wp-content/uploads/2020/02/20200330_webinar_beam_hopping_FINAL.pdf|
 
 ---
 
