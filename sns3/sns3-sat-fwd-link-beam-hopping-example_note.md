@@ -224,7 +224,9 @@ simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
  - 當次 SINR 較差
 
  影響
+ 
 ---
+
 
 ## What is Beam Hopping?
 
@@ -257,7 +259,13 @@ std::map<uint32_t, uint32_t> utsInBeam = {{1, 30},
                                               {41, 15}};
 
 ```
+
 在此程式碼裡設定好
+
 `std::map<uint32_t, uint32_t> utsInBeam = {{beam ID, UT}`
 ### 目的
 製造**不均勻流量需求**  
+
+增加高需求 beam 的 `service_time` (beam 4, beam 28)
+
+減少低需求 beam 的 `service_time` (bema 2, beam 40)
