@@ -243,7 +243,7 @@ simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
 | 系統彈性      | 低           | 高            |
 | 控制複雜度     | 低           | 高            |
 | 模擬時間      | 快           | 較慢           |
-|示意圖        ||<img width="945" height="528" alt="image" src="https://github.com/user-attachments/assets/f5ecd453-f319-4863-9583-0d0ea6989edc" /><br>refrence https://dvb.org/wp-content/uploads/2020/02/20200330_webinar_beam_hopping_FINAL.pdf|
+|示意圖        |<img width="435" height="527" alt="image" src="https://github.com/user-attachments/assets/0882cb51-6e74-4b22-94a5-4aae2a9ad242" /><br>refrence https://www.2cm.com.tw/2cm/zh-tw/tech/A411B36580BD4541BB8E9350815D2A63|<img width="945" height="528" alt="image" src="https://github.com/user-attachments/assets/f5ecd453-f319-4863-9583-0d0ea6989edc" /><br>refrence https://dvb.org/wp-content/uploads/2020/02/20200330_webinar_beam_hopping_FINAL.pdf|
 
 ---
 
@@ -265,9 +265,6 @@ std::map<uint32_t, uint32_t> utsInBeam = {{1, 30},
                                               {41, 15}};
 
 ```
-
-在此程式碼裡設定好
-
 `std::map<uint32_t, uint32_t> utsInBeam = {{beam ID, UT}`
 ### 目的
 製造**不均勻流量需求**  
