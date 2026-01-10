@@ -27,7 +27,7 @@ cd ~/workspace/bake/source/ns-3.43
 | `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
 
 ### testCase
-程式碼位置：
+查詢程式碼：
 ```
 grep -n "case 4:" sat-rtn-system-test-example.cc
 ```
