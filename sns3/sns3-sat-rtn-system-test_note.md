@@ -70,7 +70,7 @@ mkdir -p results/rtn-test1
 ### 檢視結果檔
 
 ```
-cd ~/workspace/bake/source/ns-3.43/results/rtn-test2
+cd ~/workspace/bake/source/ns-3.43/results/rtn-test1
 ls
 ```
 會跑出以下模擬結果
