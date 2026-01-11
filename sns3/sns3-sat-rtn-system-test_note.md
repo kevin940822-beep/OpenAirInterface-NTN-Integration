@@ -7,7 +7,7 @@
 
 # Table of Contents
 - [Step](#step)
-- [UT / SAT / GW](#utsatgw)
+- [UT / SAT / GW](#ut--sat--gw)
 - [RTN（Return Link Network）上行／回傳鏈路](#rtn-return-link-network)
 - [MAC 層排程與接入控制](#mac-層排程與接入控制)
 - [物理層（PHY）建模](#物理層phy建模)
