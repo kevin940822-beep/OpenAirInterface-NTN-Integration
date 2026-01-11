@@ -77,14 +77,37 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 ```
 ADD_SUPER_FRAME_ATTRIBUTES(
                 10,
-                SatSuperframeConf::CONFIG_TYPE_0,
-                5)
+                SatSuperframeConf::CONFIG_TYPE_1,
+                0)
 ```
 
 - `10` : 一個 superframe 裡有 10 個 frame
-- `CONFIG_TYPE_0` : 這個 superframe 屬於「Type 0 結構」
-- 
+- `CONFIG_TYPE_1` : 這個 superframe 屬於「Type 1 結構」
+- `0` : 少數進階欄位（例如 subdivision / reserved）
 
+```
+ADD_FRAME_ATTRIBUTES(
+    0,          // index
+    1.25e7,     // frameBandwidth  
+    1.25e6,     // carrierBandwidth
+    0.20,       // carrierSpacing
+    0.30,       // carrierRollOff
+    1,          // spreadingFactor
+    false,      // randomAccess
+    0,          // lowerLayerService
+    false,      // logon
+    0           // guardTime
+)
+```
+configuration1的frame0為data frame
+
+有10個carriers
+```
+ADD_FRAME_ATTRIBUTES(1, 1.25e6, 1.25e6, 0.20, 0.30, 1, true, 0, false, 0)
+```
+configuration1的frame1為RA frame
+
+有1個carriers
 
 ---
 
