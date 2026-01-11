@@ -2,11 +2,6 @@
 > Refrence
 > https://github.com/sns3/sns3-satellite/blob/master/examples/sat-fwd-link-beam-hopping-example.cc
 
-## 預設參數
-- UT : 252
-- beam : 14
-- duration time :
-
 # Table of contents
 ## Table of Contents
 - [預設參數](#預設參數)
@@ -14,8 +9,14 @@
   - [重要檔案](#重要檔案)
   - [Feeder link v.s. User link](#feeder-link-vs-user-link)
   - [SINR（Signal to Interference plus Noise Ratio）](#sinrsignal-to-interference-plus-noise-ratio)
-- [What is Beam Hopping?](#what-is-beam-hopping)
+- [Beam Hopping vs Static Beam](#beam-hopping-vs-static-beam)
 - [一個 beam 的 UT 數量](#一個beam-的-ut數量)
+
+
+## 預設參數
+- UT : 252
+- beam : 14
+- duration time :
 
 ## Step  
 ```
@@ -243,7 +244,7 @@ simulationHelper->SetBeams("1 2 3 4 11 12 13 14 25 26 27 28 40 41");
 ---
 
 
-## What is Beam Hopping?
+## Beam Hopping vs Static Beam
 
 | 項目        | Static Beam | Beam Hopping |
 | --------- | ----------- | ------------ |
