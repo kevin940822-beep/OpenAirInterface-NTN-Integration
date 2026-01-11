@@ -47,6 +47,8 @@ cd ~/workspace/bake/source/ns-3.43
 | `--OutputPath` | 指定輸出統計檔案的資料夾 | （未指定） | `mkdir -p results/rtn-exp1`<br>`./ns3 run sat-rtn-system-test-example -- \`<br>`--OutputPath=results/rtn-exp1` |
 | `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
 
+---
+
 ## testCase
 查詢程式碼：
 ```
@@ -70,6 +72,8 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 | `FrameConfigType`|`CONFIG_TYPE_0` |`CONFIG_TYPE_1` | Conf0【L1314~L1316】、Conf1【L1415~L1417】|
 | `MaxCarrierSubdivision`（最大細分) |5 | 0 | Conf0【L1314~L1316】、Conf1【L1415~L1417】|
 | **ACM 條件（真正會影響行為）** | **要求 ACM 應該關掉**（若開會警告） | **要求 ACM 必須開**（沒開直接 Fatal error）| 【L910~L919】|
+
+---
 
 ### 創建新資料夾給測試結果(方便之後修改使用)
 ```
@@ -96,6 +100,7 @@ ls
 
 <img width="1116" height="795" alt="image" src="https://github.com/user-attachments/assets/d78ac5e4-4573-4fcb-bbe0-9f18b6163bc3" />
 
+---
 
 ## 重要檔案
 
@@ -108,6 +113,8 @@ ls
 | **MAC Throughput** | RTN User MAC Throughput (Scalar) | RTN 使用者端 MAC layer 的吞吐量，反映無線資源在使用者端的實際利用情況 | `stat-global-rtn-user-mac-throughput-scalar.txt` |
 | | RTN Feeder MAC Throughput (Scalar) | RTN feeder link MAC layer 的吞吐量，用來分析核心鏈路的負載與瓶頸 | `stat-global-rtn-feeder-mac-throughput-scalar.txt` |
 | **Beam / Frame 使用率** | Frame Symbol Load per Beam | 各個衛星 beam 的 frame symbol 使用率，反映 RTN 資源分配與 beam 負載狀況 | `stat-per-beam-frame-symbol-load-scalar.txt` |
+
+---
 
 ### 檢視檔案內容
 | 檢視方式 | 指令格式 | 說明 | 使用範例 |
@@ -135,6 +142,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 所以才會有10個UT結果檔，因為前面手動將UT設定為10個
 
 ---
+
 ## TBTP
   - **TBTP(Terminal Burst Time Plan)** ：是由 Hub 所產生的一份 回傳鏈路（Return Link, RTN）排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
   - 內容包含：
@@ -145,14 +153,6 @@ less stat-global-rtn-app-throughput-scatter-0.txt
   - 實際運作方式：
     - FWD（Forward Link）：由 Hub 將 TBTP 傳送給各個 UT，作為回傳鏈路的傳輸規則說明。
     - Return Link（RTN）：各 UT 依照 TBTP 所指定的時間與資源配置，在對應的 time slot 中回傳資料。
-
-而模擬器正在模擬多個終端的回傳封包，TBTP 正在持續被配置。
-
-這是 `sat-rtn-system-test-example.cc` 的主要功能之一。
-
-
----
-
 
 ## UT / SAT / GW
 - **UT(User Terminal)** : 使用者終端
