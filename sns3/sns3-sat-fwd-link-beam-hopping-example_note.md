@@ -54,11 +54,6 @@ mkdir -p results/bh-test1
 ### 輸出結果解釋 : 
 `0.2` 代表 目前模擬時間已跑到 0.2 秒，`/3` 代表總模擬時間是 3 秒
 
-而0.2印一次是因為 progress log 的印出間隔是 0.2 秒（這是 progress log 的回報頻率）
-在此程式碼
-
-`simulationHelper->EnableProgressLogs();`
-
 ---
 ### 檢視結果檔
 ```
