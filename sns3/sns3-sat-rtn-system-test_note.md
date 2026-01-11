@@ -10,7 +10,7 @@
   - [testCase](#testcase)
   - [configuration 0 / 1](#configuration-0--1)
   - [重要檔案](#重要檔案)
-  - [TBTP](#tbtp)
+- [TBTP](#tbtp)
 - [UT / SAT / GW](#ut--sat--gw)
 - [RTN（Return Link Network）上行／回傳鏈路](#rtn-return-link-network)
 - [MAC 層排程與接入控制](#mac-層排程與接入控制)
