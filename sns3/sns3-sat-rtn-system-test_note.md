@@ -8,7 +8,7 @@
 # Table of Contents
 - [Step](#step)
   - [testCase](#testcase)
-  - [configuration 0 / 1](configuration-0--1)
+  - [configuration 0 / 1](configuration-0-1)
   - [重要檔案](#重要檔案)
   - [TBTP](#tbtp)
 - [UT / SAT / GW](#ut--sat--gw)
@@ -62,10 +62,8 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 | **4** | RM + RBDC | RM + 需求式分配 | 單一 UT / 單一使用者，只使用 RBDC（Rate-Based Dynamic Capacity），觀察需求導向的資源分配效果 |
 
 ## configuration 0 / 1
-```
-satellite-frame-conf.cc
-```
-[satellite-frame-conf.cc](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-frame-conf.cc)
+>[satellite-frame-conf.cc](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-frame-conf.cc)
+
 | 項目 |Configuration_0 |Configuration_1 | 程式碼位置 |
 | --- | ---| ---| --- |
 | `FrameCount`（superframe 內 frame 數） |10 |10 |Conf0【L1314-L1316】、Conf1【L1415-L1417】 |
