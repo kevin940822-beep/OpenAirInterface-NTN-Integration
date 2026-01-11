@@ -5,6 +5,21 @@
 ### sns3 set up
 >https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/SNS3_installation.md#sns3-installation
 
+# Table of Contents
+1. UT/SAT/GW
+2. RTN 上行/回傳鏈路
+3. MAC 層排程與接入控制
+4. 物理層（PHY）建模
+5. 時槽與超幀結構
+6. 網路層與應用層的回傳效能
+7. 在 SNS3 模擬中的應用
+8. ACM 影響
+10. CBR vs OnOff
+11. architecture diagram(架構圖)
+12. flowchart (流程圖)
+13. MSC (Message Sequence Chart)訊息序列圖
+
+---
 ## Step
 ### 檢視可修改的參數
 ```
@@ -134,21 +149,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 
 ---
 
-# Table of Contents
-1. UT/SAT/GW
-2. RTN 上行/回傳鏈路
-3. MAC 層排程與接入控制
-4. 物理層（PHY）建模
-5. 時槽與超幀結構
-6. 網路層與應用層的回傳效能
-7. 在 SNS3 模擬中的應用
-8. ACM 影響
-10. CBR vs OnOff
-11. architecture diagram(架構圖)
-12. flowchart (流程圖)
-13. MSC (Message Sequence Chart)訊息序列圖
 
----
 ## 1.UT/SAT/GW
 - **UT(User Terminal)** : 使用者終端
   - 產生應用資料（RTN 上行）
