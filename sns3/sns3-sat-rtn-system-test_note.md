@@ -8,7 +8,7 @@
 # Table of Contents
 - [Step](#step)
   - [testCase](#testcase)
-  - [configuration 0 / 1](configuration-0-1)
+  - [configuration 0 / 1](configuration-0--1)
   - [重要檔案](#重要檔案)
   - [TBTP](#tbtp)
 - [UT / SAT / GW](#ut--sat--gw)
