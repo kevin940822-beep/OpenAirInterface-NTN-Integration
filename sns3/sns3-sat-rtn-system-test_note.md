@@ -150,7 +150,6 @@ ls
 | | RTN Feeder MAC Throughput (Scalar) | RTN feeder link MAC layer 的吞吐量，用來分析核心鏈路的負載與瓶頸 | `stat-global-rtn-feeder-mac-throughput-scalar.txt` |
 | **Beam / Frame 使用率** | Frame Symbol Load per Beam | 各個衛星 beam 的 frame symbol 使用率，反映 RTN 資源分配與 beam 負載狀況 | `stat-per-beam-frame-symbol-load-scalar.txt` |
 
----
 
 ### 檢視檔案內容
 | 檢視方式 | 指令格式 | 說明 | 使用範例 |
