@@ -150,7 +150,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 ---
 
 
-## 1.UT/SAT/GW
+## UT/SAT/GW
 - **UT(User Terminal)** : 使用者終端
   - 產生應用資料（RTN 上行）
   - 依照 TBTP 指定的 time slot 傳送資料
@@ -170,7 +170,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 
 
 
-## 2.RTN(Return Link Network)
+## RTN(Return Link Network)
 **主要傳輸資料(App Data)**
 
 路徑：
@@ -190,7 +190,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 
 
 
-## 3.MAC 層排程與接入控制
+## MAC 層排程與接入控制
 
 ### 程式碼位置
 
@@ -233,7 +233,7 @@ RTN 中最重要的部分之一是 **MAC（Medium Access Control）** 機制。
 
 
 
-## 4.物理層（PHY）建模
+## 物理層（PHY）建模
 
 ### 程式碼位置
 
@@ -258,7 +258,7 @@ cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 | **Channel（通道模型）** | 路徑損耗、雨衰<br>雜訊、干擾、訊號疊加 | [`satellite-channel.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-channel.cc)<br>[`satellite-propagation-delay-model.cc`](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/model/satellite-propagation-delay-model.h) |
 
   
-## 5. 時槽與超幀結構（Superframe）
+## 時槽與超幀結構（Superframe）
 
 ### 程式碼位置
 ```
@@ -298,7 +298,7 @@ For `--frameConf=Configuration_1`
 |**圖表**|<img width="581" height="219" alt="image" src="https://github.com/user-attachments/assets/3791ceb6-31fb-4f46-bf6d-cea20c93798d" />|<img width="603" height="432" alt="image" src="https://github.com/user-attachments/assets/3b60632c-f328-415e-9dae-3d0025f34662" />|
 
 
-## 6. 網路層與應用層的回傳效能
+## 網路層與應用層的回傳效能
 
 RTN 模擬的最終目的是觀察：
 - 封包延遲（Round Trip Delay）
@@ -311,7 +311,7 @@ RTN 模擬的最終目的是觀察：
 - 系統需分配 RTN 時槽給每個終端
 - 分析在不同負載下系統的穩定性與效率
 
-## 7.在 SNS3 模擬中的應用
+## 在 SNS3 模擬中的應用
 
 當執行`./ns3 run sat-rtn-system-test-example`，
 系統會模擬：
@@ -357,7 +357,7 @@ ACM 由 PHY 層根據即時通道品質（如 C/N₀）自動選擇適當的調�
 
 <img width="224" height="626" alt="image" src="https://github.com/user-attachments/assets/472f2539-4f56-460e-8723-1650f4b68a99" />
 
-## 9.CBR(Constant Bit Rate) vs OnOff
+## CBR(Constant Bit Rate) vs OnOff
 
 ### 程式碼位置
 ```
@@ -386,16 +386,16 @@ cd ~/workspace/bake/source/ns-3.43/contrib/satellite/model
 | `OffTime`    | 無                       | 傳輸暫停的時間，可為常數或隨機分布       |
 
 
-## 10.architecture diagram(架構圖)
+## architecture diagram(架構圖)
 <img width="926" height="521" alt="image" src="https://github.com/user-attachments/assets/2f5e36fb-260e-4da3-8660-86a6c3936f20" />
 
 
-## 11.flowchart(流程圖)
+## flowchart(流程圖)
 
 ### 單次傳輸
 <img width="317" height="635" alt="image" src="https://github.com/user-attachments/assets/96eff2fa-8fb9-4faf-9ef6-7fbee3417c24" />
 
-## 12.MSC (Message Sequence Chart)(訊息序列圖)
+## MSC (Message Sequence Chart)(訊息序列圖)
 <img width="976" height="612" alt="image" src="https://github.com/user-attachments/assets/e76a4d16-22a6-4699-8da3-f84103497599" />
 
 
