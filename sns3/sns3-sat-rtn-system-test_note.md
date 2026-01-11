@@ -68,10 +68,23 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 
 | 項目 |Configuration_0 |Configuration_1 | 程式碼位置 |
 | --- | ---| ---| --- |
-| `FrameCount`（superframe 內 frame 數） |10 |10 |Conf0【L1314~L1316】、Conf1【L1415~L1417】 |
-| `FrameConfigType`|`CONFIG_TYPE_0` |`CONFIG_TYPE_1` | Conf0【L1314~L1316】、Conf1【L1415~L1417】|
-| `MaxCarrierSubdivision`（最大細分) |5 | 0 | Conf0【L1314~L1316】、Conf1【L1415~L1417】|
-| **ACM 條件（真正會影響行為）** | **要求 ACM 應該關掉**（若開會警告） | **要求 ACM 必須開**（沒開直接 Fatal error）| 【L910~L919】|
+| `FrameCount`（superframe 內 frame 數） |10 |10 |Conf0【L1314-L1316】、Conf1【L1415-L1417】 |
+| `FrameConfigType`|`CONFIG_TYPE_0` |`CONFIG_TYPE_1` | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
+| `MaxCarrierSubdivision`（最大細分) |5 | 0 | Conf0【L1314-L1316】、Conf1【L1415-L1417】|
+| **ACM 條件（真正會影響行為）** | **要求 ACM 應該關掉**（若開會警告） | **要求 ACM 必須開**（沒開直接 Fatal error）| 【L910-L919】|
+
+### configuration 0
+```
+ADD_SUPER_FRAME_ATTRIBUTES(
+                10,
+                SatSuperframeConf::CONFIG_TYPE_0,
+                5)
+```
+
+- `10` : 一個 superframe 裡有 10 個 frame
+- `CONFIG_TYPE_0` : 這個 superframe 屬於「Type 0 結構」
+- 
+
 
 ---
 
