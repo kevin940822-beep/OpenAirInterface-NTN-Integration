@@ -128,10 +128,11 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 ```
 ### Output :
 
-<img width="386" height="784" alt="image" src="https://github.com/user-attachments/assets/f0c034da-e30d-43f6-85fa-ea5e6d8fa9b5" />
+<img width="386" height="500" alt="image" src="https://github.com/user-attachments/assets/f0c034da-e30d-43f6-85fa-ea5e6d8fa9b5" /> <img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/fee3fdb7-42b7-47fa-8d82-a147d07f4635" />
 
 
-對應結果
+
+### 對應結果
 | 檔名關鍵字             | 意義      | 結果檔數量            |
 | ----------------- | ------- | ------------------ |
 | `stat-global-*`   | 全系統統計   | 全部加總 → 只有 1 個      |
