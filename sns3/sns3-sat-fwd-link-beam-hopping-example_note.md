@@ -3,7 +3,6 @@
 > https://github.com/sns3/sns3-satellite/blob/master/examples/sat-fwd-link-beam-hopping-example.cc
 
 # Table of contents
-## Table of Contents
 - [預設參數](#預設參數)
 - [Step](#step)
   - [重要檔案](#重要檔案)
