@@ -7,6 +7,10 @@
 
 # Table of Contents
 - [Step](#step)
+  - [testCase])(#testcase)
+  - [configuration 0 / 1](configuration-0--1)
+  - [重要檔案](#重要檔案)
+  - [TBTP](#tbtp)
 - [UT / SAT / GW](#ut--sat--gw)
 - [RTN（Return Link Network）上行／回傳鏈路](#rtn-return-link-network)
 - [MAC 層排程與接入控制](#mac-層排程與接入控制)
@@ -43,7 +47,7 @@ cd ~/workspace/bake/source/ns-3.43
 | `--OutputPath` | 指定輸出統計檔案的資料夾 | （未指定） | `mkdir -p results/rtn-exp1`<br>`./ns3 run sat-rtn-system-test-example -- \`<br>`--OutputPath=results/rtn-exp1` |
 | `--InputXml` | 指定 XML 設定檔（節點數、Frame 結構、FWD / RTN 參數） | `contrib/satellite/examples/sys-rtn-test.xml` | `--InputXml=contrib/satellite/examples/sys-rtn-test.xml` |
 
-### testCase
+## testCase
 查詢程式碼：
 ```
 grep -n "case 4:" sat-rtn-system-test-example.cc
@@ -57,7 +61,7 @@ grep -n "case 4:" sat-rtn-system-test-example.cc
 | **3** | RM（Resource Management）+ CRA | RM + 固定配置 | 單一 UT / 單一使用者，只使用 CRA，測試 RM 架構下的固定資源管理行為 |
 | **4** | RM + RBDC | RM + 需求式分配 | 單一 UT / 單一使用者，只使用 RBDC（Rate-Based Dynamic Capacity），觀察需求導向的資源分配效果 |
 
-### configuration 0/1
+## configuration 0 / 1
 ```
 satellite-frame-conf.cc
 ```
@@ -95,7 +99,7 @@ ls
 <img width="1116" height="795" alt="image" src="https://github.com/user-attachments/assets/d78ac5e4-4573-4fcb-bbe0-9f18b6163bc3" />
 
 
-### 重要檔案
+## 重要檔案
 
 | 類別 | 指標名稱 | 說明 | 對應輸出檔案 |
 |---|---|---|---|
