@@ -125,37 +125,9 @@ BBFrame 包含三個主要部分：
 - 接收端可以快速定位封包邊界。
 
 ### CRC-8 (1 byte)
-- 如果 UPL = 0_D (continuous generic stream)連續位元流，CRC-8 encoder 不做任何事，直接把資料往下送。
-- 如果 UPL ≠ 0_D ，資料為一連串 User Packets（UP），長度為 UPL bits，都有一個 sync-byte(如果沒有，視為0)
-- CRC-8 的「**規格固定**多項式」 :
-<img width="601" height="43" alt="image" src="https://github.com/user-attachments/assets/54008325-33ae-4382-8bee-ce8377091192" />
+- error detection code(錯誤檢驗碼) applied to the first 9 bytes of the BBHEADER
+- 對 BBHEADER 本身做 CRC-8 檢查，確保 header 沒被錯誤接收。
 
-> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
-
-- CRC 算法 :
-  - 把資料位元序列寫成多項式 𝑢(𝑋)
-  - 乘上 𝑋^8（等於在資料後面補 8 個 0）
-  - 再除以 𝑔(𝑋)
-  - 餘數為CRC-8（8 個 bits） 
-<img width="312" height="38" alt="image" src="https://github.com/user-attachments/assets/4f1ae6b8-a07b-4b98-8243-9abceaaa955d" />
-
-> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
-
-- 算完CRC-8之後，會取代下一個 UP 的 sync-byte 位置
-- 此做法在不增加額外 byte 的情況下，把 CRC 資訊串在封包之間傳遞。
-
-<img width="906" height="304" alt="image" src="https://github.com/user-attachments/assets/1d94a697-d9db-4620-b435-aa03b4ba564f" />
-
-> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
-
-
-- 實際CRC-8運算過程 :
-  - 每次開始計算一段 CRC（每個 sequence/每個 UP）之前
-  - CRC shift register 都要清除為 0
-    
-<img width="1160" height="438" alt="image" src="https://github.com/user-attachments/assets/df59f133-1dfe-46f2-a09f-67c5885b9c66" />
-
-> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
 
 
 
@@ -210,3 +182,43 @@ BBframe Tx會將每一個封包所抵達的目的做一次紀錄，所以在Outp
 > Line 89-98
 
 ### Output
+
+
+
+
+---
+
+- 如果 UPL = 0_D (continuous generic stream)連續位元流，CRC-8 encoder 不做任何事，直接把資料往下送。
+- 如果 UPL ≠ 0_D ，資料為一連串 User Packets（UP），長度為 UPL bits，都有一個 sync-byte(如果沒有，視為0)
+- CRC-8 的「**規格固定**多項式」 :
+<img width="601" height="43" alt="image" src="https://github.com/user-attachments/assets/54008325-33ae-4382-8bee-ce8377091192" />
+
+> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
+
+- CRC 算法 :
+  - 把資料位元序列寫成多項式 𝑢(𝑋)
+  - 乘上 𝑋^8（等於在資料後面補 8 個 0）
+  - 再除以 𝑔(𝑋)
+  - 餘數為CRC-8（8 個 bits） 
+<img width="312" height="38" alt="image" src="https://github.com/user-attachments/assets/4f1ae6b8-a07b-4b98-8243-9abceaaa955d" />
+
+> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
+
+- 算完CRC-8之後，會取代下一個 UP 的 sync-byte 位置
+- 此做法在不增加額外 byte 的情況下，把 CRC 資訊串在封包之間傳遞。
+
+<img width="906" height="304" alt="image" src="https://github.com/user-attachments/assets/1d94a697-d9db-4620-b435-aa03b4ba564f" />
+
+> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
+
+
+- 實際CRC-8運算過程 :
+  - 每次開始計算一段 CRC（每個 sequence/每個 UP）之前
+  - CRC shift register 都要清除為 0
+    
+<img width="1160" height="438" alt="image" src="https://github.com/user-attachments/assets/df59f133-1dfe-46f2-a09f-67c5885b9c66" />
+
+> refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
+
+
+
