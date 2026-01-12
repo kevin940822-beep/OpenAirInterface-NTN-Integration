@@ -186,7 +186,9 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 ## TBTP
 
 > refrence :
+> 
 > ETSI EN 301 545-2 V1.4.1 (2024-01) 6.2.2.8
+> 
 > ETSI EN 301 545-2 V1.4.1 (2024-01) 7.2.7
 
   - **TBTP(Terminal Burst Time Plan)** ：是由 **Network Control Center(NCC)** 在 **Gateway（GW）** 端 集中產生的一份 **回傳鏈路（Return Link, RTN）** 時槽排程計畫，
@@ -248,7 +250,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 | 同時傳輸   | ❌    | ✅       |
 | 頻寬利用率  | 較低   | 較高      |
 | 衛星 RTN | 少用   | **主流**  |
-|圖片比較|<img width="640" height="178" alt="image" src="https://github.com/user-attachments/assets/d233a5c8-dded-4339-93ad-2eeebaaad95a" />|<img width="458" height="264" alt="image" src="https://github.com/user-attachments/assets/1ac51ea1-7af9-4bff-ad27-b6f46efce6a1" />|
+|圖片比較|<img width="640" height="178" alt="image" src="https://github.com/user-attachments/assets/d233a5c8-dded-4339-93ad-2eeebaaad95a" />|<img width="398" height="368" alt="image" src="https://github.com/user-attachments/assets/8f7911a1-c592-4eb2-b7cf-649e0eaca01d" /><br>refrence : [DVB-RCS2, Part 2: Lower Layers for Satellite standard](https://www.etsi.org/deliver/etsi_en/301500_301599/30154502/01.04.01_60/en_30154502v010401p.pdf) 7.5.3|
 
 
 
