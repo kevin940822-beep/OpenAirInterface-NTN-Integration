@@ -1,11 +1,10 @@
 # SNS3 sat-rtn-system-test-example.cc
->### Refrence 
->https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/examples/sat-rtn-system-test-example.cc
+### [Refrence ](https://github.com/sns3/sns3-satellite/blob/0fc2b8c74f0d9c2b0c3ee4ed132064a40ad2daf1/examples/sat-rtn-system-test-example.cc)
 
-### sns3 set up
->https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/SNS3_installation.md#sns3-installation
+### [sns3 set up](https://github.com/kevin940822-beep/OpenAirInterface-NTN-Integration/blob/main/sns3/SNS3_installation.md#sns3-installation)
 
 # Table of Contents
+- [Architecture](#architecture)
 - [Step](#step)
   - [testCase](#testcase)
   - [configuration 0 / 1](#configuration-0--1)
@@ -24,8 +23,13 @@
 - [Flowchart（流程圖）](#flowchart流程圖)
 - [MSC（Message Sequence Chart）訊息序列圖](#msc-message-sequence-chart訊息序列圖)
 
+## Architecture
+<img width="1300" height="537" alt="image" src="https://github.com/user-attachments/assets/e2898be4-8048-42bd-a0a6-e3867a8488eb" />
+
+> refrence : https://www.sns3.org/doc/satellite-design.html#architecture
 
 ---
+
 ## Step
 ### 檢視可修改的參數
 ```
@@ -199,7 +203,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
   - 接收 UT 的 RTN 資料
   - 轉發至 GW
   - 將 GW 的 FWD 控制訊息轉送給 UT
-  - **不做排程決策**
+  - **不做排程決策** (Transparent Mode)
   - **只負責轉送（bent-pipe）**
 
 - **GW(Gateway)** : 地面端，外部核心網或伺服器
