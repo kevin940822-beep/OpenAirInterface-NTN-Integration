@@ -65,7 +65,7 @@ BBFrame 包含三個主要部分：
 >
 >[ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.6
 
-MATYPE（2 bytes）: BBFRAME 承載資料流的種類:
+**MATYPE（2 bytes）: BBFRAME 承載資料流的種類**
 
 ### First Byte (MATYPE-1)
 | 欄位 | 位元數 | 設定值 | 功能說明|
@@ -86,6 +86,21 @@ MATYPE（2 bytes）: BBFRAME 承載資料流的種類:
 | ------------------------------ | -------------------------------- | ----------------------------------------- |
 | **SIS（Single Input Stream）**   | Reserved(保留)                       單一輸入流時，MATYPE-2 保留不用。                     |
 | **MIS（Multiple Input Stream）** | **ISI（Input Stream Identifier）** | 指示此 BBFRAME 屬於哪一條輸入流，讓接收端在多輸入流情境下正確分流與解碼。 |
+
+
+**UPL（User Packet Length)，2 bytes**
+- DATA FIELD 中，每個 user packet 的長度（bits）,in the range 0 to 65 535. 
+  - **固定長度封包**（例如 MPEG-TS）：UPL 固定
+  - **變動長度封包**（例如 IP/GSE）：UPL 可能設為 0，代表「變長」
+- SNS-3 會依據 packet size + UPL 規則，把封包一個一個放進 BBFRAME
+
+**DFL（Data Field Length，2 bytes）**
+- DATA FIELD 的**有效長度**（bits）
+  - 不包含 BBHEADER
+  - 不包含 padding
+- 告訴接收端：「後面有多少 bits 是有效資料」。
+
+  
 
 
 ---
