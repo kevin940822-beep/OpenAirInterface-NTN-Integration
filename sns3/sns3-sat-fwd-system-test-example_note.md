@@ -188,7 +188,7 @@ BBframe Tx會將每一個封包所抵達的目的做一次紀錄，所以在Outp
 
 ---
 
-CRC-8 (for UP)
+### CRC-8 (for UP)
 
 - 如果 UPL = 0_D (continuous generic stream)連續位元流，CRC-8 encoder 不做任何事，直接把資料往下送。
 - 如果 UPL ≠ 0_D ，資料為一連串 User Packets（UP），長度為 UPL bits，都有一個 sync-byte(如果沒有，視為0)
