@@ -56,9 +56,11 @@ BBFrame 包含三個主要部分：
 - [BBHEADER](#bbheader)（固定長度 80 bits）
 - DATA FIELD（payload，可變長度，此模擬器預設為4050）
 - Padding（若 payload 不足）
-  - 用來將BBframe補到固定長度 **Kbch bits**，所以會發生`Occupancy < 1`。
+  - 用來將BBframe補到固定長度 **Kbch bits**。
+  - 所以`Occupancy < 1`發生時，是經由padding補足至固定長度。 
 
 <img width="732" height="242" alt="image" src="https://github.com/user-attachments/assets/b271e018-91ea-4906-885d-2dde8b414fd1" />
+
 > Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.2
 
 
@@ -76,7 +78,7 @@ BBFrame 包含三個主要部分：
 ### First Byte (MATYPE-1)
 | 欄位 | 位元數 | 設定值 | 功能說明|
 | --- | ---| ---| ---|
-| **TS / GS**   | 2 bits | **TS**       | **Transport Stream Input**：典型為 **MPEG-TS（188 bytes/packet）**，常用於廣播 / 電視傳輸。|
+| **TS / GS**   | 2 bits | **TS**       | **Transport Stream Input**：典型為 **MPEG-TS（188 bytes/packet）**，常用於廣播 / 電視傳輸，所有規格已定義好。|
 |               |        | **GS**       | **Generic Stream Input**：泛用資料流（封包化或連續位元流），常用於 **IP / 資料服務**。|
 |               |        |              |讓接收端知道 DATA FIELD 裡的**內容格式**，接收端才能用正確方式切封包、找同步、解封裝。              |
 | **SIS / MIS** | 1 bit  | **SIS**      | **Single Input Stream**：僅一條輸入流（單一 service / 單一 stream）。                                                       |
@@ -94,16 +96,16 @@ BBFrame 包含三個主要部分：
 | **MIS（Multiple Input Stream）** | **ISI（Input Stream Identifier）** | 指示此 BBFRAME 屬於哪一條輸入流，讓接收端在多輸入流情境下正確分流與解碼。 |
 
 <img width="912" height="179" alt="image" src="https://github.com/user-attachments/assets/f019f278-8db3-4a0e-b1c3-b8d12c864317" />
+
 > Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.6
 
 ### UPL（User Packet Length，2 bytes)
 - DATA FIELD 中，每個 user packet 的長度（bits）,in the range 0 to 65 535. 
   - **固定長度封包**（例如 MPEG-TS）：UPL 固定
-  - **變動長度封包**（例如 IP/GSE）：UPL 可能設為 0，代表「變長」
 - SNS-3 會依據 packet size + UPL 規則，把封包一個一個放進 BBFRAME
-- Example 1: 0000(HEX) = continuous stream. (連續位元流，沒有「封包邊界」)
-- Example 2: 000AHEX = UP length of 10 bits.
-- Example 3: UPL = 188×8_D for **MPEG** transport stream packets (每個封包188 Bytes).  
+- Example 1: 0000 (HEX) = continuous stream. (連續位元流，沒有「封包邊界」)
+- Example 2: 000A (HEX) = UP length of 10 bits.
+- Example 3: UPL = 188×8_D for **MPEG** transport stream packets (每個封包188 Bytes)(已定義好的規格)。  
 
 
 ### DFL（Data Field Length，2 bytes）
@@ -111,14 +113,13 @@ BBFrame 包含三個主要部分：
   - 不包含 BBHEADER
   - 不包含 padding
 - 告訴接收端：「後面有多少 bits 是有效資料」。
-- Example 1: 000A (HEX) = Data Field length of 10 bits(有效資料10bits).
+- Example 4: 000A (HEX) = Data Field length of 10 bits(有效資料10bits).
 
 ### SYNC (1 byte)
 - for packetized Transport or Generic Streams : copy of the User Packet Sync byte.
 - 用於封包對齊，讓接收端知道「封包的起始點」。
-- Example 1: SYNC = 47 (HEX) for **MPEG** transport stream packets.
-- Example 2: SYNC = 00 (HEX) 資料為連續 GS（不是封包化資料），沒有封包起點可對齊。
-  - 因此，接收端在完成 **CRC-8** 解碼後，會移除 CRC-8 字段，無需重新插入同步位元組)。
+- Example 5: SYNC = 47 (HEX) for **MPEG** transport stream packets(已定義好的規格).
+- Example 6: SYNC = 00 (HEX) 代表封包化 **generic stream**的輸入本身沒有 sync-byte，sync-byte 視為 0。
 
 ### SYNCD （Sync Distance，2 bytes）
 - for packetized Transport or Generic Streams: distance in bits from the beginning of the DATA FIELD and the first UP from this frame(first bit of the CRC-8).
@@ -128,10 +129,11 @@ BBFrame 包含三個主要部分：
 - 接收端可以快速定位封包邊界。
 
 ### CRC-8 (1 byte)
-- Error detection code (錯誤檢測碼) applied to the first 9 bytes of the BBHEADER.
-- 對 BBHEADER 做除錯檢查。
+- 如果 UPL = 0_D (continuous generic stream)連續位元流，CRC-8 encoder 不做任何事，直接把資料往下送。
+- 如果 UPL ≠ 0D ，資料為一連串 User Packets（UP），
 
 <img width="1040" height="287" alt="image" src="https://github.com/user-attachments/assets/50ba0809-9a9f-4b87-bca7-26e492fc3cf9" />
+
 > Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.6
 
 ---
