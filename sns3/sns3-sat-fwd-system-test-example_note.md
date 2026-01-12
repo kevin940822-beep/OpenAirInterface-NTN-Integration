@@ -130,7 +130,7 @@ BBFrame 包含三個主要部分：
 
 ### CRC-8 (1 byte)
 - 如果 UPL = 0_D (continuous generic stream)連續位元流，CRC-8 encoder 不做任何事，直接把資料往下送。
-- 如果 UPL ≠ 0D ，資料為一連串 User Packets（UP），長度為 UPL bits，都有一個 sync-byte(如果沒有，視為0)
+- 如果 UPL ≠ 0_D ，資料為一連串 User Packets（UP），長度為 UPL bits，都有一個 sync-byte(如果沒有，視為0)
 - CRC-8 的「**規格固定**多項式」 :
 <img width="601" height="43" alt="image" src="https://github.com/user-attachments/assets/54008325-33ae-4382-8bee-ce8377091192" />
 
