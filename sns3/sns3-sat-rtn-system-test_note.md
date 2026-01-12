@@ -187,9 +187,9 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 
 > refrence :
 > 
-> ETSI EN 301 545-2 V1.4.1 (2024-01) 6.2.2.8
+> [ETSI EN 301 545-2 V1.4.1 (2024-01)](https://www.etsi.org/deliver/etsi_en/301500_301599/30154502/01.04.01_60/en_30154502v010401p.pdf) 6.2.2.8
 > 
-> ETSI EN 301 545-2 V1.4.1 (2024-01) 7.2.7
+> [ETSI EN 301 545-2 V1.4.1 (2024-01)](https://www.etsi.org/deliver/etsi_en/301500_301599/30154502/01.04.01_60/en_30154502v010401p.pdf) 7.2.7
 
   - **TBTP(Terminal Burst Time Plan)** ：是由 **Network Control Center(NCC)** 在 **Gateway（GW）** 端 集中產生的一份 **回傳鏈路（Return Link, RTN）** 時槽排程計畫，
 用於協調與控制多個 **UT**在 **MF-TDMA** 回傳鏈路上的傳輸行為。
