@@ -59,10 +59,6 @@ BBFrame 包含三個主要部分：
   - 用來將BBframe補到固定長度 **Kbch bits**。
   - 所以`Occupancy < 1`發生時，是經由padding補足至固定長度。 
 
-<img width="732" height="242" alt="image" src="https://github.com/user-attachments/assets/b271e018-91ea-4906-885d-2dde8b414fd1" />
-
-> Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.2
-
 
 ## BBHEADER
 <img width="889" height="279" alt="image" src="https://github.com/user-attachments/assets/c8dbf7af-308b-4f92-95be-87390d255076" />
