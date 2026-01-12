@@ -184,8 +184,17 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 ---
 
 ## TBTP
+
+> refrence :
+> ETSI EN 301 545-2 V1.4.1 (2024-01) 6.2.2.8
+> ETSI EN 301 545-2 V1.4.1 (2024-01) 7.2.7
+
   - **TBTP(Terminal Burst Time Plan)** ：是由 **Network Control Center(NCC)** 在 **Gateway（GW）** 端 集中產生的一份 **回傳鏈路（Return Link, RTN）** 時槽排程計畫，
 用於協調與控制多個 **UT**在 **MF-TDMA** 回傳鏈路上的傳輸行為。
+
+<img width="1574" height="790" alt="image" src="https://github.com/user-attachments/assets/1658252c-8e51-47e9-9f1d-929f79043eff" />
+
+>refernce : https://github.com/liang924/SNS3/blob/main/DAMA/DAMA-introduce.md#dama-overview
 
   - 內容包含：
     - 哪一個 UT（User Terminal）
@@ -201,9 +210,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
       - 各 UT 僅在 TBTP 指定的 time slot、carrier 與傳輸格式下進行傳輸
       - 避免衝突，並確保回傳鏈路的集中式資源管理
 
-<img width="1574" height="790" alt="image" src="https://github.com/user-attachments/assets/1658252c-8e51-47e9-9f1d-929f79043eff" />
 
->refernce : https://github.com/liang924/SNS3/blob/main/DAMA/DAMA-introduce.md#dama-overview
 
 ## UT / SAT / GW
 - **UT(User Terminal)** : 使用者終端
