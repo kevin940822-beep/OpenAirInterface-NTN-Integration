@@ -40,7 +40,7 @@ cd ~/workspace/bake/source/ns-3.43
 ## BBframe
 **BBFrame（BaseBand Frame）**  : 
 - 是來自 DVB-S2 / DVB-S2X 標準，屬於 **實體層（Physical Layer）** 中，基頻處理的資料單位。
-- 所有上層封包（IP / MPEG / GSE）都必須先被封裝進 BBFrame，才能形成**PLFRAME** 並送上衛星載波。
+- 所有上層封包（IP / MPEG / GSE）都必須先被封裝進 BBFrame，才能形成**PLFRAME** 經調變後送上衛星載波。
 - 通道編碼（channel coding）之前的資料格式，用來承載上層輸入資料。
 
 ### BBFrame 結構
