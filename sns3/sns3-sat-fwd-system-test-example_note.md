@@ -35,6 +35,9 @@ cd ~/workspace/bake/source/ns-3.43
 ### Output
 <img width="212" height="263" alt="image" src="https://github.com/user-attachments/assets/63cf4d64-809c-4a32-860f-937feeec4e7a" />
 
+**主要輸出在BBframe，因為將**
+`--traceFrameInfo`  `--traceMergeInfo`
+**設為false，所以才沒有輸出內容**
 
 ---
 
@@ -53,7 +56,10 @@ BBFrame 包含三個主要部分：
 - [BBHEADER](#bbheader)（固定長度 80 bits）
 - DATA FIELD（payload，可變長度，此模擬器預設為4050）
 - Padding（若 payload 不足）
-  - 用來將BBframe補到固定長度 Kbch bits，所以會發生`Occupancy < 1`。
+  - 用來將BBframe補到固定長度 **Kbch bits**，所以會發生`Occupancy < 1`。
+
+<img width="732" height="242" alt="image" src="https://github.com/user-attachments/assets/b271e018-91ea-4906-885d-2dde8b414fd1" />
+> Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.2
 
 
 ## BBHEADER
@@ -65,7 +71,7 @@ BBFrame 包含三個主要部分：
 >
 >[ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.6
 
-**MATYPE（2 bytes）: BBFRAME 承載資料流的種類**
+### MATYPE（2 bytes）: BBFRAME 承載資料流的種類
 
 ### First Byte (MATYPE-1)
 | 欄位 | 位元數 | 設定值 | 功能說明|
@@ -87,21 +93,46 @@ BBFrame 包含三個主要部分：
 | **SIS（Single Input Stream）**   | Reserved(保留)                       單一輸入流時，MATYPE-2 保留不用。                     |
 | **MIS（Multiple Input Stream）** | **ISI（Input Stream Identifier）** | 指示此 BBFRAME 屬於哪一條輸入流，讓接收端在多輸入流情境下正確分流與解碼。 |
 
+<img width="912" height="179" alt="image" src="https://github.com/user-attachments/assets/f019f278-8db3-4a0e-b1c3-b8d12c864317" />
+> Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.6
 
-**UPL（User Packet Length)，2 bytes**
+### UPL（User Packet Length，2 bytes)
 - DATA FIELD 中，每個 user packet 的長度（bits）,in the range 0 to 65 535. 
   - **固定長度封包**（例如 MPEG-TS）：UPL 固定
   - **變動長度封包**（例如 IP/GSE）：UPL 可能設為 0，代表「變長」
 - SNS-3 會依據 packet size + UPL 規則，把封包一個一個放進 BBFRAME
+- Example 1: 0000(HEX) = continuous stream. (連續位元流，沒有「封包邊界」)
+- Example 2: 000AHEX = UP length of 10 bits.
+- Example 3: UPL = 188×8_D for **MPEG** transport stream packets (每個封包188 Bytes).  
 
-**DFL（Data Field Length，2 bytes）**
+
+### DFL（Data Field Length，2 bytes）
 - DATA FIELD 的**有效長度**（bits）
   - 不包含 BBHEADER
   - 不包含 padding
 - 告訴接收端：「後面有多少 bits 是有效資料」。
+- Example 1: 000A (HEX) = Data Field length of 10 bits(有效資料10bits).
 
-  
+### SYNC (1 byte)
+- for packetized Transport or Generic Streams : copy of the User Packet Sync byte.
+- 用於封包對齊，讓接收端知道「封包的起始點」。
+- Example 1: SYNC = 47 (HEX) for **MPEG** transport stream packets.
+- Example 2: SYNC = 00 (HEX) 資料為連續 GS（不是封包化資料），沒有封包起點可對齊。
+  - 因此，接收端在完成 **CRC-8** 解碼後，會移除 CRC-8 字段，無需重新插入同步位元組)。
 
+### SYNCD （Sync Distance，2 bytes）
+- for packetized Transport or Generic Streams: distance in bits from the beginning of the DATA FIELD and the first UP from this frame(first bit of the CRC-8).
+- SYNCD = 65535_D means that no UP starts in the DATA FIELD;
+- for **Continuous Generic Streams** : SYNCD= 0000 - FFFF reserved for future uses.
+- 從 DATA FIELD 開始，到下一個 sync byte 的距離。
+- 接收端可以快速定位封包邊界。
+
+### CRC-8 (1 byte)
+- Error detection code (錯誤檢測碼) applied to the first 9 bytes of the BBHEADER.
+- 對 BBHEADER 做除錯檢查。
+
+<img width="1040" height="287" alt="image" src="https://github.com/user-attachments/assets/50ba0809-9a9f-4b87-bca7-26e492fc3cf9" />
+> Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.6
 
 ---
 
