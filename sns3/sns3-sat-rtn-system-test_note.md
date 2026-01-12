@@ -184,7 +184,7 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 ---
 
 ## TBTP
-  - **TBTP(Terminal Burst Time Plan)** ：是由 Hub 所產生的一份 回傳鏈路（Return Link, RTN）排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
+  - **TBTP(Terminal Burst Time Plan)** ：是由 **NCC(Network Control Centre)** 所產生的一份 **回傳鏈路（Return Link, RTN）** 排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
   - 內容包含：
     - 哪一個 UT（User Terminal）
     - 在哪一個 superframe / frame
