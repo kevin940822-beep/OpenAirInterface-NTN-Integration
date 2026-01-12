@@ -184,15 +184,26 @@ less stat-global-rtn-app-throughput-scatter-0.txt
 ---
 
 ## TBTP
-  - **TBTP(Terminal Burst Time Plan)** ：是由 **NCC(Network Control Centre)** 所產生的一份 **回傳鏈路（Return Link, RTN）** 排程表，用來集中管理各個 UT（User Terminal） 的上行傳輸行為。
+  - **TBTP(Terminal Burst Time Plan)** ：是由 **Network Control Center(NCC)** 在 **Gateway（GW）** 端 集中產生的一份 **回傳鏈路（Return Link, RTN）** 時槽排程計畫，
+用於協調與控制多個 **UT**在 **MF-TDMA** 回傳鏈路上的傳輸行為。
+
   - 內容包含：
     - 哪一個 UT（User Terminal）
     - 在哪一個 superframe / frame
-    - 被分配到哪一個 time slot
-    - 可以使用多少 symbols / bursts 進行傳輸
+    - 該 time slot 的使用型態(DA/RA/CB)
+    - 對應的 burst / transmission format
+      
   - 實際運作方式：
-    - FWD（Forward Link）：由 Hub 將 TBTP 傳送給各個 UT，作為回傳鏈路的傳輸規則說明。
-    - Return Link（RTN）：各 UT 依照 TBTP 所指定的時間與資源配置，在對應的 time slot 中回傳資料。
+    - **FWD（Forward Link）**：
+      - **NCC** 透過 Forward Link 將 TBTP 廣播給各個 UT
+      - 作為**回傳鏈路（RTN）** 在該 superframe 期間的傳輸控制與排程依據
+    - **Return Link（RTN）**：
+      - 各 UT 僅在 TBTP 指定的 time slot、carrier 與傳輸格式下進行傳輸
+      - 避免衝突，並確保回傳鏈路的集中式資源管理
+
+<img width="1574" height="790" alt="image" src="https://github.com/user-attachments/assets/1658252c-8e51-47e9-9f1d-929f79043eff" />
+
+>refernce : https://github.com/liang924/SNS3/blob/main/DAMA/DAMA-introduce.md#dama-overview
 
 ## UT / SAT / GW
 - **UT(User Terminal)** : 使用者終端
