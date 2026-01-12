@@ -4,6 +4,7 @@ Refrence : https://github.com/sns3/sns3-satellite/blob/master/examples/sat-fwd-s
 - [Table of Contents](#table-of-contents)
 - [Step](#step)
 - [BBframe](#bbframe)
+  - BBframe Header
   - [BBframe Tx](#bbframe-tx)
   - [BBFrame Merge](#bbframe-merge)
 
@@ -51,6 +52,7 @@ BBFrame 包含三個主要部分：
 - BBHEADER（固定長度 80 bits）
 - DATA FIELD（payload，可變長度，此模擬器預設為4050）
 - Padding（若 payload 不足）
+  - 用來將BBframe補到固定長度 Kbch bits，所以會發生`Occupancy < 1`。
 
 
 <img width="889" height="279" alt="image" src="https://github.com/user-attachments/assets/c8dbf7af-308b-4f92-95be-87390d255076" />
