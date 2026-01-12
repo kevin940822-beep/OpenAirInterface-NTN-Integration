@@ -3,6 +3,9 @@ Refrence : https://github.com/sns3/sns3-satellite/blob/master/examples/sat-fwd-s
 # Table of Contents 
 - [Table of Contents](#table-of-contents)
 - [Step](#step)
+- [BBframe](#bbframe)
+  - [BBframe Tx](#bbframe-tx)
+  - [BBFrame Merge](#bbframe-merge)
 
 
 ## Step 
@@ -34,21 +37,66 @@ cd ~/workspace/bake/source/ns-3.43
 
 ---
 
-## BBFrame Tx
+## BBframe
+**BBFrame（BaseBand Frame）**  : 
+- 是來自 DVB-S2 / DVB-S2X 標準，屬於 **實體層（Physical Layer）** 中，基頻處理的資料單位。
+- 所有上層封包（IP / MPEG / GSE）都必須先被封裝進 BBFrame，才能形成**PLFRAME** 並送上衛星載波。
+- 通道編碼（channel coding）之前的資料格式，用來承載上層輸入資料。
+
+### BBFrame 結構
+<img width="735" height="253" alt="image" src="https://github.com/user-attachments/assets/a96f9e97-2299-4a56-a429-6e4993734a22" />
+> Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.2
+
+BBFrame 包含三個主要部分：
+- BBHEADER（固定長度 80 bits）
+- DATA FIELD（payload，可變長度，此模擬器預設為4050）
+- Padding（若 payload 不足）
+
+
+<img width="889" height="279" alt="image" src="https://github.com/user-attachments/assets/c8dbf7af-308b-4f92-95be-87390d255076" />
+>Refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.5
+
+BBFrame 能裝多少資料，是由 **DFL(Data Field Length)** 決定。
+
+`[BBFrameTx] Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2` 代表Scheduler : 
+
+- 從 GW 的佇列中拿出多個 packet
+- 依照 ModCod 計算可用空間
+- 把 packet 塞進 BBFrame (盡量塞滿)
+- 把這個 BBFrame 丟到 PHY 層傳送出去
+
+<img width="316" height="376" alt="image" src="https://github.com/user-attachments/assets/fb03e5aa-b453-442b-b4ef-57c59c3a8ccc" />
+
+`Frame Type: DUMMY_FRAME` : 代表此時還未有資料要送，但PHY 時序仍需維持
+
+### BBFrame Tx
+```
+--traceFrameInfo=true --traceMergeInfo=false
+```
 `PrintBbFrameInfo()` 會在每次 BBFrame 傳送時，印出：
 - 時間
 - Frame type
 - ModCod
-- Occupancy、Duration
-- Space used/left
-- 以及 BBFrame 裡每個 payload packet 的 接收端地址（DestAddress）
+- Occupancy (佔用的空間%)、Duration (固定`+3.19507e+06 ns`)
+- Space used/left (固定4050)
+- BBFrame 裡每個 payload packet 的 接收端地址（DestAddress）
 
+BBframe Tx會將每一個封包所抵達的目的做一次紀錄，所以在Output會看到很多位址
 > line 44-84
+
+一個封包大小固定為128 Bytes
 
 ### Output
 <img width="1845" height="106" alt="image" src="https://github.com/user-attachments/assets/6f7f70a5-10b4-441e-b096-d96f0b5f63f9" />
 
-## BBFrame Merge
+
+
+
+### BBFrame Merge
+```
+--traceFrameInfo=false --traceMergeInfo=true
+```
+
 `PrintBbFrameMergeInfo()` 會印出 merge 的起訖，再呼叫 `PrintBbFrameInfo()` 分別印 mergeTo / mergeFrom。
 
 > Line 89-98
