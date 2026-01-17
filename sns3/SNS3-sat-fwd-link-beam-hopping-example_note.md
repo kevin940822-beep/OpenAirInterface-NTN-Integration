@@ -285,7 +285,7 @@ beam hopping 主要由 **BSTP（Beam Switching Time Plan）** 描述各 beam 在
 
 分別定義在兩個檔案中
 
-- `satellite-bstp-controller.cc` : 根據 BSTP 設定與 superframe duration 控制beam 啟用／關閉與切換時機
+- [`satellite-bstp-controller.cc`](https://github.com/sns3/sns3-satellite/blob/master/model/satellite-bstp-controller.cc) : 根據 BSTP 設定與 superframe duration 控制beam 啟用／關閉與切換時機
 ```
  .AddAttribute("SuperframeDuration",
                           "Superframe duration in Time.",
@@ -293,4 +293,4 @@ beam hopping 主要由 **BSTP（Beam Switching Time Plan）** 描述各 beam 在
                           MakeTimeAccessor(&SatBstpController::m_superFrameDuration),
                           MakeTimeChecker());
 ```
-- `satellite-static-bstp.cc` : 負責解析與提供 BSTP 設定內容 Line160 - 206
+- [`satellite-static-bstp.cc`](https://github.com/sns3/sns3-satellite/blob/master/model/satellite-static-bstp.cc) : 負責解析與提供 BSTP 設定內容 Line160 - 206
