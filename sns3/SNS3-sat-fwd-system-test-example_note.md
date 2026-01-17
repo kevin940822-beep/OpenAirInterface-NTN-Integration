@@ -56,7 +56,7 @@ BBFrame 包含三個主要部分：
 - [BBHEADER](#bbheader)（固定長度 80 bits）
 - DATA FIELD（payload，可變長度，由DFL決定)
 - Padding
-  - 當 DATA FIELD 沒有填滿可用容量時，用 padding bits 補齊，使 BBFRAME 達到固定長度
+  - 當 DATA FIELD 沒有填滿可用容量時，用 padding bits 補齊至𝐾𝑏𝑐ℎ長度。
   - 內容為「全 0 bits」 [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.2.1
   
 此模擬器𝐾𝑏𝑐ℎ = 32208 bits​ (4026 bytes)
@@ -122,7 +122,7 @@ BBFrame 包含三個主要部分：
 - for packetized Transport or Generic Streams: distance in bits from the beginning of the DATA FIELD and the first UP from this frame(first bit of the CRC-8).
 - SYNCD = 65535_D means that no UP starts in the DATA FIELD;
 - for **Continuous Generic Streams** : SYNCD= 0000 - FFFF reserved for future uses.
-- 從 DATA FIELD 開始，到下一個 sync byte 的距離。
+- 從 DATA FIELD 開始，到下一個 UP 的 CRC-8 第一個 bit 的距離（bits）
 - 接收端可以快速定位封包邊界。
 
 ### CRC-8 (1 byte)
@@ -235,7 +235,7 @@ Merge From <- [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_
 
 > refrence : [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.1.4
 
-- 算完CRC-8之後，會取代下一個 UP 的 sync-byte 位置
+- 算完CRC-8之後，會被插入在 User Packet stream 中
 - 此做法在不增加額外 byte 的情況下，把 CRC 資訊串在封包之間傳遞。
 
 <img width="906" height="304" alt="image" src="https://github.com/user-attachments/assets/1d94a697-d9db-4620-b435-aa03b4ba564f" />
