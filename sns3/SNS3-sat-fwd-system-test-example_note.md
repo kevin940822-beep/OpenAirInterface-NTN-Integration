@@ -55,7 +55,7 @@ cd ~/workspace/bake/source/ns-3.43
 BBFrame 包含三個主要部分：
 - [BBHEADER](#bbheader)（固定長度 80 bits）
 - DATA FIELD（payload，可變長度，由DFL決定)
-- Padding（若 payload 不足）
+- Padding
   - 當 DATA FIELD 沒有填滿可用容量時，用 padding bits 補齊，使 BBFRAME 達到固定長度
   - 內容為「全 0 bits」 [ETSI EN 302 307-1](https://www.etsi.org/deliver/etsi_en/302300_302399/30230701/01.04.01_20/en_30230701v010401a.pdf) 5.2.1
   
