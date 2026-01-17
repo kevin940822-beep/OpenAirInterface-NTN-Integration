@@ -54,11 +54,12 @@ cd ~/workspace/bake/source/ns-3.43
 
 BBFrame 包含三個主要部分：
 - [BBHEADER](#bbheader)（固定長度 80 bits）
-- DATA FIELD（payload，可變長度，此模擬器預設為4050）
+- DATA FIELD（payload，可變長度，由DFL決定)
 - Padding（若 payload 不足）
   - 用來將BBframe補到固定長度 **Kbch bits**。
   - 所以`Occupancy < 1`發生時，是經由padding補足至固定長度。 
 
+此模擬器𝐾𝑏𝑐ℎ = 32208 bits​ (4026 bytes)
 
 ## BBHEADER
 <img width="889" height="279" alt="image" src="https://github.com/user-attachments/assets/c8dbf7af-308b-4f92-95be-87390d255076" />
