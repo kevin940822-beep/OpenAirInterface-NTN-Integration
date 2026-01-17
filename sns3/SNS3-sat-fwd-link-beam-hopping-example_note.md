@@ -286,4 +286,11 @@ beam hopping 的superframe 定義為 **BSTP（Beam Switching Time Plan）**
 分別定義在兩個檔案中
 
 - `satellite-bstp-controller.cc` : 定義了superfrmae duration = 10ms
-- `satellite-static-bstp.cc` : 決定何時哪一個beam被啟動 
+```
+ .AddAttribute("SuperframeDuration",
+                          "Superframe duration in Time.",
+                          TimeValue(MilliSeconds(10)),
+                          MakeTimeAccessor(&SatBstpController::m_superFrameDuration),
+                          MakeTimeChecker());
+```
+- `satellite-static-bstp.cc` : 決定何時哪一個beam被啟動 Line160 - 206
