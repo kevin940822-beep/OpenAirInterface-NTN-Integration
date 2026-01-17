@@ -10,6 +10,7 @@
   - [SINR（Signal to Interference plus Noise Ratio）](#sinrsignal-to-interference-plus-noise-ratio)
 - [Beam Hopping vs Static Beam](#beam-hopping-vs-static-beam)
 - [一個 beam 的 UT 數量](#一個beam-的-ut數量)
+- [superframe定義](#superframe定義)
 
 
 ## 預設參數
@@ -277,3 +278,6 @@ std::map<uint32_t, uint32_t> utsInBeam = {{1, 30},
 增加高需求 beam 的 `service_time` (beam 4, beam 28)
 
 減少低需求 beam 的 `service_time` (bema 2, beam 40)
+
+
+## superframe定義
