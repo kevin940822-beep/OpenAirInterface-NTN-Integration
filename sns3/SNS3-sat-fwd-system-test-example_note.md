@@ -177,12 +177,40 @@ BBframe Tx會將每一個封包所抵達的目的做一次紀錄，所以在Outp
 ```
 --traceFrameInfo=false --traceMergeInfo=true
 ```
-
-`PrintBbFrameMergeInfo()` 會印出 merge 的起訖，再呼叫 `PrintBbFrameInfo()` 分別印 mergeTo / mergeFrom。
-
-> Line 89-98
+將多個低佔用率的 BBFRAME（來自不同 UT）逐一合併進同一個正在填充的 BBFRAME（Merge To）
 
 ### Output
+```
+[Merge Info Begins]
+Merge To   -> [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.00395062, Duration: +3.19507e+06ns, Space used: 16, Space Left: 4034 [Receivers: ff:ff:ff:ff:ff:ff]
+Merge From <- [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.261481, Duration: +3.19507e+06ns, Space used: 1059, Space Left: 2991 [Receivers: 00:00:00:00:00:17, 00:00:00:00:00:18, 00:00:00:00:00:19, 00:00:00:00:00:1a, 00:00:00:00:00:1b, 00:00:00:00:00:1c, 00:00:00:00:00:1d]
+[Merge Info Ends]
+[Merge Info Begins]
+Merge To   -> [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.262963, Duration: +3.19507e+06ns, Space used: 1065, Space Left: 2985 [Receivers: ff:ff:ff:ff:ff:ff, 00:00:00:00:00:17, 00:00:00:00:00:18, 00:00:00:00:00:19, 00:00:00:00:00:1a, 00:00:00:00:00:1b, 00:00:00:00:00:1c, 00:00:00:00:00:1d]
+Merge From <- [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.0259259, Duration: +3.19507e+06ns, Space used: 105, Space Left: 3945 [Receivers: 00:00:00:00:00:17]
+[Merge Info Ends]
+[Merge Info Begins]
+Merge To   -> [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.28642, Duration: +3.19507e+06ns, Space used: 1160, Space Left: 2890 [Receivers: ff:ff:ff:ff:ff:ff, 00:00:00:00:00:17, 00:00:00:00:00:18, 00:00:00:00:00:19, 00:00:00:00:00:1a, 00:00:00:00:00:1b, 00:00:00:00:00:1c, 00:00:00:00:00:1d, 00:00:00:00:00:17]
+Merge From <- [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.0437037, Duration: +3.19507e+06ns, Space used: 177, Space Left: 3873 [Receivers: 00:00:00:00:00:18]
+[Merge Info Ends]
+[Merge Info Begins]
+Merge To   -> [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.327654, Duration: +3.19507e+06ns, Space used: 1327, Space Left: 2723 [Receivers: ff:ff:ff:ff:ff:ff, 00:00:00:00:00:17, 00:00:00:00:00:18, 00:00:00:00:00:19, 00:00:00:00:00:1a, 00:00:00:00:00:1b, 00:00:00:00:00:1c, 00:00:00:00:00:1d, 00:00:00:00:00:17, 00:00:00:00:00:18]
+Merge From <- [BBFrameTx] Time: 3.95405, Frame Type: NORMAL_FRAME, ModCod: QPSK_1_TO_2, Occupancy: 0.0437037, Duration: +3.19507e+06ns, Space used: 177, Space Left: 3873 [Receivers: 00:00:00:00:00:19]
+[Merge Info Ends]
+```
+`Merge to` : 正在填充的目標 frame
+
+`Merge From` : 被合併的來源 frame
+
+可以看到一個BBframe將`Space used: 16`與`Space used: 1059`合併後，此BBframe大小變為`Space used: 1065`，此過程將持續到封包被送出或者空間被完全利用
+
+而`Receivers`也會隨著Merge越加越多
+
+所以「 一個 BBFRAME 會同時攜帶多個 UT 的資料 」
+
+提高 frame 的 occupancy，減少 padding 浪費。
+
+
 
 
 
