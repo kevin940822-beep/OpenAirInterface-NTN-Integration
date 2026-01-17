@@ -281,3 +281,9 @@ std::map<uint32_t, uint32_t> utsInBeam = {{1, 30},
 
 
 ## superframe定義
+beam hopping 的superframe 定義為 **BSTP（Beam Switching Time Plan）**
+
+分別定義在兩個檔案中
+
+- `satellite-bstp-controller.cc` : 定義了superfrmae duration = 10ms
+- `satellite-static-bstp.cc` : 決定何時哪一個beam被啟動 
