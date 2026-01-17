@@ -16,7 +16,7 @@
 ## 預設參數
 - UT : 252
 - beam : 14
-- duration time :
+- duration time : 10ms
 
 ## Step  
 ```
@@ -281,11 +281,11 @@ std::map<uint32_t, uint32_t> utsInBeam = {{1, 30},
 
 
 ## superframe定義
-beam hopping 的superframe 定義為 **BSTP（Beam Switching Time Plan）**
+beam hopping 主要由 **BSTP（Beam Switching Time Plan）** 描述各 beam 在不同時間區段的啟用與關閉排程。(以 superframe 為單位，)
 
 分別定義在兩個檔案中
 
-- `satellite-bstp-controller.cc` : 定義了superfrmae duration = 10ms
+- `satellite-bstp-controller.cc` : 根據 BSTP 設定與 superframe duration 控制beam 啟用／關閉與切換時機
 ```
  .AddAttribute("SuperframeDuration",
                           "Superframe duration in Time.",
@@ -293,4 +293,4 @@ beam hopping 的superframe 定義為 **BSTP（Beam Switching Time Plan）**
                           MakeTimeAccessor(&SatBstpController::m_superFrameDuration),
                           MakeTimeChecker());
 ```
-- `satellite-static-bstp.cc` : 決定何時哪一個beam被啟動 Line160 - 206
+- `satellite-static-bstp.cc` : 負責解析與提供 BSTP 設定內容 Line160 - 206
