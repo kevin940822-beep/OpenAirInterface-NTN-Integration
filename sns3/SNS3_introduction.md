@@ -43,7 +43,7 @@
   - **Broadcast Composition Table (BCT)**
 
 - The satellite module does not explicitly model **SCT**, **FCT** and **BCT**.
-- The frame configurations may be changed by **parametrization**.
+- The frame configurations may be changed via **parametrization**.
 - **NCC** models **Terminal Burst Time Plan v2 (TBTPv2)**.
   - Is capable of configuring the time slots dynamically for each **superframe** **(e.g. start times, durations, waveforms)**.
 
@@ -71,7 +71,7 @@
   - In addition to labeling latitude, longitude, altitude of UT, GEO satellite and GW.
 
 *(支援球面/大地座標（WGS80、GRS84），方便標示 UT / SAT / GW 的經緯度與高度)*
-### 1. Left side End user（地面使用者）
+### 1️⃣. Left side End user（地面使用者）
 - Connection :
   - Use **CSMA channel** connect to User Terminal(UT).
 - Protocol Stack :
@@ -82,34 +82,39 @@
 - This end user simply sends and receives IP traffic over a LAN interface. *(這個 End user 只是透過 LAN 介面收送 IP 流量)*
 - It does not know that its packets will cross a satellite system.
 
-### 2. User Terminal (UT)
+### 2️⃣. UT (User Terminal)
 - Connection :
   - Use **SatChannel** connect to Satellite node.
-- Protocol Stack :
+- Modules :
   - ```SatNetDevice``` : Special satellite network interface towards the satellite.
   - **Network layer** :
     - An IP routing/forwarding layer that connects the **LAN side (CSMA)** to the **satellite side** (```SatNetDevice```).
     - Looks like a router: one interface to the **local LAN**, one interface to the **satellite network**.
-  - ```GeoPosition``` : Stores the **UT’s geographic coordinates**(latitude, longitude, altitude), used to compute propagation delay, path loss, and for possible handover.    *(計算傳播延遲、路徑損耗，以及將來可能做 handover。)*
+  - ```GeoPosition``` : Record the UT’s orbital position (latitude, longitude, altitude using WGS-84/GRS-84).
+    *(儲存UT的軌道位置，經度/緯度/高度)*
 
 - The UT plays the role of a customer premises terminal. *(UT 扮演的是一個 用戶端終端設備／小型路由器 的角色)*
 - It routes IP packets between the **local LAN** and the **satellite link**.
 
-### 3. Satellite node
+### 3️⃣. Satellite node
 - Connection :
   - Use **SatChannel** to build **uplink/downlink** with  **UT** and **GW**.
-- Protocol Stack :
+- Modules :
   - ```SatGeoNetDevice``` :
     - Device representing the **satellite’s radio payload**.    *(代表衛星上的射頻酬載。)*
     - Does not run IP or transport protocols.
     - Receives bursts from UTs/GWs on the ```SatChannel```.
     - Forwards the bursts towards the opposite direction (UT↔GW).    *(將 burst 轉發到另一方向（UT ↔ GW）)*
     - Applies propagation effects and computes received signal quality (e.g., SINR).    *(套用傳播效應，計算收到訊號的品質（例如 SINR）。)*
-  - ```GeoPosition``` : The satellite’s orbital position (e.g., GEO longitude/latitude/altitude) used to compute delays and link budgets.
+  - ```GeoPosition``` : Record the satellite’s orbital position (latitude, longitude, altitude using WGS-84/GRS-84).
  
  - The satellite is essentially a transparent relay at the **physical**/**MAC** level. *(做透明轉發的中繼站)*
 
-
+### 4️⃣.GW (GateWay)
+- Connection :
+  - Use **Ideal channel** connect to **End Users** .
+- Modules :
+  - 
 
 <!--Internally includes : *(內部包含)*
     - **Logical Link Control (LLC)** : Packs/Unpacks higher-layer packets into **bursts**. *(把上層封包打包成 **burst**、或從 **burst** 還原出封包。)*
