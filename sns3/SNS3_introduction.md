@@ -59,6 +59,12 @@
 
 > Refrence : https://www.sns3.org/doc/satellite-design.html#fig-satellite-general-architecture
 
+|Channel Name	|Description|
+|---|---|
+|CSMA channel | Communication between ground user and UT, simulates LAN/shared media  *(模擬地面有線／LAN 通道)*    |
+|SatChannel   |	Simulates satellite uplink/downlink (UT ↔ SAT ↔ GW)                      |
+|Ideal channel|	Idealized channel between GW and ground user (no interference or latency) *(無干擾、延遲)*|
+
 - All satellite nodes require a new implementation of a ```SatNetDevice```
 - ```SatNetDevice``` implement:
   - **Logical Link Control (LLC)**.
@@ -73,7 +79,7 @@
 *(支援球面/大地座標（WGS80、GRS84），方便標示 UT / SAT / GW 的經緯度與高度)*
 ### 1️⃣. Left side End user（地面使用者）
 - Connection :
-  - Use **CSMA channel** connect to User Terminal(UT).
+  - Use **CSMA channel** (Carrier Sense Multiple Access) connect to User Terminal(UT).
 - Protocol Stack :
   - **Data Link Layer (CSMA)** : Ethernet link to the UT.
   - **Network Layer** : An Ip layer(IPv4 or IPv6), responsible for packet routing by IPv4.
@@ -110,12 +116,19 @@
  
  - The satellite is essentially a transparent relay at the **physical**/**MAC** level. *(做透明轉發的中繼站)*
 
-### 4️⃣.GW (GateWay)
+### 4️⃣. GW (GateWay)
 - Connection :
   - Use **Ideal channel** connect to **End Users** .
 - Modules :
-  - 
+  - `SatNetDevice` : Handles data transmission to and from the satellite.
+  - `CSMA` : Communicates with end users on the ground via terrestrial networks (e.g., Wi-Fi, wired LAN).
+  - `GeoPosition` : Records the gateway’s geographic coordinates.
 
+### 5️⃣. Right side End User
+- Connection :
+  - Use **Ideal channel** connect to **End Users** .
+  - Representing a simplified model without interference or delay. *(無延遲無干擾的簡易模型)*
+ 
 <!--Internally includes : *(內部包含)*
     - **Logical Link Control (LLC)** : Packs/Unpacks higher-layer packets into **bursts**. *(把上層封包打包成 **burst**、或從 **burst** 還原出封包。)*
     - **Medium Access Control (MAC)** : Obeys the satellite access rules (frames, time slots, TBTP). *(遵守衛星系統的存取規則。)*
