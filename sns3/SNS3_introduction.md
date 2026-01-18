@@ -1,21 +1,26 @@
 ### Refrence
-> https://www.sns3.org/
+> https://www.sns3.org/doc/satellite-design.html#frame-configuration
 > 
 > https://github.com/sns3/sns3-satellite/blob/master/doc/satellite-design.rst
+
+# Table of Contents
+- [SNS3 Introduction](#sns3-introduction)
+- [Frame configuration (框架與時槽結構)](#frame-configuration-(框架與時槽結構))
+
 
 ## SNS3 Introduction
 
 - **Satellite Network Simulator 3 (SNS3)** is a satellite network extension to **Network Simulator 3 (ns-3)** platform.
 - **SNS3** models a full interactive multi-spot beam satellite network with a **geostationary satellite (GEO)**.
-- transparent star (bent-pipe) payload.
+- **transparent star (bent-pipe)** payload.
 
 - reference satellite system have **72 spot-beams with an  European coverage**.
 
-- serverd by 5 **gateways (GWs)** and using **Ka-band frequencies** on the feeder/user link.
+- serverd by 5 **gateways (GWs)** and using **Ka-band frequencies**  26.5 GHz ~ 40 GHz on the feeder/user link.
 
 - implements the **DVB-RCS2/S2** standards.
-  - **DVB-RCS2 (return link)** : Digital Video Broadcast - Return Channel via Satellite - 2nd generation
-  - **DVB-S2 (forword link)** : Digital Video Broadcasting - Satellite - 2nd generation
+  - **DVB-RCS2 (return link) : Digital Video Broadcast - Return Channel via Satellite - 2nd generation**
+  - **DVB-S2 (forword link) : Digital Video Broadcasting - Satellite - 2nd generation**
 
 ## Frame configuration (框架與時槽結構)
 ### Return Link (DVB-RCS2)
