@@ -6,7 +6,9 @@
 # Table of Contents
 - [SNS3 Introduction](#sns3-introduction)
 - [Frame configuration (框架與時槽結構)](#frame-configuration-框架與時槽結構)
-- [Architecture (整體架構)](architecture-整體架構)
+- [Architecture (整體架構)](#architecture-整體架構)
+- [User terminal SatNetDevice](#user-terminal-satnetdevice)
+- [Geostationary satellite](#geostationary-satellite)
 
 
 ## SNS3 Introduction
@@ -71,6 +73,7 @@
 
 > Refrence : https://www.sns3.org/doc/satellite-design.html#fig-satellite-general-architecture
 
+### Communication Channels
 |Channel Name	|Description|
 |---|---|
 |CSMA channel | Communication between ground user and UT, simulates LAN/shared media  *(模擬地面有線／LAN 通道)*    |
@@ -147,3 +150,59 @@
     - **Physical (PHY)** : Transmits bursts over the ```SatChannel``` using given waveforms/MODCODs. *(用指定的 waveform / MODCOD在 ```SatChannel``` 上發射 **burst**。)* 
 -->
 
+## User terminal SatNetDevice
+
+<div align="center">
+<img width="465" height="566" alt="image" src="https://github.com/user-attachments/assets/9e0aa6c4-350a-400f-acdc-e68d5112cc3d" />
+</div>
+
+>Refrence : https://www.sns3.org/doc/satellite-design.html#user-terminal
+
+UT負責 : 
+- DVB-RCS2（RTN）回傳鏈路：burst transmission logic（上行 burst 發送邏輯）
+- DVB-S2（FWD）前向鏈路：BB frame reception logic（下行 BBFrame 接收邏輯）
+
+### SatNetDevice
+- UT 對衛星網路的介面
+- 內部實作 DVB-RCS2 / DVB-S2 所需的 LLC、MAC、PHY 功能
+
+### SatPacketClassifier
+- 封包分類
+- 根據封包特徵（QoS、目的地）決定後續走哪條處理路徑 (queue / module)。
+
+### SatUtLlc (Logical Link Control - LLC Layer)
+- Tx : 
+  - **SatReturnLinkEncapsulator** : 將上行 IP packets 封裝成 **RLE (Return Link Encapsulation)** 格式，for **return channel transmission**.
+  - **SatQueue** : 暫存上行資料（封裝後 / 等待排程）
+
+ - Rx（FWD 下行）:
+   - **SatGenericStreamEncapsulator** : 將前向鏈路（DVB-S2）收到的資料做解封包/重新封包。
+   - **SatQueue** : 暫存下行資料(收到 / 解封裝後)。
+
+- **SatRequestManager** :
+  - 監控 queue 狀態
+  - 必要時送 **CR (Capacity Request)** 給 **NCC (Network Control Center)**
+  - 支援**RBDC(Rate-Based Dynamic Capacity)** / **VBDC(Volume-Based Dynamic Capacity)**
+
+queue 有資料 → **SatRequestManager** 依規則產生 CR（RBDC/VBDC）→ NCC 在 TBTP 分配上行 timeslot 給 UT
+
+### SatUtMac (Media Access Control - MAC Layer)
+- **SatUtScheduler** : 根據 **TBTP(Terminal Burst Time Plan)** 資訊來排程 time slots
+- **SatRandomAccess** : 支援 random access mechanisms
+- **SatTbtpContainer** : 保存 NCC 傳送的 TBTP
+
+### SatUtPhy (PHY Layer)
+- **SatPhyTx** : 處理實體層的傳輸邏輯
+
+- **SatPhyRx** : 處理實體層的接收邏輯
+  - **SatPhyRxCarrier** : 多個 carrier 的接收處理與干擾檢查
+    - **SatLinkResults** : 儲存封包接收結果
+    - **SatInterference** : 評估接收時的干擾
+
+## Geostationary satellite
+
+<div align="center">
+<img width="691" height="395" alt="image" src="https://github.com/user-attachments/assets/b64dbef0-ab4a-4572-9c66-1fdea8f740df" />
+</div>
+
+>Refrence : https://www.sns3.org/doc/satellite-design.html#geostationary-satellite
