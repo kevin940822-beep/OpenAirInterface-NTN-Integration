@@ -73,6 +73,7 @@
   
 ## Architecture (整體架構)
 <img width="1300" height="537" alt="image" src="https://github.com/user-attachments/assets/5949f5b4-03a9-46ba-9677-3c0bd824779f" />
+<p align="center"><strong>Figure 3.</strong> SNS3 Architecture </p>
 
 > Refrence : https://www.sns3.org/doc/satellite-design.html#fig-satellite-general-architecture
 
@@ -157,6 +158,7 @@
 
 <div align="center">
 <img width="465" height="566" alt="image" src="https://github.com/user-attachments/assets/9e0aa6c4-350a-400f-acdc-e68d5112cc3d" />
+  <p align="center"><strong>Figure 4.</strong> SatNetDevice </p>
 </div>
 
 >Refrence : https://www.sns3.org/doc/satellite-design.html#user-terminal
@@ -206,6 +208,7 @@ queue 有資料 → **SatRequestManager** 依規則產生 CR（RBDC/VBDC）→ N
 
 <div align="center">
 <img width="691" height="395" alt="image" src="https://github.com/user-attachments/assets/b64dbef0-ab4a-4572-9c66-1fdea8f740df" />
+    <p align="center"><strong>Figure 5.</strong> SatGeoNetDevice </p>
 </div>
 
 >Refrence : https://www.sns3.org/doc/satellite-design.html#geostationary-satellite
