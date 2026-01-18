@@ -6,6 +6,7 @@
 # Table of Contents
 - [SNS3 Introduction](#sns3-introduction)
 - [Frame configuration (框架與時槽結構)](#frame-configuration-框架與時槽結構)
+- [Architecture (整體架構)](architecture-整體架構)
 
 
 ## SNS3 Introduction
