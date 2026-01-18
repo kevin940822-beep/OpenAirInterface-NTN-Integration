@@ -47,7 +47,7 @@
 
 <p align="center"><strong>Figure 2.</strong> Superframe configuration </p>
 
-> Refrence : [EN 301 545-2 - V1.4.1](https://www.etsi.org/deliver/etsi_en/301500_301599/30154502/01.04.01_60/en_30154502v010401p.pdf)
+> Refrence : [EN 301 545-2 - V1.4.1](https://www.etsi.org/deliver/etsi_en/301500_301599/30154502/01.04.01_60/en_30154502v010401p.pdf) 7.5.1.2
 
 - The used frame structures are dynamically configured by the **Network Control Center (NCC)**.
   - **Superframe Composition Table (SCT)**
