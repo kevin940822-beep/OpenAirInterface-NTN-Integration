@@ -35,9 +35,20 @@
 
 **Superframe sequence (SFS)** : An ordered time sequence of superframes on a given set of carriers, identifying one **MF-TDMA** resource block.  *(在一組特定頻寬上的連續 superframe 時間序列，代表一整塊 MF-TDMA 資源)*
 
-<img width="600" height="537" alt="image" src="https://github.com/user-attachments/assets/ccd39297-2004-4637-9320-de07b7d87531" />
+<div align="center">
+<img width="579" height="281" alt="image" src="https://github.com/user-attachments/assets/defa1270-bb8a-443e-a363-518475093956" />
+</div>
 
-   
+<p align="center"><strong>Figure 1.</strong> Superframe sequences (SFS) </p>
+
+<div align="center">
+<img width="722" height="663" alt="image" src="https://github.com/user-attachments/assets/6f2ab7a8-6721-49d1-88e6-3d5e478d5353" />
+</div>
+
+<p align="center"><strong>Figure 2.</strong> Superframe configuration </p>
+
+> Refrence : [EN 301 545-2 - V1.4.1](https://www.etsi.org/deliver/etsi_en/301500_301599/30154502/01.04.01_60/en_30154502v010401p.pdf)
+
 - The used frame structures are dynamically configured by the **Network Control Center (NCC)**.
   - **Superframe Composition Table (SCT)**
   - **Frame Composition Table v2 (FCT2)**
