@@ -4,14 +4,15 @@
 > https://github.com/sns3/sns3-satellite/blob/master/doc/satellite-design.rst
 
 # Table of Contents
-- [SNS3 Introduction](#sns3-introduction)
+- [SNS3 Design](#sns3-design)
 - [Frame configuration (框架與時槽結構)](#frame-configuration-框架與時槽結構)
 - [Architecture (整體架構)](#architecture-整體架構)
 - [User terminal SatNetDevice](#user-terminal-satnetdevice)
 - [Geostationary satellite](#geostationary-satellite)
 
 
-## SNS3 Introduction
+## SNS3 Design
+> Refrence : https://www.sns3.org/doc/satellite-design.html#design
 
 - **Satellite Network Simulator 3 (SNS3)** is a satellite network extension to **Network Simulator 3 (ns-3)** platform.
 - **SNS3** models a full interactive multi-spot beam satellite network with a **geostationary satellite (GEO)**.
@@ -26,6 +27,8 @@
   - **DVB-S2 (forword link) : Digital Video Broadcasting - Satellite - 2nd generation**
 
 ## Frame configuration (框架與時槽結構)
+> Refrence : https://www.sns3.org/doc/satellite-design.html#frame-configuration
+
 ### Return Link (DVB-RCS2)
 - Use **Multi-Frequency Time Division Multiple Access (MF-TDMA)**.
 - Composed of:
