@@ -96,7 +96,7 @@
   - In addition to labeling latitude, longitude, altitude of UT, GEO satellite and GW.
 
 *(支援球面/大地座標（WGS80、GRS84），方便標示 UT / SAT / GW 的經緯度與高度)*
-### 1️⃣. Left side End user（地面使用者）
+### 1️⃣ Left side End user（地面使用者）
 - Connection :
   - Use **CSMA channel** (Carrier Sense Multiple Access) connect to User Terminal(UT).
 - Protocol Stack :
@@ -107,7 +107,7 @@
 - This end user simply sends and receives IP traffic over a LAN interface. *(這個 End user 只是透過 LAN 介面收送 IP 流量)*
 - It does not know that its packets will cross a satellite system.
 
-### 2️⃣. UT (User Terminal)
+### 2️⃣ UT (User Terminal)
 - Connection :
   - Use **SatChannel** connect to Satellite node.
 - Modules :
@@ -121,7 +121,7 @@
 - The UT plays the role of a customer premises terminal. *(UT 扮演的是一個 用戶端終端設備／小型路由器 的角色)*
 - It routes IP packets between the **local LAN** and the **satellite link**.
 
-### 3️⃣. Satellite node
+### 3️⃣ Satellite node
 - Connection :
   - Use **SatChannel** to build **uplink/downlink** with  **UT** and **GW**.
 - Modules :
@@ -135,7 +135,7 @@
  
  - The satellite is essentially a transparent relay at the **physical**/**MAC** level. *(做透明轉發的中繼站)*
 
-### 4️⃣. GW (GateWay)
+### 4️⃣ GW (GateWay)
 - Connection :
   - Use **Ideal channel** connect to **End Users** .
 - Modules :
@@ -143,7 +143,7 @@
   - `CSMA` : Communicates with end users on the ground via terrestrial networks (e.g., Wi-Fi, wired LAN).
   - `GeoPosition` : Records the gateway’s geographic coordinates.
 
-### 5️⃣. Right side End User
+### 5️⃣ Right side End User
 - Connection :
   - Use **Ideal channel** connect to **End Users** .
   - Representing a simplified model without interference or delay. *(無延遲無干擾的簡易模型)*
@@ -154,6 +154,8 @@
     - **Physical (PHY)** : Transmits bursts over the ```SatChannel``` using given waveforms/MODCODs. *(用指定的 waveform / MODCOD在 ```SatChannel``` 上發射 **burst**。)* 
 -->
 
+---
+
 ## User terminal SatNetDevice
 
 <div align="center">
@@ -163,7 +165,7 @@
 
 >Refrence : https://www.sns3.org/doc/satellite-design.html#user-terminal
 
-UT負責 : 
+### UT負責 : 
 - DVB-RCS2（RTN）回傳鏈路：burst transmission logic（上行 burst 發送邏輯）
 - DVB-S2（FWD）前向鏈路：BB frame reception logic（下行 BBFrame 接收邏輯）
 
@@ -176,11 +178,11 @@ UT負責 :
 - 根據封包特徵（QoS、目的地）決定後續走哪條處理路徑 (queue / module)。
 
 ### SatUtLlc (Logical Link Control - LLC Layer)
-- Tx : 
+- `Tx` : 
   - **SatReturnLinkEncapsulator** : 將上行 IP packets 封裝成 **RLE (Return Link Encapsulation)** 格式，for **return channel transmission**.
   - **SatQueue** : 暫存上行資料（封裝後 / 等待排程）
 
- - Rx（FWD 下行）:
+ - `Rx`（FWD 下行）:
    - **SatGenericStreamEncapsulator** : 將前向鏈路（DVB-S2）收到的資料做解封包/重新封包。
    - **SatQueue** : 暫存下行資料(收到 / 解封裝後)。
 
@@ -195,6 +197,8 @@ queue 有資料 → **SatRequestManager** 依規則產生 CR（RBDC/VBDC）→ N
 - **SatUtScheduler** : 根據 **TBTP(Terminal Burst Time Plan)** 資訊來排程 time slots
 - **SatRandomAccess** : 支援 random access mechanisms
 - **SatTbtpContainer** : 保存 NCC 傳送的 TBTP
+  
+*(遵守衛星系統的存取規則。)*
 
 ### SatUtPhy (PHY Layer)
 - **SatPhyTx** : 處理實體層的傳輸邏輯
@@ -204,11 +208,46 @@ queue 有資料 → **SatRequestManager** 依規則產生 CR（RBDC/VBDC）→ N
     - **SatLinkResults** : 儲存封包接收結果
     - **SatInterference** : 評估接收時的干擾
 
+
+
 ## Geostationary satellite
 
 <div align="center">
-<img width="691" height="395" alt="image" src="https://github.com/user-attachments/assets/b64dbef0-ab4a-4572-9c66-1fdea8f740df" />
+<img width="721" height="395" alt="image" src="https://github.com/user-attachments/assets/27381ff5-c92c-4c55-b410-db6455205ca1" />
     <p align="center"><strong>Figure 5.</strong> SatGeoNetDevice </p>
 </div>
 
 >Refrence : https://www.sns3.org/doc/satellite-design.html#geostationary-satellite
+
+### SatGeoUserPhy
+
+- 處理 **User Link PHY layer**
+
+- SatChannel "Rtn user" :（UT → SAT）
+- SatChannel "Fwd user" :（SAT → UT）
+- `Tx` : Transmitter module, 負責向 **UT（User Terminal）** 發送訊號的模組。
+- `Rx` : Receiver module, 接收來自**UT（User Terminal）** 的訊號。
+  - `RxC` : Receiver Control module, 用於量測接收到的使用者上行品質
+  - `I` : Interference Estimator, 計算**SINR (Signal-to-Interference-plus-Noise Ratio)**.
+   
+
+### SatGeoFeederPhy 
+
+- 處理**Feeder Link PHY layer**
+
+- SatChannel "Fwd feeder" :（GW → SAT）
+- SatChannel "Rtn feeder" :（SAT → GW）
+
+- 與**SatGeoUserPhy**相同，包含`Tx`、`Rx`、`RxC`、`I`
+- 接收來自**GW**的訊號或向**GW**發送訊號。
+
+### Addintional Note
+- **Transparent Forwarding (bent-pipe)** : 衛星不對封包進行處理，只負責放大和轉發訊號。
+- **SINR Calculation** : SINR分別在 **User End**和 **Feeder Ends** 進行計算，最後在 **GW** 使用複合公式進行組合。
+
+<div align="center">
+<img width="517" height="662" alt="image" src="https://github.com/user-attachments/assets/4f107856-3f0c-4778-8e36-981e0f88c3b3" />
+    <p align="center"><strong>Figure 6.</strong> RTN / FWD packet flowchart</p>
+</div>
+
+
